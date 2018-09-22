@@ -34,12 +34,12 @@ public class BoxyDrive extends OpMode
     @Override
     public void loop() {
             if (gamepad1.left_stick_y > 0.1 || gamepad1.left_stick_y < -0.1) {
-                robot.RFMotor.setPower(gamepad1.left_stick_y * 0.5);
+                robot.RFMotor.setPower(gamepad1.left_stick_y * 0.75);
             } else {
                 robot.RFMotor.setPower(0);
             }
             if (gamepad1.right_stick_y > 0.1 || gamepad1.right_stick_y < -0.1) {
-                robot.LFMotor.setPower(-1* (gamepad1.right_stick_y * 0.5));
+                robot.LFMotor.setPower(-1* (gamepad1.right_stick_y * 0.75));
             } else {
                 robot.LFMotor.setPower(0);
             }
