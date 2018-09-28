@@ -44,7 +44,7 @@ public class NextGenPicnic extends OpMode
         } else {
             robot.LFMotor.setPower(0);
             robot.LBMotor.setPower(0);
-        }
+        }   
         if (gamepad1.right_stick_y > 0.1 || gamepad1.right_stick_y < -0.1) {
             robot.RFMotor.setPower(-1* (gamepad1.right_stick_y * 0.75));
             robot.RBMotor.setPower(-1* (gamepad1.right_stick_y * 0.75));
