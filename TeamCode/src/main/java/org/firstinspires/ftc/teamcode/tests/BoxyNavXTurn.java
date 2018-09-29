@@ -22,7 +22,7 @@ public class BoxyNavXTurn extends LinearOpMode {
     BoxyHardwareMap robot = new BoxyHardwareMap();
     NavxMicroNavigationSensor navxMicro;
     IntegratingGyroscope gyro;
-    private ElapsedTime runtime;
+    private ElapsedTime runtime = new ElapsedTime();
     final double BOT_SPEED = 0.4;
     final int THRESHOLD = 2;
     @Override
