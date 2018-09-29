@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 
 @Autonomous(name="BoxyBlue2SamplingAndParking",group="tests")
-public class BoxyBlue2 extends LinearOpMode {
+public class BoxyBlue1 extends LinearOpMode {
     SamplingOrderDetector sampler;
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -22,8 +22,8 @@ public class BoxyBlue2 extends LinearOpMode {
         // STATE 0
         /*
         Initialize motors
-        Initialize NavX
-        Initialize DogeCV
+        Initialize variables
+        State 1
          */
 
 
@@ -33,19 +33,21 @@ public class BoxyBlue2 extends LinearOpMode {
         // continues to run until you run out of time or hit stop
         while(opModeIsActive()) {
 
-            // STATE 10
+            // STATE 1
             /*
-            While(goldNotInView){
-            Forward
-            if(gold.inView){
-            Stop
-            Break
+            AllignWithPicture
             }
             }
-            State 20
+            State 2
             */
 
-            // STATE 20
+            // STATE 2
+            /*
+            Initialize NavX
+            State 3
+            */
+
+            //STATE 3
             /*
             Find Location
             if(goldposition == right){
@@ -59,31 +61,26 @@ public class BoxyBlue2 extends LinearOpMode {
             }
             */
 
-            // STATE 21
+            // STATE 4
             /*
             face(-45)
             Forwards
-            face(-135 degrees)
+            face(0 degrees)
             Forwards
             Stop
             */
 
-            // STATE 22
+            // STATE 5
             /*
             face(45)
             Forwards
-            face(135 degrees)
+            face(0 degrees)
             Forwards
             Stop
             */
 
-            // STATE 23
+            // STATE 6
             /*
-            Forwards
-            BackSome
-            face(-45 degrees)
-            ForwardSome
-            face(-135)
             Forwards
             Stop
             */
