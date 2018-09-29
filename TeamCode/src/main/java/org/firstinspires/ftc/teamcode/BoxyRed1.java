@@ -35,6 +35,7 @@ public class BoxyRed1 extends LinearOpMode {
 
             // STATE 1
             /*
+            change allign with picture, angles are awkward and won't be convenient
             AllignWithPicture
             }
             }
