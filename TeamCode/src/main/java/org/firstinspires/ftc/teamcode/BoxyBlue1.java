@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 
-@Autonomous(name="BoxyBlue2SamplingAndParking",group="tests")
+@Autonomous(name="BoxyBlue1SamplingAndParking",group="tests")
 public class BoxyBlue1 extends LinearOpMode {
     SamplingOrderDetector sampler;
     public void runOpMode() {
