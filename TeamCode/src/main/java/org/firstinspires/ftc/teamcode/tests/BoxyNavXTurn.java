@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -48,25 +49,24 @@ public class BoxyNavXTurn extends LinearOpMode {
         telemetry.addData("Gyro","Calibrated! Press Start!");
         telemetry.update();
         waitForStart();
+        sleep(3000);
         navxTurn(90);
-        sleep(2000);
+        sleep(3000);
         navxTurn(-90);
     }
     public void navxTurn(double target) {
         Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         while(opModeIsActive()) {
+            angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("Heading",angles.firstAngle+" degrees");
             if(angles.firstAngle < target - THRESHOLD) {
                 telemetry.addData("Status","Turning Left");
-                robot.LFMotor.setPower(-BOT_SPEED);
-                robot.RFMotor.setPower(BOT_SPEED);
+                robot.turnLeft(BOT_SPEED);
             } else if(angles.firstAngle > target + THRESHOLD) {
                 telemetry.addData("Status","Turning Right");
-                robot.LFMotor.setPower(BOT_SPEED);
-                robot.RFMotor.setPower(-BOT_SPEED);
+                robot.turnRight(BOT_SPEED);
             } else {
-                robot.LFMotor.setPower(0);
-                robot.RFMotor.setPower(0);
+                robot.stop();
                 break;
             }
             telemetry.update();
