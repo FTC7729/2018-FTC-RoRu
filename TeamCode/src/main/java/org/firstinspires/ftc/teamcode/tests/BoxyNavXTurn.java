@@ -1,26 +1,21 @@
 package org.firstinspires.ftc.teamcode.tests;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
 import org.firstinspires.ftc.teamcode.BoxyHardwareMap;
 
 @Autonomous(name="NavX Drive RoRu",group = "tests")
 //@Disabled //comment out to enable opmode
-public class BoxyNavXTurn extends LinearOpMode {
-    BoxyHardwareMap robot = new BoxyHardwareMap();
+public class BoxyNavXTurn extends BoxyHardwareMap {
+   // BoxyHardwareMap robot = new BoxyHardwareMap();
     NavxMicroNavigationSensor navxMicro;
     IntegratingGyroscope gyro;
     private ElapsedTime runtime = new ElapsedTime();
@@ -30,15 +25,15 @@ public class BoxyNavXTurn extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         navxMicro = hardwareMap.get(NavxMicroNavigationSensor.class, "navx");
         gyro = (IntegratingGyroscope)navxMicro;
-        robot.init(hardwareMap);
+        init(hardwareMap);
 
-        robot.LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         idle();
 
-        robot.LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         runtime.reset();
         while (navxMicro.isCalibrating())  {
@@ -61,12 +56,12 @@ public class BoxyNavXTurn extends LinearOpMode {
             telemetry.addData("Heading",angles.firstAngle+" degrees");
             if(angles.firstAngle < target - THRESHOLD) {
                 telemetry.addData("Status","Turning Left");
-                robot.turnLeft(BOT_SPEED);
+                turnLeft(BOT_SPEED);
             } else if(angles.firstAngle > target + THRESHOLD) {
                 telemetry.addData("Status","Turning Right");
-                robot.turnRight(BOT_SPEED);
+                turnRight(BOT_SPEED);
             } else {
-                robot.stop();
+                stop();
                 break;
             }
             telemetry.update();

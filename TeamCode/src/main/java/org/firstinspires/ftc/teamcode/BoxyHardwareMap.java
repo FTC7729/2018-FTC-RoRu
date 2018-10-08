@@ -1,11 +1,21 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-public class BoxyHardwareMap {
+
+
+public abstract class BoxyHardwareMap extends LinearOpMode{
     public DcMotor LFMotor;
     public DcMotor RFMotor;
     public NavxMicroNavigationSensor navx;
+
+
+    /**
+     * Initialize the hardware
+     *
+     * @param hardwareMap configuration from FTC application
+     */
     public void init(HardwareMap hardwareMap) {
         // grab wheels
         LFMotor = hardwareMap.dcMotor.get("LFMotor");
@@ -21,7 +31,7 @@ public class BoxyHardwareMap {
         LFMotor.setPower(-power);
         RFMotor.setPower(-power);
     }
-    public void stop() {
+    public void commitStopMoving() {
         LFMotor.setPower(0);
         RFMotor.setPower(0);
     }

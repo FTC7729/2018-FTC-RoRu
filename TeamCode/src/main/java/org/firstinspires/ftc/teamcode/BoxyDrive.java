@@ -1,20 +1,25 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-@TeleOp(name="BoxyDrive", group="TeleOp")
-public class BoxyDrive extends OpMode
+//@TeleOp(name="BoxyDrive", group="TeleOp")
+public class BoxyDrive extends BoxyHardwareMap
 {
-    BoxyHardwareMap robot = new BoxyHardwareMap();
+    @Override
+    public void runOpMode() throws InterruptedException {
+
+    }
+    // BoxyHardwareMap robot = new BoxyHardwareMap();
     // Declare OpMode members.
-    private ElapsedTime runtime = new ElapsedTime();
+    /*private ElapsedTime runtime = new ElapsedTime();
 
     @Override
-    public void init() {
-        this.robot.init(hardwareMap);
+    public void runOpMode() throws InterruptedException {
+        
+    }
+
+    @Override
+    //public void init() {
+        this.init(hardwareMap);
     }
 
     @Override
@@ -29,17 +34,17 @@ public class BoxyDrive extends OpMode
     @Override
     public void loop() {
             if (gamepad1.left_stick_y > 0.1 || gamepad1.left_stick_y < -0.1) {
-                robot.RFMotor.setPower(gamepad1.left_stick_y * 0.75);
+                RFMotor.setPower(gamepad1.left_stick_y * 0.75);
             } else {
-                robot.RFMotor.setPower(0);
+                RFMotor.setPower(0);
             }
             if (gamepad1.right_stick_y > 0.1 || gamepad1.right_stick_y < -0.1) {
-                robot.LFMotor.setPower(-1* (gamepad1.right_stick_y * 0.75));
+                LFMotor.setPower(-1* (gamepad1.right_stick_y * 0.75));
             } else {
-                robot.LFMotor.setPower(0);
+                LFMotor.setPower(0);
             }
 
     }
 
-
+*/
 }
