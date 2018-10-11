@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class BoxyBlue1 extends BoxyHardwareMap {
        // BoxyHardwareMap robot = new BoxyHardwareMap();
        private ElapsedTime runtime = new ElapsedTime();
-                (WHEEL_DIAMETER_INCHES * 3.14159265358979323846264338327950288419716939937510);
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         //initialize the bot
