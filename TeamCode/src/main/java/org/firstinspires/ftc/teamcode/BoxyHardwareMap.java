@@ -34,7 +34,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * Math.PI);
 
-
+    static final double THRESHOLD = 2;
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
     static final double     FORWARD_SPEED           = 0.6;
@@ -118,62 +118,47 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
 
         }
     }
-    String formatRate(float rate) {
-        return String.format("%.3f", rate);
-    }
-
-
-    String formatAngle(AngleUnit angleUnit, double angle) {
-        return formatDegrees(AngleUnit.DEGREES.fromUnit(angleUnit, angle));
-    }
-
-
-    String formatDegrees(double degrees){
-        getNumDegrees(degrees);
-        return String.format("%.1f", AngleUnit.DEGREES.normalize(degrees));
-    }
-
-
-    void getNumDegrees(double stuff) {
-        degrees = stuff;
-    }
-
-
     void navxTurn(double target) {
-        AngularVelocity rates = gyro.getAngularVelocity(AngleUnit.DEGREES);
         Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-
-        String heading = formatAngle(angles.angleUnit, angles.firstAngle);
-
-        while (degrees > target + 2 || degrees < target - 2) {
-            if (!opModeIsActive())
-            {
-                return;
-            }
-
-            rates = gyro.getAngularVelocity(AngleUnit.DEGREES);
+        while(opModeIsActive()) {
             angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-
-            heading = formatAngle(angles.angleUnit, angles.firstAngle);
-            if (degrees > target + 2) {
-                RFMotor.setPower(-BOT_SPEED);
-                LFMotor.setPower(BOT_SPEED);
-            } else if (degrees < target - 2) {
-                RFMotor.setPower(BOT_SPEED);
-                LFMotor.setPower(-BOT_SPEED);
+            telemetry.addData("Heading",angles.firstAngle+" degrees");
+            if(angles.firstAngle < target - THRESHOLD) {
+                telemetry.addData("Status","Turning Left");
+                turnLeft(BOT_SPEED);
+            } else if(angles.firstAngle > target + THRESHOLD) {
+                telemetry.addData("Status","Turning Right");
+                turnRight(BOT_SPEED);
             } else {
-
-                RFMotor.setPower(0);
-                LFMotor.setPower(0);
+                stop();
+                break;
             }
+            telemetry.update();
             idle();
         }
-        telemetry.addData("Done Turning","");
-
-        sleep(1500);
-
-        telemetry.log().clear();
     }
+    void navxTurn(double target, double threshold) {
+        Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        while(opModeIsActive()) {
+            angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            telemetry.addData("Heading",angles.firstAngle+" degrees");
+            if(angles.firstAngle < target - threshold) {
+                telemetry.addData("Status","Turning Left");
+                turnLeft(BOT_SPEED);
+            } else if(angles.firstAngle > target + threshold) {
+                telemetry.addData("Status","Turning Right");
+                turnRight(BOT_SPEED);
+            } else {
+                stop();
+                break;
+            }
+            telemetry.update();
+            idle();
+        }
+    }
+
+
+
 
 
 }
