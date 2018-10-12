@@ -16,6 +16,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 public abstract class BoxyHardwareMap extends LinearOpMode{
     public DcMotor LFMotor;
     public DcMotor RFMotor;
+    public DcMotor LBMotor;
+    public DcMotor RBMotor;
     public NavxMicroNavigationSensor navx;
 
 
@@ -55,6 +57,8 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         // grab wheels
         LFMotor = hardwareMap.dcMotor.get("LFMotor");
         RFMotor = hardwareMap.dcMotor.get("RFMotor");
+        LBMotor = hardwareMap.dcMotor.get("LBMotor");
+        RBMotor = hardwareMap.dcMotor.get("RBMotor");
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
     }
@@ -69,9 +73,9 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
     public void stopMotors() {
         LFMotor.setPower(0);
         RFMotor.setPower(0);
+        LBMotor.setPower(0);
+        RBMotor.setPower(0);
     }
-
-
     public void encoderDrive(double speed, double leftInches, double rightInches, double leftBackInches, double rightBackInches, double timeoutS) {
         int newLeftTarget;
         int newRightTarget;
@@ -79,7 +83,6 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         int newRightBackTarget;
 
         if (opModeIsActive()) {
-
             newLeftTarget = LFMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
             newRightTarget = RFMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
             LFMotor.setTargetPosition(newLeftTarget);
@@ -92,7 +95,6 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             runtime.reset();
             LFMotor.setPower(Math.abs(speed));
             RFMotor.setPower(Math.abs(speed));
-
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
@@ -115,7 +117,6 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             // Turn off RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         }
     }
     void navxTurn(double target) {
@@ -156,9 +157,4 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             idle();
         }
     }
-
-
-
-
-
 }
