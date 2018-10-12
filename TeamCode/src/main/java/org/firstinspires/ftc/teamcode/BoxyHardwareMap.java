@@ -66,7 +66,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         LFMotor.setPower(-power);
         RFMotor.setPower(-power);
     }
-    public void commitStopMoving() {
+    public void stopMotors() {
         LFMotor.setPower(0);
         RFMotor.setPower(0);
     }
@@ -130,7 +130,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
                 telemetry.addData("Status","Turning Right");
                 turnRight(BOT_SPEED);
             } else {
-                stop();
+                stopMotors();
                 break;
             }
             telemetry.update();

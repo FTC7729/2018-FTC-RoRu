@@ -61,7 +61,7 @@ public class BoxyNavXTurn extends BoxyHardwareMap {
                 telemetry.addData("Status","Turning Right");
                 turnRight(BOT_SPEED);
             } else {
-                stop();
+                stopMotors();
                 break;
             }
             telemetry.update();
