@@ -161,4 +161,44 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             idle();
         }
     }
+    void navxTurnRel(double target) {
+        Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        target = target - angles.firstAngle;
+        while(opModeIsActive()) {
+            angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            telemetry.addData("Heading",angles.firstAngle+" degrees");
+            if(angles.firstAngle < target - THRESHOLD) {
+                telemetry.addData("Status","Turning Left");
+                turnLeft(BOT_SPEED);
+            } else if(angles.firstAngle > target + THRESHOLD) {
+                telemetry.addData("Status","Turning Right");
+                turnRight(BOT_SPEED);
+            } else {
+                stopMotors();
+                break;
+            }
+            telemetry.update();
+            idle();
+        }
+    }
+    void navxTurnRel(double target, double threshold) {
+        Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        target = target - angles.firstAngle;
+        while(opModeIsActive()) {
+            angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            telemetry.addData("Heading",angles.firstAngle+" degrees");
+            if(angles.firstAngle < target - threshold) {
+                telemetry.addData("Status","Turning Left");
+                turnLeft(BOT_SPEED);
+            } else if(angles.firstAngle > target + threshold) {
+                telemetry.addData("Status","Turning Right");
+                turnRight(BOT_SPEED);
+            } else {
+                stop();
+                break;
+            }
+            telemetry.update();
+            idle();
+        }
+    }
 }
