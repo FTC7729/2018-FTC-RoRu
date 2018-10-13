@@ -62,15 +62,17 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
     }
-    // Not sure how motors are going to be wired up.
-    // We should edit these methods when we know how we're going to set that up.
     public void turnLeft(double power) {
         LFMotor.setPower(power);
         RFMotor.setPower(power);
+        LBMotor.setPower(power);
+        RBMotor.setPower(power);
     }
     public void turnRight(double power) {
         LFMotor.setPower(-power);
         RFMotor.setPower(-power);
+        LBMotor.setPower(-power);
+        RBMotor.setPower(-power);
     }
     public void stopMotors() {
         LFMotor.setPower(0);
