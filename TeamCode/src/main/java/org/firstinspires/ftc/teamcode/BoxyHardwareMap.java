@@ -62,6 +62,8 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
     }
+    // Not sure how motors are going to be wired up.
+    // We should edit these methods when we know how we're going to set that up.
     public void turnLeft(double power) {
         LFMotor.setPower(power);
         RFMotor.setPower(power);
@@ -120,7 +122,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         }
     }
     void navxTurn(double target) {
-        Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        Orientation angles;
         while(opModeIsActive()) {
             angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("Heading",angles.firstAngle+" degrees");
