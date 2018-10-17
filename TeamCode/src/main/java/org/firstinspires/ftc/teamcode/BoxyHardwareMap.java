@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -59,19 +60,22 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         RFMotor = hardwareMap.dcMotor.get("RFMotor");
         LBMotor = hardwareMap.dcMotor.get("LBMotor");
         RBMotor = hardwareMap.dcMotor.get("RBMotor");
+        LFMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        LBMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
+        gyro = (IntegratingGyroscope)navx;
     }
     public void turnLeft(double power) {
-        LFMotor.setPower(power);
+        LFMotor.setPower(-power);
         RFMotor.setPower(power);
-        LBMotor.setPower(power);
+        LBMotor.setPower(-power);
         RBMotor.setPower(power);
     }
     public void turnRight(double power) {
-        LFMotor.setPower(-power);
+        LFMotor.setPower(power);
         RFMotor.setPower(-power);
-        LBMotor.setPower(-power);
+        LBMotor.setPower(power);
         RBMotor.setPower(-power);
     }
     public void stopMotors() {
@@ -123,6 +127,11 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
+
+    /**
+     * Turns the robot using the NavX Micro Navigational Sensor.
+     * @param target The target number of degrees for the bot to reach.
+     */
     void navxTurn(double target) {
         Orientation angles;
         while(opModeIsActive()) {
@@ -142,8 +151,14 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             idle();
         }
     }
+
+    /**
+     * Turns the robot using the NavX Micro Navigational Sensor to determine heading. Uses a non-hardcoded threshold.
+     * @param target The target number of degrees for the robot to reach.
+     * @param threshold The threshold to be allowed for the robot heading.
+     */
     void navxTurn(double target, double threshold) {
-        Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        Orientation angles;
         while(opModeIsActive()) {
             angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("Heading",angles.firstAngle+" degrees");
@@ -161,6 +176,10 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             idle();
         }
     }
+    /**
+     * Turns the robot using the NavX Micro Navigational Sensor to determine heading. Turns relative to the current heading of the robot.
+     * @param target The target number of degrees for the robot to reach, relative to the robot's current heading.
+     */
     void navxTurnRel(double target) {
         Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         target = target - angles.firstAngle;
@@ -181,6 +200,11 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             idle();
         }
     }
+    /**
+     * Turns the robot using the NavX Micro Navigational Sensor to determine heading. Uses a non-hardcoded threshold. Turns relative to the current heading of the robot.
+     * @param target The target number of degrees away from current heading for the robot to reach
+     * @param threshold The threshold to be allowed for the robot heading.
+     */
     void navxTurnRel(double target, double threshold) {
         Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         target = target - angles.firstAngle;

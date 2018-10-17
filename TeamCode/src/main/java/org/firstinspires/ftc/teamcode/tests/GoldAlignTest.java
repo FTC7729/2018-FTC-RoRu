@@ -15,6 +15,7 @@ public class GoldAlignTest extends LinearOpMode {
         align = new GoldAlignDetector();
         align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         align.useDefaults();
+        align.alignSize = 120;
         align.enable();
         telemetry.update();
 
