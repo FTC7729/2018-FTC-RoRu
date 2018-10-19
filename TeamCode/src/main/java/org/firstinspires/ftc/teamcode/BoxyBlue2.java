@@ -3,11 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
+import org.firstinspires.ftc.teamcode.BoxyHardwareMap;
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 
+
 @Autonomous(name="BoxyBlue2SamplingAndParking",group="tests")
-public class BoxyBlue2 extends LinearOpMode {
+public class BoxyBlue2 extends BoxyHardwareMap {
     SamplingOrderDetector sampler;
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -18,13 +19,39 @@ public class BoxyBlue2 extends LinearOpMode {
         sampler.useDefaults();
         sampler.enable();
         telemetry.update();
+        int state = 0;
+        while (opModeIsActive())
+        {
+            if(state == 0) {
+                //Initialize Navx
+                //initialize MOtors
+                state = 10;
+            }
+            if (state == 10)
+            {
 
-        // STATE 0
-        /*
-        Initialize motors
-        Initialize NavX
-        Initialize DogeCV
-         */
+            }
+            if (state == 20)
+            {
+
+            }
+            if (state == 21)
+            {
+
+                break;
+            }
+            if (state == 22)
+            {
+
+                break;
+            }
+            if (state == 23)
+            {
+
+                break;
+            }
+        }
+
 
 
 
