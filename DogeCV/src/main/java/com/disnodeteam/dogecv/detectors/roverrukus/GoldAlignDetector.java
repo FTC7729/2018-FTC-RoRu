@@ -41,6 +41,8 @@ public class GoldAlignDetector extends DogeCVDetector {
     private boolean found = false;
     private boolean aligned = false;
     private double goldXPos = 0;
+    private double alignXMin;
+    private double alignXMax;
 
 
     public boolean debugAlignment = true;
@@ -93,8 +95,8 @@ public class GoldAlignDetector extends DogeCVDetector {
 
 
         double alignX = (getAdjustedSize().width / 2) + alignPosOffset;
-        double alignXMin = alignX - (alignSize / 2);
-        double alignXMax = alignX +(alignSize / 2);
+        alignXMin = alignX - (alignSize / 2);
+        alignXMax = alignX +(alignSize / 2);
         double xPos = 0;
 
 
@@ -156,9 +158,12 @@ public class GoldAlignDetector extends DogeCVDetector {
     }
 
     public double getXPosition(){
-        return goldXPos;
+        return this.goldXPos;
     }
 
+    public double xMax() { return alignXMax; }
+
+    public double xMin() { return alignXMin; }
 
     public boolean isFound() {
         return found;
