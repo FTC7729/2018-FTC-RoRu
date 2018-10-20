@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
+import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -10,22 +11,26 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class BoxyBlue1 extends BoxyHardwareMap {
         // BoxyHardwareMap robot = new BoxyHardwareMap();
        private ElapsedTime runtime = new ElapsedTime();
+       GoldAlignDetector align;
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         //initialize the bot
-        SamplingOrderDetector sampler = new SamplingOrderDetector();
-        // passes data to sampler to allow it to access the camera.
-        sampler.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
-        sampler.useDefaults();
-        sampler.enable();
+        align = new GoldAlignDetector();
+        align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+        align.useDefaults();
+        align.alignSize = 120;
+        align.enable();
         telemetry.update();
-
+        init(hardwareMap);
         // STATE 0
         /*
         Initialize motors
         Initialize variables
         State 1
          */
+        double xMaxAlign;
+        double xMinAlign;
+        // The parameters for a gold piece to be considered "aligned".
         int state = 10;
 
 
@@ -69,6 +74,30 @@ public class BoxyBlue1 extends BoxyHardwareMap {
             //State 30
             while (state == 30){
 
+                //if the gold IS on screen
+                if (align.isFound()) {
+                    // if the gold is to the right of the window of "aligned";
+                    // if the robot needs to turn right to be aligned with the gold
+                    if (align.getXPosition() > align.xMax()){
+                            state = 21;
+                    }
+
+                    // if the gold is to the left of the window of "aligned";
+                    // if the robot needs to turn left to be aligned with the gold
+                    else if (align.getXPosition() < align.xMin()){
+                        state = 22;
+                    }
+
+                    // if the gold is already aligned; in the center
+                    else {
+                        state = 23;
+                    }
+                }
+
+                //if the gold is NOT on screen
+                else {
+                    //figure this out later
+                }
             }
 
             // STATE 31
