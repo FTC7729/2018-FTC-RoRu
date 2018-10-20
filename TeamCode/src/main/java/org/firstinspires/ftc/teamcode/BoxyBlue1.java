@@ -79,18 +79,18 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                     // if the gold is to the right of the window of "aligned";
                     // if the robot needs to turn right to be aligned with the gold
                     if (align.getXPosition() > align.xMax()){
-                            state = 21;
+                            state = 31;
                     }
 
                     // if the gold is to the left of the window of "aligned";
                     // if the robot needs to turn left to be aligned with the gold
                     else if (align.getXPosition() < align.xMin()){
-                        state = 22;
+                        state = 32;
                     }
 
                     // if the gold is already aligned; in the center
                     else {
-                        state = 23;
+                        state = 33;
                     }
                 }
 
@@ -124,8 +124,24 @@ public class BoxyBlue1 extends BoxyHardwareMap {
             Stop
             */
 
-
-            //get reason for idle() later
+            // gold in center
+            if (state == 33) {
+                double timeSecs = ElapsedTime.SECOND_IN_NANO / 1000000000;
+                LFMotor.setPower(0.75);
+                LBMotor.setPower(0.75);
+                RFMotor.setPower(0.75);
+                RBMotor.setPower(0.75);
+                while (state == 33) {
+                    //wait for 5 seconds
+                    if ((ElapsedTime.SECOND_IN_NANO/1000000000) - timeSecs > 5){
+                        state = 40;
+                    }
+                }
+            }
+            stopMotors();
+            if (state != 40){
+                telemetry.addLine("State made it to the end; state is not 40.");
+            }
             idle();
         }
     }
