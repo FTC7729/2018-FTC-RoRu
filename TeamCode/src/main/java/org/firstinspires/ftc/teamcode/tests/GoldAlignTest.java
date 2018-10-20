@@ -22,6 +22,9 @@ public class GoldAlignTest extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            if(align.isFound()) {
+                telemetry.addData("Gold X Position", align.getXPosition());
+            }
             if(align.getAligned()) {
                 telemetry.addData("Status","Aligned!");
             } else {
