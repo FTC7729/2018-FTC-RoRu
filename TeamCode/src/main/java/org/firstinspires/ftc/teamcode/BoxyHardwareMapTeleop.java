@@ -15,6 +15,7 @@ public abstract class BoxyHardwareMapTeleop extends OpMode {
     public DcMotor RFMotor;
     public DcMotor LBMotor;
     public DcMotor RBMotor;
+
     public NavxMicroNavigationSensor navx;
 
 
@@ -25,22 +26,6 @@ public abstract class BoxyHardwareMapTeleop extends OpMode {
     //Boxy         robot   = new Boxy();
     //NavXMicro Navx = new NavXMicro();
     private ElapsedTime     runtime = new ElapsedTime();
-
-    @Override
-    public void loop() {
-        handleGamePad1(gamepad1);
-        handleGamePad2(gamepad2);
-    }
-
-    public abstract void handleGamePad1(Gamepad gamepad);
-
-    /**
-     * Handle all Game Pad 2 controller input
-     * When creating a new Tele-Op user must extend this class then add in custom gamepad2 code
-     */
-    public abstract void handleGamePad2(Gamepad gamepad);
-
-
 
     /**
      * Initialize the hardware
