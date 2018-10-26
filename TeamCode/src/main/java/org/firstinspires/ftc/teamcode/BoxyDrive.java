@@ -26,7 +26,7 @@ public class BoxyDrive extends BoxyHardwareHandler
         float leftPower = leftStickY;
         float rightPower = rightStickY;
         telemetry.addData("gamepad1","Left1 %.2f , Right1 %.2f", leftStickY, rightStickY);
-        
+
         LBMotor.setPower(leftPower* SPEED_MULTIPIER);
         LFMotor.setPower(leftPower * SPEED_MULTIPIER);
         RFMotor.setPower(rightPower * SPEED_MULTIPIER);

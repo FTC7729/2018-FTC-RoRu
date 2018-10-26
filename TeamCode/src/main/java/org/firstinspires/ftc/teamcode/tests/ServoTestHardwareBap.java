@@ -18,7 +18,7 @@ public abstract class ServoTestHardwareBap extends OpMode {
 
         //front is 1 back is 2
             frontServo = hardwaremap.crservo.get("frontServo");
-            backServo = hardwaremap.crservo.get("backServo");
+            //backServo = hardwaremap.crservo.get("backServo");
     }
 
 }

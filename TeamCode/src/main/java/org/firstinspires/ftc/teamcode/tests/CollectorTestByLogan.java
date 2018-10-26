@@ -23,18 +23,18 @@ public class CollectorTestByLogan extends ServoTestHardwareBap {
         if (isButtonA) {
             frontServo.setDirection(DcMotorSimple.Direction.FORWARD);
             frontServo.setPower(1);
-            backServo.setDirection(DcMotorSimple.Direction.REVERSE);
-            backServo.setPower(1);
+            //backServo.setDirection(DcMotorSimple.Direction.REVERSE);
+            //backServo.setPower(1);
         }
         if (isButtonB) {
             frontServo.setDirection(DcMotorSimple.Direction.REVERSE);
             frontServo.setPower(1);
-            backServo.setDirection(DcMotorSimple.Direction.FORWARD);
-            backServo.setPower(1);
+            //backServo.setDirection(DcMotorSimple.Direction.FORWARD);
+            //backServo.setPower(1);
         }
         if(!isButtonA || !isButtonB){
             frontServo.setPower(0);
-            backServo.setPower(0);
+            //backServo.setPower(0);
         }
     }
 
