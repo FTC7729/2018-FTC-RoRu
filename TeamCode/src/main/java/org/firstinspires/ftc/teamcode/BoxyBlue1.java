@@ -7,14 +7,16 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name="BoxyBlue1SamplingAndParking",group="tests")
+@Autonomous(name = "BoxyBlue1SamplingAndParking", group = "tests")
 public class BoxyBlue1 extends BoxyHardwareMap {
-        // BoxyHardwareMap robot = new BoxyHardwareMap();
-       private ElapsedTime runtime = new ElapsedTime();
-       GoldAlignDetector align;
+    // BoxyHardwareMap robot = new BoxyHardwareMap();
+    private ElapsedTime runtime = new ElapsedTime();
+    GoldAlignDetector align;
+
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
-        //initialize the bot
+        // STATE 0
+        //initialize the motors and variables
         align = new GoldAlignDetector();
         align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         align.useDefaults();
@@ -22,15 +24,11 @@ public class BoxyBlue1 extends BoxyHardwareMap {
         align.enable();
         telemetry.update();
         init(hardwareMap);
-        // STATE 0
-        /*
-        Initialize motors
-        Initialize variables
-        State 1
-         */
+
+        // The parameters for a gold piece to be considered "aligned".
         double xMaxAlign;
         double xMinAlign;
-        // The parameters for a gold piece to be considered "aligned".
+
         int state = 10;
 
 
@@ -38,111 +36,87 @@ public class BoxyBlue1 extends BoxyHardwareMap {
         waitForStart();
         // continues to run until you run out of time or hit stop
         while (opModeIsActive()) {
-            encoderDrive(0.5,5,5,3,3,2);
-            // STATE 1
-            /*
-            change align with picture, angles are awkward and won't be convenient
-            AlignWithPicture
+            telemetry.addLine("We begin in state " + state);
+            // STATE 10
+            if (state == 10)
+            {
+                // FORWARD (CHANGE)
+                encoderDrive(0.5, 1, 1, 1, 1, 3);
+                state = 20;
             }
-            }
-            State 2
-            */
+            telemetry.addLine("State made it to the end; We are in state " + state);
 
-            // STATE 2
-            /*
-            Initialize NavX
-            State 3
-            */
-            //state 2
-            navx.initialize();
-            state = 30;
-            //end state 2
-            //STATE 3
-            /*
-            Find Location
-            if(goldposition == right){
-            State 21
+            // STATE 20
+            if (state == 20) {
+                navx.initialize();
+                state = 30;
             }
-            if(goldposition == left){
-            State 22
-            }
-            if(goldposition == middle){
-            State 23
-            }
-            */
+            telemetry.addLine("State made it to the end; We are in state " + state);
 
-            //State 30
-            while (state == 30){
+            // STATE 30
+            while (state == 30) {
 
-                //if the gold IS on screen
+                //If the gold IS on screen
                 if (align.isFound()) {
-                    // if the gold is to the right of the window of "aligned";
-                    // if the robot needs to turn right to be aligned with the gold
-                    if (align.getXPosition() > align.xMax()){
-                            state = 31;
+                    // If the gold is to the right of the window of "aligned";
+                    // If the robot needs to turn right to be aligned with the gold
+                    if (align.getXPosition() > align.xMax()) {
+                        state = 31;
                     }
 
-                    // if the gold is to the left of the window of "aligned";
-                    // if the robot needs to turn left to be aligned with the gold
-                    else if (align.getXPosition() < align.xMin()){
+                    // If the gold is to the left of the window of "aligned";
+                    // If the robot needs to turn left to be aligned with the gold
+                    else if (align.getXPosition() < align.xMin()) {
                         state = 32;
                     }
 
-                    // if the gold is already aligned; in the center
+                    // If the gold is already aligned; in the center
                     else {
                         state = 33;
                     }
                 }
 
-                //if the gold is NOT on screen
+                // If the gold is NOT on screen
                 else {
-                    //figure this out later
+                    // PLACEHOLDER
                 }
             }
 
             // STATE 31
-            /*
-            face(-45)
-            Forwards
-            face(0 degrees)
-            Forwards
-            Stop
-            */
+            if (state == 31)
+            {
+                // Relative
+                navxTurnRel(-45);
+                // CHANGE THESE VALUES
+                encoderDrive(0.5,1,1,1,1,2);
+                navxTurnRel(45);
+                // CHANGE THESE VALUES
+                encoderDrive(0.5, 1, 1, 1, 1, 2);
+                stopMotors();
+            }
 
             // STATE 32
-            /*
-            face(45)
-            Forwards
-            face(0 degrees)
-            Forwards
-            Stop
-            */
+            if (state == 32)
+            {
+                // Relative
+                navxTurnRel(45);
+                // CHANGE THESE VALUES
+                encoderDrive(0.5,1,1,1,1,2);
+                navxTurnRel(-45);
+                // CHANGE THESE VALUES
+                encoderDrive(0.5, 1, 1, 1, 1, 2);
+                stopMotors();
+            }
 
             // STATE 33
-            /*
-            Forwards
-            Stop
-            */
-
-            // gold in center
-            if (state == 33) {
-                double timeSecs = ElapsedTime.SECOND_IN_NANO / 1000000000;
-                LFMotor.setPower(0.75);
-                LBMotor.setPower(0.75);
-                RFMotor.setPower(0.75);
-                RBMotor.setPower(0.75);
-                while (state == 33) {
-                    //wait for 5 seconds
-                    if ((ElapsedTime.SECOND_IN_NANO/1000000000) - timeSecs > 5){
-                        state = 40;
-                    }
-                }
+            if (state == 33)
+            {
+                // CHANGE THESE VALUES
+                encoderDrive(0.5,1,1,1,1,2);
+                stopMotors();
             }
             stopMotors();
-            if (state != 40){
-                telemetry.addLine("State made it to the end; state is not 40.");
-            }
-            idle();
+
         }
     }
 
