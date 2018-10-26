@@ -25,11 +25,16 @@ public class BoxyNavXTurn extends BoxyHardwareMap {
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        RBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         idle();
 
         LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         runtime.reset();
         telemetry.addData("Gyro", "Calibrated! Press Start!");
