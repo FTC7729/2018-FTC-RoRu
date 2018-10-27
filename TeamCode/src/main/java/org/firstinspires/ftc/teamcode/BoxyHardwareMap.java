@@ -30,7 +30,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
     //NavXMicro Navx = new NavXMicro();
     private ElapsedTime     runtime = new ElapsedTime();
     static final double     BOT_SPEED = 0.3;
-    static final double     COUNTS_PER_MOTOR_REV    = 280 ;    // eg: NEVEREST 40 Motor Encoder
+    static final double     COUNTS_PER_MOTOR_REV    = 280 ;    // eg: NEVEREST 40 Motor Encoder https://www.servocity.com/neverest-40-gearmotor
     static final double     ROTATIONS_PER_MINUTE    = 160 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1.5 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 3.93701 ;     // For figuring circumference
@@ -62,6 +62,8 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         RBMotor = hardwareMap.dcMotor.get("RBMotor");
         LFMotor.setDirection(DcMotor.Direction.REVERSE);
         LBMotor.setDirection(DcMotor.Direction.REVERSE);
+        RFMotor.setDirection(DcMotor.Direction.FORWARD);
+        RBMotor.setDirection(DcMotor.Direction.FORWARD);
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
         gyro = (IntegratingGyroscope)navx;
@@ -93,27 +95,37 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         if (opModeIsActive()) {
             newLeftTarget = LFMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
             newRightTarget = RFMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newLeftBackTarget = LBMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightBackTarget = RBMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
             LFMotor.setTargetPosition(newLeftTarget);
             RFMotor.setTargetPosition(newRightTarget);
+            LBMotor.setTargetPosition(newLeftBackTarget);
+            RBMotor.setTargetPosition(newRightBackTarget);
 
             LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             RFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            RBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
             runtime.reset();
             LFMotor.setPower(Math.abs(speed));
             RFMotor.setPower(Math.abs(speed));
+            LBMotor.setPower(Math.abs(speed));
+            RBMotor.setPower(Math.abs(speed));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
                     (runtime.seconds() < timeoutS) &&
-                    (LFMotor.isBusy() && RFMotor.isBusy())) {
+                    (LFMotor.isBusy() && RFMotor.isBusy() && LBMotor.isBusy() && RBMotor.isBusy())) {
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Going to %7d :%7d", newLeftTarget,  newRightTarget);
                 telemetry.addData("Path2",  "Currently at %7d :%7d",
                         LFMotor.getCurrentPosition(),
-                        RFMotor.getCurrentPosition()
+                        RFMotor.getCurrentPosition(),
+                        LBMotor.getCurrentPosition(),
+                        RBMotor.getCurrentPosition()
                 );
                 telemetry.update();
             }
@@ -121,10 +133,14 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
             // Stop all motion;
             LFMotor.setPower(0);
             RFMotor.setPower(0);
+            LBMotor.setPower(0);
+            RBMotor.setPower(0);
 
             // Turn off RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
 
