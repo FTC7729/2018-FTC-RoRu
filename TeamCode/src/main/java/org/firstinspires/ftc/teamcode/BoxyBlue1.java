@@ -9,27 +9,26 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous(name = "BoxyBlue1SamplingAndParking", group = "tests")
 public class BoxyBlue1 extends BoxyHardwareMap {
-<<<<<<< HEAD
-        // BoxyHardwareMap robot = new BoxyHardwareMap();
-       private ElapsedTime runtime = new ElapsedTime();
-       GoldAlignDetector align;
-=======
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
     GoldAlignDetector align;
->>>>>>> a5360a771ac01b956d0a7b8635b0ab1e12fd0f70
+    // BoxyHardwareMap robot = new BoxyHardwareMap();
+    // private ElapsedTime runtime = new ElapsedTime();
+    //GoldAlignDetector align;
 
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         // STATE 0
         //initialize the motors and variables
+        // This MUST be here or else there are errors in loading the motors
+        // which end up causing encoderDrive to loop.
+        init(hardwareMap);
         align = new GoldAlignDetector();
         align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         align.useDefaults();
         align.alignSize = 120;
         align.enable();
         telemetry.update();
-        init(hardwareMap);
 
         // The parameters for a gold piece to be considered "aligned".
         double xMaxAlign;
@@ -40,12 +39,8 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 
         //wait till start here in the this place
         waitForStart();
-        // continues to run until you run out of time or hit stop
-        while (opModeIsActive()) {
-<<<<<<< HEAD
-            encoderDrive(0.5,20,20,20,20,2);
-            // STATE 1
-            /*
+        // STATE 1
+
 //            change align with picture, angles are awkward and won't be convenient
 //            AlignWithPicture
 //            }
@@ -58,12 +53,12 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 //            Initialize NavX
 //            State 3
 //            */
-//            //state 2
-//            navx.initialize();
-//            state = 30;
-//            //end state 2
-//            //STATE 3
-//            /*
+        //state 2
+        navx.initialize();
+        state = 30;
+        //end state 2
+        //STATE 3
+            /*
 //            Find Location
 //            if(goldposition == right){
 //            State 21
@@ -76,91 +71,46 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 //            }
 //            */
 //
-//            //State 30
-//            while (state == 30){
-//
-//                //if the gold IS on screen
-//                if (align.isFound()) {
-//                    // if the gold is to the right of the window of "aligned";
-//                    // if the robot needs to turn right to be aligned with the gold
-//                    if (align.getXPosition() > align.xMax()){
-//                            state = 21;
-//                    }
-//
+        //State 30
+        while (state == 30) {
+            telemetry.addData("State","30");
+            //if the gold IS on screen
+            if (align.isFound()) {
+                // if the gold is to the right of the window of "aligned";
+                // if the robot needs to turn right to be aligned with the gold
+                if (align.getXPosition() > align.xMax()) {
+                    state = 31;
+                    telemetry.addData("State","31");
+                }
+
 //                    // if the gold is to the left of the window of "aligned";
 //                    // if the robot needs to turn left to be aligned with the gold
-//                    else if (align.getXPosition() < align.xMin()){
-//                        state = 22;
-//                    }
-//
-//                    // if the gold is already aligned; in the center
-//                    else {
-//                        state = 23;
-//                    }
-//                }
+                else if (align.getXPosition() < align.xMin()) {
+                    state = 32;
+                    telemetry.addData("State","32");
+                }
+
+                // if the gold is already aligned; in the center
+                else {
+                    state = 33;
+                    telemetry.addData("State","33");
+                }
+            }
 //
 //                //if the gold is NOT on screen
 //                else {
 //                    //figure this out later
 //                }
 //
-//            }
+           }
 
-=======
-            telemetry.addLine("We begin in state " + state);
-            // STATE 10
-            if (state == 10)
-            {
-                // FORWARD (CHANGE)
-                encoderDrive(0.5, 1, 1, 1, 1, 3);
-                state = 20;
-            }
-            telemetry.addLine("State made it to the end; We are in state " + state);
-
-            // STATE 20
-            if (state == 20) {
-                navx.initialize();
-                state = 30;
-            }
-            telemetry.addLine("State made it to the end; We are in state " + state);
-
-            // STATE 30
-            while (state == 30) {
-
-                //If the gold IS on screen
-                if (align.isFound()) {
-                    // If the gold is to the right of the window of "aligned";
-                    // If the robot needs to turn right to be aligned with the gold
-                    if (align.getXPosition() > align.xMax()) {
-                        state = 31;
-                    }
-
-                    // If the gold is to the left of the window of "aligned";
-                    // If the robot needs to turn left to be aligned with the gold
-                    else if (align.getXPosition() < align.xMin()) {
-                        state = 32;
-                    }
-
-                    // If the gold is already aligned; in the center
-                    else {
-                        state = 33;
-                    }
-                }
-
-                // If the gold is NOT on screen
-                else {
-                    // PLACEHOLDER
-                }
-            }
->>>>>>> a5360a771ac01b956d0a7b8635b0ab1e12fd0f70
 
             // STATE 31
-            if (state == 31)
-            {
+            /*if (state == 31) {
                 // Relative
                 navxTurnRel(-45);
                 // CHANGE THESE VALUES
-                encoderDrive(0.5,1,1,1,1,2);
+                encoderDrive(0.5, 1, 1, 1, 1, 2);
                 navxTurnRel(45);
                 // CHANGE THESE VALUES
                 encoderDrive(0.5, 1, 1, 1, 1, 2);
@@ -168,12 +118,11 @@ public class BoxyBlue1 extends BoxyHardwareMap {
             }
 
             // STATE 32
-            if (state == 32)
-            {
+            if (state == 32) {
                 // Relative
                 navxTurnRel(45);
                 // CHANGE THESE VALUES
-                encoderDrive(0.5,1,1,1,1,2);
+                encoderDrive(0.5, 1, 1, 1, 1, 2);
                 navxTurnRel(-45);
                 // CHANGE THESE VALUES
                 encoderDrive(0.5, 1, 1, 1, 1, 2);
@@ -181,15 +130,12 @@ public class BoxyBlue1 extends BoxyHardwareMap {
             }
 
             // STATE 33
-            if (state == 33)
-            {
+            if (state == 33) {
                 // CHANGE THESE VALUES
-                encoderDrive(0.5,1,1,1,1,2);
+                encoderDrive(0.5, 1, 1, 1, 1, 2);
                 stopMotors();
-            }
-            stopMotors();
+            } */
 
-        }
+
     }
-
 }
