@@ -73,29 +73,31 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 //
         //State 30
         while (state == 30) {
-            telemetry.addData("State","30");
             //if the gold IS on screen
             if (align.isFound()) {
                 // if the gold is to the right of the window of "aligned";
                 // if the robot needs to turn right to be aligned with the gold
                 if (align.getXPosition() > align.xMax()) {
                     state = 31;
-                    telemetry.addData("State","31");
+                    telemetry.addData("State", "31");
                 }
 
 //                    // if the gold is to the left of the window of "aligned";
 //                    // if the robot needs to turn left to be aligned with the gold
                 else if (align.getXPosition() < align.xMin()) {
                     state = 32;
-                    telemetry.addData("State","32");
+                    telemetry.addData("State", "32");
                 }
 
                 // if the gold is already aligned; in the center
                 else {
                     state = 33;
-                    telemetry.addData("State","33");
+                    telemetry.addData("State", "33");
                 }
+                telemetry.update();
             }
+            telemetry.update();
+
 //
 //                //if the gold is NOT on screen
 //                else {
@@ -106,19 +108,32 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 
 
             // STATE 31
-            /*if (state == 31) {
+            if (state == 31) {
+                telemetry.addData("State","31");
                 // Relative
-                navxTurnRel(-45);
+                telemetry.addData("Status","Turning Right");
+                telemetry.update();
+                //while(!align.getAligned()) {
+                //    navxTurnRel(-1);
+                //}
                 // CHANGE THESE VALUES
-                encoderDrive(0.5, 1, 1, 1, 1, 2);
+                telemetry.addData("Status","Moving");
+                telemetry.update();
+                encoderDrive(0.5, -3, -3, -3, -3, 2);
+                telemetry.addData("Status","Turning Left");
+                telemetry.update();
                 navxTurnRel(45);
                 // CHANGE THESE VALUES
-                encoderDrive(0.5, 1, 1, 1, 1, 2);
+                telemetry.addData("Status","Moving");
+                telemetry.update();
+                encoderDrive(0.5, -1, -1, -1, -1, 2);
                 stopMotors();
+                telemetry.addLine("Done");
+                telemetry.update();
             }
 
             // STATE 32
-            if (state == 32) {
+           /* if (state == 32) {
                 // Relative
                 navxTurnRel(45);
                 // CHANGE THESE VALUES

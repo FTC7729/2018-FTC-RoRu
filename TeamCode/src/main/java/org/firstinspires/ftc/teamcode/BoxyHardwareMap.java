@@ -198,7 +198,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
      */
     public void navxTurnRel(double target) {
         Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        target = target - angles.firstAngle;
+        target = angles.firstAngle + target;
         while(opModeIsActive()) {
             angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("Heading",angles.firstAngle+" degrees");
@@ -223,7 +223,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
      */
     public void navxTurnRel(double target, double threshold) {
         Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        target = target - angles.firstAngle;
+        target = angles.firstAngle + target;
         while(opModeIsActive()) {
             angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("Heading",angles.firstAngle+" degrees");
