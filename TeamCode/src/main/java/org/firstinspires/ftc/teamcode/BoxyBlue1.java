@@ -16,7 +16,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
     // private ElapsedTime runtime = new ElapsedTime();
     //GoldAlignDetector align;
 
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Initialized");
         // STATE 0
         //initialize the motors and variables
@@ -54,7 +54,6 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 //            State 3
 //            */
         //state 2
-        navx.initialize();
         state = 30;
         //end state 2
         //STATE 3
@@ -72,7 +71,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 //            */
 //
         //State 30
-        while (state == 30) {
+        if (state == 30) {
             //if the gold IS on screen
             if (align.isFound()) {
                 // if the gold is to the right of the window of "aligned";
@@ -80,23 +79,18 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 if (align.getXPosition() > align.xMax()) {
                     state = 31;
                     telemetry.addData("State", "31");
-                }
-
-//                    // if the gold is to the left of the window of "aligned";
-//                    // if the robot needs to turn left to be aligned with the gold
-                else if (align.getXPosition() < align.xMin()) {
+                } else if (align.getXPosition() < align.xMin()) {
+                    // if the gold is to the left of the window of "aligned";
+                    // if the robot needs to turn left to be aligned with the gold
                     state = 32;
                     telemetry.addData("State", "32");
-                }
-
-                // if the gold is already aligned; in the center
-                else {
+                } else {
+                    // if the gold is already aligned; in the center
                     state = 33;
                     telemetry.addData("State", "33");
                 }
                 telemetry.update();
             }
-            telemetry.update();
 
 //
 //                //if the gold is NOT on screen
@@ -104,7 +98,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 //                    //figure this out later
 //                }
 //
-           }
+        }
 
 
             // STATE 31
@@ -113,13 +107,13 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 // Relative
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
-                //while(!align.getAligned()) {
-                //    navxTurnRel(-1);
-                //}
+                while(!align.getAligned()) {
+                    navxTurnRel(-1);
+                }
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.5, -3, -3, -3, -3, 2);
+                encoderDrive(0.5, -6, -6, -6, -6, 2);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
                 navxTurnRel(45);

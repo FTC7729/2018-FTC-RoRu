@@ -54,7 +54,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
 
 
 
-    public void init(HardwareMap hardwareMap) {
+    public void init(HardwareMap hardwareMap) throws InterruptedException {
         // grab wheels
         LFMotor = hardwareMap.dcMotor.get("LFMotor");
         RFMotor = hardwareMap.dcMotor.get("RFMotor");
@@ -67,6 +67,11 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
         gyro = (IntegratingGyroscope)navx;
+        while (navx.isCalibrating())  {
+            telemetry.addData("Gyro", "calibrating %s", Math.round(runtime.seconds())%2==0 ? "|.." : "..|");
+            telemetry.update();
+            Thread.sleep(50);
+        }
     }
     public void turnLeft(double power) {
         LFMotor.setPower(-power);
