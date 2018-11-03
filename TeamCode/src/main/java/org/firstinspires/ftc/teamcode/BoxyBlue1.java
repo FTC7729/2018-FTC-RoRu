@@ -117,7 +117,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.5, -18, -18, -18, -18, 2);
+                encoderDrive(0.5, -22, -22, -22, -22, 2);
                 stopMotors();
                 telemetry.addLine("Done");
                 telemetry.update();
@@ -132,14 +132,14 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 encoderDrive(0.5, -26, -26, -26, -26, 2);
                 navxTurnRel(-53);
                 // CHANGE THESE VALUES
-                encoderDrive(0.5, -18, -18, -18, -18, 2);
+                encoderDrive(0.5, -22, -22, -22, -22, 2);
                 stopMotors();
             }
 
             // STATE 33
             if (state == 33) {
                 // CHANGE THESE VALUES
-                encoderDrive(0.5, -30, -30, -30, -30, 2);
+                encoderDrive(0.5, -35, -35, -35, -35, 2);
                 stopMotors();
             }
         align.disable();
