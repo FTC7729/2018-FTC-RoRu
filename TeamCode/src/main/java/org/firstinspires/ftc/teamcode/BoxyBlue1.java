@@ -117,31 +117,32 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.5, -13, -13, -13, -13, 2);
+                encoderDrive(0.5, -18, -18, -18, -18, 2);
                 stopMotors();
                 telemetry.addLine("Done");
                 telemetry.update();
             }
-            align.disable();
+
 
             // STATE 32
-           /* if (state == 32) {
+            if (state == 32) {
                 // Relative
-                navxTurnRel(45);
+                navxTurnRel(46);
                 // CHANGE THESE VALUES
-                encoderDrive(0.5, 1, 1, 1, 1, 2);
-                navxTurnRel(-45);
+                encoderDrive(0.5, -26, -26, -26, -26, 2);
+                navxTurnRel(-53);
                 // CHANGE THESE VALUES
-                encoderDrive(0.5, 1, 1, 1, 1, 2);
+                encoderDrive(0.5, -18, -18, -18, -18, 2);
                 stopMotors();
             }
 
             // STATE 33
             if (state == 33) {
                 // CHANGE THESE VALUES
-                encoderDrive(0.5, 1, 1, 1, 1, 2);
+                encoderDrive(0.5, -30, -30, -30, -30, 2);
                 stopMotors();
-            } */
+            }
+        align.disable();
 
 
     }
