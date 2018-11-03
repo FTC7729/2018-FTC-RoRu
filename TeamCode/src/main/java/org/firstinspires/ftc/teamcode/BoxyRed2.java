@@ -5,20 +5,28 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.tests.BoxyNavXTurn;
 
 @Autonomous(name="BoxyRed2SamplingAndParking",group="tests")
-public class BoxyRed2 extends LinearOpMode {
-    SamplingOrderDetector sampler;
+public class BoxyRed2 extends BoxyHardwareMap {
+   // SamplingOrderDetector sampler;
+   private ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         //initialize the bot
-        sampler = new SamplingOrderDetector();
+        //sampler = new SamplingOrderDetector();
         // passes data to sampler to allow it to access the camera.
-        sampler.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
-        sampler.useDefaults();
-        sampler.enable();
+       // sampler.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+       // sampler.useDefaults();
+        //sampler.enable();
         telemetry.update();
-
+        int state = 0;
+        if (state == 0){
+            //motors, navX, and DogeCV are already initialized
+            state = 10;
+        }
         // STATE 0
         /*
         Initialize motors
@@ -32,6 +40,24 @@ public class BoxyRed2 extends LinearOpMode {
         waitForStart();
         // continues to run until you run out of time or hit stop
         while(opModeIsActive()) {
+            if (state == 10){
+                //would do all that sampling stuff here
+                state = 20;
+            }
+
+            if (state == 20){
+                //more sampling
+                state = 30;
+            }
+
+            //would have states 21-23 here
+
+            if (state == 30) {
+                navxTurnRel(45);
+                encoderDrive(0.5,24,24,24,24,10);
+                navxTurnRel(90);
+                encoderDrive(0.7,72,72,72,72,15);
+                }
 
             // STATE 10
             /*
