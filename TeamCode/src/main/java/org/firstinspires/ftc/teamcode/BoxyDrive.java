@@ -22,7 +22,7 @@ public class BoxyDrive extends BoxyHardwareHandler
         float rightStickY = Range.clip(-gamepad.right_stick_y, -1, 1);
 
         //Cannot go over 1
-        double SPEED_MULTIPIER = 0.75;
+        double SPEED_MULTIPIER = 0.5;
         float leftPower = leftStickY;
         float rightPower = rightStickY;
         telemetry.addData("gamepad1","Left1 %.2f , Right1 %.2f", leftStickY, rightStickY);

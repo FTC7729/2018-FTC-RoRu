@@ -17,7 +17,6 @@ public class BoxyBlue1 extends BoxyHardwareMap {
     //GoldAlignDetector align;
 
     public void runOpMode() throws InterruptedException {
-        telemetry.addData("Status", "Initialized");
         // STATE 0
         //initialize the motors and variables
         // This MUST be here or else there are errors in loading the motors
@@ -25,14 +24,8 @@ public class BoxyBlue1 extends BoxyHardwareMap {
         init(hardwareMap);
         align = new GoldAlignDetector();
         align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
-        align.useDefaults();
         align.alignSize = 120;
         align.enable();
-        telemetry.update();
-
-        // The parameters for a gold piece to be considered "aligned".
-        double xMaxAlign;
-        double xMinAlign;
 
         int state = 10;
 
@@ -73,12 +66,12 @@ public class BoxyBlue1 extends BoxyHardwareMap {
         //State 30
         if (state == 30) {
             //if the gold IS on screen
-            if (align.isFound()) {
+            //if (align.isFound()) {
                 // if the gold is to the right of the window of "aligned";
                 // if the robot needs to turn right to be aligned with the gold
                 if (align.getXPosition() > align.xMax()) {
                     state = 31;
-                    telemetry.addData("State", "31");
+                    telemetry.addData("Loading State", "31");
                 } else if (align.getXPosition() < align.xMin()) {
                     // if the gold is to the left of the window of "aligned";
                     // if the robot needs to turn left to be aligned with the gold
@@ -90,7 +83,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                     telemetry.addData("State", "33");
                 }
                 telemetry.update();
-            }
+            //}
 
 //
 //                //if the gold is NOT on screen
@@ -103,28 +96,33 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 
             // STATE 31
             if (state == 31) {
+                BOT_SPEED = 0.2;
                 telemetry.addData("State","31");
-                // Relative
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
-                while(!align.getAligned()) {
-                    navxTurnRel(-1);
-                }
+                navxTurnRel(-46);
+                //while(!align.getAligned() && opModeIsActive()) {
+                   // navxTurnRel(-2,1);
+                    //sleep(50);
+                //}
+                // Relative
+                sleep(500);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.5, -6, -6, -6, -6, 2);
+                encoderDrive(0.5, -26, -26, -26, -26, 3);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
-                navxTurnRel(45);
+                navxTurnRel(53);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.5, -1, -1, -1, -1, 2);
+                encoderDrive(0.5, -13, -13, -13, -13, 2);
                 stopMotors();
                 telemetry.addLine("Done");
                 telemetry.update();
             }
+            align.disable();
 
             // STATE 32
            /* if (state == 32) {
