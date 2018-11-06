@@ -29,7 +29,7 @@ public abstract class BoxyHardwareMap extends LinearOpMode{
     //Boxy         robot   = new Boxy();
     //NavXMicro Navx = new NavXMicro();
     private ElapsedTime     runtime = new ElapsedTime();
-    public double     BOT_SPEED = 0.3;
+    static final double     BOT_SPEED = 0.3;
     static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: NEVEREST 40 Motor Encoder https://www.servocity.com/neverest-40-gearmotor
     static final double     ROTATIONS_PER_MINUTE    = 160 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1 ;     // This is < 1.0 if geared UP

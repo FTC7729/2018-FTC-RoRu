@@ -2,13 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
-import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name = "BoxyBlue1SamplingAndParking", group = "tests")
-public class BoxyBlue1 extends BoxyHardwareMap {
+@Autonomous(name = "Placeholder Blue 1 Test", group = "tests")
+public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
     GoldAlignDetector align;
@@ -76,13 +74,14 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                     // if the gold is to the left of the window of "aligned";
                     // if the robot needs to turn left to be aligned with the gold
                     state = 32;
-                    telemetry.addData("State", "32");
+                    telemetry.addData("Loading State", "32");
                 } else {
                     // if the gold is already aligned; in the center
                     state = 33;
-                    telemetry.addData("State", "33");
+                    telemetry.addData("Loading State", "33");
                 }
                 telemetry.update();
+                sleep(200);
             //}
 
 //
@@ -113,7 +112,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 telemetry.update();
                 navxTurnRel(53);
                 // CHANGE THESE VALUES
-                telemetry.addData("Status","Parking");
+                telemetry.addData("Status","Moving");
                 telemetry.update();
                 encoderDrive(0.2, -22, -22, -22, -22, 3);
                 stopMotors();
@@ -124,20 +123,20 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 
             // STATE 32
             if (state == 32) {
-                // Relative
                 telemetry.addData("State","32");
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
+                // Relative
                 navxTurnRel(46);
-                // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -26, -26, -26, -26, 2);
+                // CHANGE THESE VALUES
+                encoderDrive(0.2, -26, -26, -26, -26, 3);
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
                 navxTurnRel(-53);
                 // CHANGE THESE VALUES
-                telemetry.addData("Status","Parking");
+                telemetry.addData("Status","Moving");
                 telemetry.update();
                 encoderDrive(0.2, -22, -22, -22, -22, 3);
                 stopMotors();
@@ -146,10 +145,9 @@ public class BoxyBlue1 extends BoxyHardwareMap {
             // STATE 33
             if (state == 33) {
                 // CHANGE THESE VALUES
-                telemetry.addLine("Parking...");
+                telemetry.addData("Status","Moving");
                 telemetry.update();
-                sleep(50);
-                encoderDrive(0.2, -45, -45, -45, -45, 4);
+                encoderDrive(0.2, -35, -35, -35, -35, 2);
                 stopMotors();
             }
         align.disable();
