@@ -2,12 +2,14 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.BoxyHardwareMap;
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 
 
 @Autonomous(name="BoxyBlue2SamplingAndParking",group="tests")
+@Disabled
 public class BoxyBlue2 extends BoxyHardwareMap {
     SamplingOrderDetector sampler;
     public void runOpMode() {

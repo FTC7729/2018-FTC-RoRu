@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
@@ -10,6 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.tests.BoxyNavXTurn;
 
 @Autonomous(name="BoxyRed2SamplingAndParking",group="tests")
+@Disabled
 public class BoxyRed2 extends BoxyHardwareMap {
    // SamplingOrderDetector sampler;
    private ElapsedTime runtime = new ElapsedTime();

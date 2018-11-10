@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name = "BoxyBlue1SamplingAndParking", group = "tests")
+@Autonomous(name = "BoxySampling", group = "tests")
 public class BoxyBlue1 extends BoxyHardwareMap {
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
@@ -32,6 +32,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 
         //wait till start here in the this place
         waitForStart();
+        navxTurn(0,1);
         // STATE 1
 
 //            change align with picture, angles are awkward and won't be convenient
