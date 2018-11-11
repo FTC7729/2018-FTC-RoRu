@@ -1,23 +1,14 @@
 package org.firstinspires.ftc.teamcode.tests;
 
-import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.BoxyHardwareMap;
+import org.firstinspires.ftc.teamcode.PlaceholderAutonomousHardware;
 
-@Autonomous(name="NavX Drive RoRu",group = "tests")
-//@Disabled //comment out to enable opmode
-public class BoxyNavXTurn extends BoxyHardwareMap {
-   // BoxyHardwareMap robot = new BoxyHardwareMap();
-    private ElapsedTime runtime = new ElapsedTime();
-    @Override
+@Autonomous(name="Alan NavX Drive",group="tests")
+public class AlanNavXTurn extends PlaceholderAutonomousHardware {
+    ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() throws InterruptedException {
         init(hardwareMap);
 

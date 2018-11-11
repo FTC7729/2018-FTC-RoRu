@@ -32,7 +32,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 
         //wait till start here in the this place
         waitForStart();
-        navxTurn(0,1);
+
         // STATE 1
 
 //            change align with picture, angles are awkward and won't be convenient
@@ -66,6 +66,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
 //
         //State 30
         if (state == 30) {
+            //navxTurn(0,1);
             //if the gold IS on screen
             //if (align.isFound()) {
                 // if the gold is to the right of the window of "aligned";
@@ -99,7 +100,7 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 telemetry.addData("State","31");
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
-                navxTurnRel(-46);
+                navxTurnRel(-43);
                 //while(!align.getAligned() && opModeIsActive()) {
                    // navxTurnRel(-2,1);
                     //sleep(50);
@@ -109,10 +110,10 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -26, -26, -26, -26, 3);
+                encoderDrive(0.2, -28, -28, -28, -28, 3);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
-                navxTurnRel(53);
+                navxTurnRel(50);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Parking");
                 telemetry.update();
@@ -129,14 +130,14 @@ public class BoxyBlue1 extends BoxyHardwareMap {
                 telemetry.addData("State","32");
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
-                navxTurnRel(46);
+                navxTurnRel(43);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -26, -26, -26, -26, 2);
+                encoderDrive(0.2, -28, -28, -28, -28, 2);
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
-                navxTurnRel(-53);
+                navxTurnRel(-50);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Parking");
                 telemetry.update();
