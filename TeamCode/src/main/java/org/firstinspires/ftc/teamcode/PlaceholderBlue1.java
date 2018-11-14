@@ -131,14 +131,14 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
                 telemetry.addData("Status","Moving");
                 telemetry.update();
                 // CHANGE THESE VALUES
-                encoderDrive(0.2, -26, -26, -26, -26, 3);
+                encoderDrive(0.2, 26, 26, 26, 26, 3);
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
                 navxTurnRel(-53);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -22, -22, -22, -22, 3);
+                encoderDrive(0.2, 22, 22, 22, 22, 3);
                 stopMotors();
             }
 
@@ -147,7 +147,7 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -35, -35, -35, -35, 2);
+                encoderDrive(0.2, 35, 35, 35, 35, 2);
                 stopMotors();
             }
         align.disable();

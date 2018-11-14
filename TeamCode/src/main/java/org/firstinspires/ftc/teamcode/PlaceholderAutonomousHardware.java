@@ -33,11 +33,13 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
     //NavXMicro Navx = new NavXMicro();
     private ElapsedTime     runtime = new ElapsedTime();
     static final double     BOT_SPEED = 0.3;
-    static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: NEVEREST 40 Motor Encoder https://www.servocity.com/neverest-40-gearmotor
+    static final double     COUNTS_PER_MOTOR_REV_NEVEREST40    = 1120 ;    // eg: NEVEREST 40 Motor Encoder https://www.servocity.com/neverest-40-gearmotor
+    static final double     COUNTS_PER_MOTOR_REV_NEVEREST20    = 560 ;
     static final double     ROTATIONS_PER_MINUTE    = 160 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 5 ;     // For figuring circumference
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV_NEVEREST20
+            * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * Math.PI);
 
     static final double THRESHOLD = 2;
