@@ -60,10 +60,10 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
         RFMotor = hardwareMap.dcMotor.get("RFMotor");
         LBMotor = hardwareMap.dcMotor.get("LBMotor");
         RBMotor = hardwareMap.dcMotor.get("RBMotor");
-        LFMotor.setDirection(DcMotor.Direction.REVERSE);
-        LBMotor.setDirection(DcMotor.Direction.REVERSE);
-        RFMotor.setDirection(DcMotor.Direction.FORWARD);
-        RBMotor.setDirection(DcMotor.Direction.FORWARD);
+        LFMotor.setDirection(DcMotor.Direction.FORWARD);
+        LBMotor.setDirection(DcMotor.Direction.FORWARD);
+        RFMotor.setDirection(DcMotor.Direction.REVERSE);
+        RBMotor.setDirection(DcMotor.Direction.REVERSE);
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
         gyro = (IntegratingGyroscope)navx;
