@@ -9,16 +9,16 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public abstract class ServoTestHardwareBap extends OpMode {
-    public CRServo frontServo;
-    public CRServo backServo;
+    public Servo hookServo;
 
 
     public void init (HardwareMap hardwaremap)
     {
 
         //front is 1 back is 2
-            frontServo = hardwaremap.crservo.get("frontServo");
-            //backServo = hardwaremap.crservo.get("backServo");
+            hookServo = hardwaremap.servo.get("hookServo");
+            hookServo.setDirection(Servo.Direction.FORWARD);
+            hookServo.setPosition(0);
     }
 
 }

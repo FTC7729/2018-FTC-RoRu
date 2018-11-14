@@ -16,26 +16,23 @@ public class CollectorTestByLogan extends ServoTestHardwareBap {
 
     @Override
     public void loop() {
-
+        final double INCREMENT = 0.01;
         boolean isButtonB= gamepad1.b;
         boolean isButtonA = gamepad1.a;
+        double position = hookServo.getPosition();
 
         if (isButtonA) {
-            frontServo.setDirection(DcMotorSimple.Direction.FORWARD);
-            frontServo.setPower(1);
+            position += INCREMENT;
+            hookServo.setPosition(position);
             //backServo.setDirection(DcMotorSimple.Direction.REVERSE);
             //backServo.setPower(1);
-        }
-        if (isButtonB) {
-            frontServo.setDirection(DcMotorSimple.Direction.REVERSE);
-            frontServo.setPower(1);
+        } else if (isButtonB) {
+            position -= INCREMENT;
+            hookServo.setPosition(position);
             //backServo.setDirection(DcMotorSimple.Direction.FORWARD);
             //backServo.setPower(1);
         }
-        if(!isButtonA || !isButtonB){
-            frontServo.setPower(0);
-            //backServo.setPower(0);
-        }
+        telemetry.addData("Hook Servo Position",String.format("%.2f", hookServo.getPosition()));
     }
 
 }
