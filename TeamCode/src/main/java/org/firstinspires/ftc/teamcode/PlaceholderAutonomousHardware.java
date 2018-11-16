@@ -19,6 +19,8 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
     public DcMotor LBMotor;
     public DcMotor RBMotor;
     public Servo weebleServ;
+    public DcMotor liftMotor;
+    public Servo hookServo;
     /**
      * I2C Pin order: Red, Black, Yellow, White
      *
@@ -66,6 +68,16 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
         LBMotor.setDirection(DcMotor.Direction.FORWARD);
         RFMotor.setDirection(DcMotor.Direction.REVERSE);
         RBMotor.setDirection(DcMotor.Direction.REVERSE);
+        //front is 1 back is 2
+        liftMotor = hardwareMap.dcMotor.get("liftMotor");
+        liftMotor.setDirection(DcMotor.Direction.FORWARD);
+        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //front is 1 back is 2
+        hookServo = hardwareMap.servo.get("hookServo");
+        hookServo.setDirection(Servo.Direction.FORWARD);
+        hookServo.setPosition(0);
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
         gyro = (IntegratingGyroscope)navx;
