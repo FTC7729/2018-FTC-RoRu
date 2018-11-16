@@ -32,7 +32,8 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
 
         @Override
         public void handleGamePad2(Gamepad gamepad) {
-
+            telemetry.addData("Lift Position",String.format("%7d", liftMotor.getCurrentPosition()));
+            telemetry.update();
         }
 
 

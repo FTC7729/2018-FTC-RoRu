@@ -50,7 +50,10 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
     static final double     TURN_SPEED              = 0.5;
     static final double     FORWARD_SPEED           = 0.6;
     static final double     BACKWARDS_SPEED         = -0.6;
-
+    static final int        LIFT_EXTEND_MAX         = 2628;
+    static final int        LIFT_DOWN_END_POS       = 97;
+    static final double     HOOK_CLOSE              = 0;
+    static final double     HOOK_OPEN               = 0;
 
     /**
      * Initialize the hardware
