@@ -5,8 +5,8 @@ import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Placeholder Blue 1 Test", group = "tests")
-public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
+@Autonomous(name = "(Depot) Placeholder Autonomous", group = "tests")
+public class PlaceholderBlue1Depot extends PlaceholderAutonomousHardware {
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
     GoldAlignDetector align;
@@ -19,13 +19,15 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
         //initialize the motors and variables
         // This MUST be here or else there are errors in loading the motors
         // which end up causing encoderDrive to loop.
+        weebleServ = hardwareMap.servo.get("weeble");
         init(hardwareMap);
         align = new GoldAlignDetector();
         align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
-        align.alignSize = 120;
+        align.alignSize = 150;
         align.enable();
 
         int state = 10;
+
 
         //wait till start here in the this place
         waitForStart();
@@ -66,17 +68,17 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
             //if (align.isFound()) {
                 // if the gold is to the right of the window of "aligned";
                 // if the robot needs to turn right to be aligned with the gold
-                if (align.getXPosition() > align.xMax()) {
-                    state = 31;
+                if (align.getXPosition() < align.xMax()) {
+                    state = 32;
                     telemetry.addData("Loading State", "31");
-                } else if (align.getXPosition() < align.xMin()) {
+                } else if (align.getAligned()) {
                     // if the gold is to the left of the window of "aligned";
                     // if the robot needs to turn left to be aligned with the gold
-                    state = 32;
+                    state = 33;
                     telemetry.addData("Loading State", "32");
                 } else {
                     // if the gold is already aligned; in the center
-                    state = 33;
+                    state = 31;
                     telemetry.addData("Loading State", "33");
                 }
                 telemetry.update();
@@ -146,7 +148,13 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -35, -35, -35, -35, 2);
+                encoderDrive(0.2, -62, -62, -62, -62, 2);
+                navxTurnRel(-90);
+                weebleServ.setPosition(0);
+                sleep(850);
+                weebleServ.setPosition(0.45);
+                sleep(850);
+                weebleServ.setPosition(0);
                 stopMotors();
             }
         align.disable();

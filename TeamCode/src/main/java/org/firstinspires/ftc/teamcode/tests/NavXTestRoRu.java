@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 @Autonomous(name = "NavX Test 2018-2019 (RoRu)",group = "tests")
-//@Disabled //Comment out to enable
+@Disabled //Comment out to enable
 public class NavXTestRoRu extends LinearOpMode {
     IntegratingGyroscope gyro;
     NavxMicroNavigationSensor navxMicro;

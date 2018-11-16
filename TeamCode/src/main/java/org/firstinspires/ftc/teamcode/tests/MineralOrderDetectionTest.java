@@ -2,11 +2,13 @@ package org.firstinspires.ftc.teamcode.tests;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 
 @Autonomous(name="Sampling Order Detection Test",group="tests")
+@Disabled
 public class MineralOrderDetectionTest extends LinearOpMode {
     SamplingOrderDetector sampler;
     public void runOpMode() {

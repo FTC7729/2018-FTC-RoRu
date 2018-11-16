@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "LiftTestByRobert", group = "Teleop")
+@TeleOp(name = "LiftTestByBobert", group = "Teleop")
 public class LiftTestTeleOp extends LiftTest {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();

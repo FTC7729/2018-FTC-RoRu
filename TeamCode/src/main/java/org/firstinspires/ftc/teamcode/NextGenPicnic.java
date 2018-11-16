@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.NextGenHardwareMap;
 
 @TeleOp(name="NextGenPicnic", group="TeleOp")
+@Disabled
 public class NextGenPicnic extends OpMode
 {
     NextGenHardwareMap robot = new NextGenHardwareMap();
