@@ -18,6 +18,7 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
     public DcMotor RFMotor;
     public DcMotor LBMotor;
     public DcMotor RBMotor;
+    public Servo weebleServ;
     public DcMotor liftMotor;
     public Servo hookServo;
     /**

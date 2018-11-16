@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.tests;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name = "CollectorTestByLogan", group = "Teleop")
+//@Disabled
 public class CollectorTestByLogan extends ServoTestHardwareBap {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
