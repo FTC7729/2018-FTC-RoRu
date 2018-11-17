@@ -36,7 +36,7 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
     //Boxy         robot   = new Boxy();
     //NavXMicro Navx = new NavXMicro();
     private ElapsedTime     runtime = new ElapsedTime();
-    static final double     BOT_SPEED = 0.3;
+    static final double     BOT_SPEED = 0.2;
     static final double     COUNTS_PER_MOTOR_REV_NEVEREST40    = 1120 ;    // eg: NEVEREST 40 Motor Encoder https://www.servocity.com/neverest-40-gearmotor
     static final double     COUNTS_PER_MOTOR_REV_NEVEREST20    = 560 ;
     static final double     ROTATIONS_PER_MINUTE    = 160 ;
@@ -71,10 +71,20 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
         LBMotor.setDirection(DcMotor.Direction.FORWARD);
         RFMotor.setDirection(DcMotor.Direction.REVERSE);
         RBMotor.setDirection(DcMotor.Direction.REVERSE);
+        LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        RBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        idle();
+        LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //front is 1 back is 2
         liftMotor = hardwareMap.dcMotor.get("liftMotor");
         liftMotor.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        idle();
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //front is 1 back is 2
