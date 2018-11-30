@@ -11,7 +11,7 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
     GoldAlignDetector align;
-    public final int LIFT_RUN_POSITION = 1650;
+    public final int LIFT_RUN_POSITION = 2720;
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     // private ElapsedTime runtime = new ElapsedTime();
     //GoldAlignDetector align;
@@ -46,9 +46,8 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
 //            State 3
 //            */
         //state
-        setLiftPosition(LIFT_RUN_POSITION,0.3);
+        setLiftPosition(218,0.3);
         hookServo.setPosition(1);
-        setLiftPosition(21,0.3);
         hookServo.setPosition(0.15);
         state = 30;
         //end state 2
