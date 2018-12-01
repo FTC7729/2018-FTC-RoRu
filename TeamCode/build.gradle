@@ -16,4 +16,5 @@ apply from: '../build.common.gradle'
 dependencies {
     implementation project(':openCVLibrary3')
     implementation project(':DogeCV')
+    implementation project(':ftc-library')
 }
