@@ -3,13 +3,15 @@ package org.firstinspires.ftc.teamcode;
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Placeholder Blue 1 Test", group = "tests")
+@Autonomous(name = "Alan Autonomous", group = "tests")
 public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
     GoldAlignDetector align;
+    public final int LIFT_RUN_POSITION = 2720;
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     // private ElapsedTime runtime = new ElapsedTime();
     //GoldAlignDetector align;
@@ -24,7 +26,7 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
         align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         align.alignSize = 120;
         align.enable();
-
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         int state = 10;
 
         //wait till start here in the this place
@@ -43,7 +45,10 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
 //            Initialize NavX
 //            State 3
 //            */
-        //state 2
+        //state
+        setLiftPosition(218,0.3);
+        hookServo.setPosition(1);
+        hookServo.setPosition(0.15);
         state = 30;
         //end state 2
         //STATE 3
