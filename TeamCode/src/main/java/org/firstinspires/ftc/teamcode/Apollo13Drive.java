@@ -37,7 +37,7 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
             telemetry.update();
             if(gamepad.left_bumper && liftMotor.getCurrentPosition() > 21) {
                 liftMotor.setPower(-1);
-            } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() < 1651) {
+            } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() < 2700) {
                 liftMotor.setPower(1);
             } else {
                 liftMotor.setPower(0);
