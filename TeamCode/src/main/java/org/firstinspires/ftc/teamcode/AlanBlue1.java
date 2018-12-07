@@ -31,6 +31,7 @@ public class AlanBlue1 extends PlaceholderAutonomousHardware {
 
             //wait till start here in the this place
             waitForStart();
+            liftMotor.setPower(0);
             // STATE 1
 
 //            change align with picture, angles are awkward and won't be convenient

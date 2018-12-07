@@ -85,9 +85,11 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
         liftMotor.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         idle();
-        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftMotor.setPower(0);
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        liftMotor.setTargetPosition(3);
+        liftMotor.setPower(0.25);
+        //liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //liftMotor.setPower(0);
         //front is 1 back is 2
         hookServo = hardwareMap.servo.get("hookServo");
         hookServo.setDirection(Servo.Direction.FORWARD);

@@ -46,9 +46,10 @@ public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
 //            State 3
 //            */
         //state
-        setLiftPosition(218,0.3);
+        setLiftPosition(2720,0.3);
         hookServo.setPosition(1);
         hookServo.setPosition(0.15);
+        setLiftPosition(218,0.3);
         state = 30;
         //end state 2
         //STATE 3
