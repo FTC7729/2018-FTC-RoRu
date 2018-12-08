@@ -61,7 +61,7 @@ public abstract class PlaceholderAutonomousHardware extends LinearOpMode{
      *
      * @param hardwareMap configuration from FTC application
      */
-    public void init(HardwareMap hardwareMap) throws InterruptedException {
+    public void  init(HardwareMap hardwareMap) throws InterruptedException {
         // grab wheels
         LFMotor = hardwareMap.dcMotor.get("LFMotor");
         RFMotor = hardwareMap.dcMotor.get("RFMotor");
