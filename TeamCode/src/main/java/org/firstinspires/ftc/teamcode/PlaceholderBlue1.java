@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name = "Alan Autonomous", group = "tests")
-public class PlaceholderBlue1 extends PlaceholderAutonomousHardware {
+public class PlaceholderBlue1 extends AlanAutonomousHardwareMap {
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
     GoldAlignDetector align;

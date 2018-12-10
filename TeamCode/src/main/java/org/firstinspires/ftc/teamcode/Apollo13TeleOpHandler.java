@@ -2,10 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.BoxyHardwareMapTeleop;
-import org.firstinspires.ftc.teamcode.PlaceholderHardwareMap;
-
-public abstract class Apollo13TeleOpHandler extends PlaceholderHardwareMap {
+public abstract class Apollo13TeleOpHandler extends AlanHardwareMap {
 
         @Override
         public void init() {

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name = "(Depot) Placeholder Autonomous", group = "tests")
-public class PlaceholderBlue1Depot extends PlaceholderAutonomousHardware {
+public class PlaceholderBlue1Depot extends AlanAutonomousHardwareMap {
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
     GoldAlignDetector align;

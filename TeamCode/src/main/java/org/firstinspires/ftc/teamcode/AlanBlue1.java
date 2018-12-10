@@ -3,16 +3,16 @@ package org.firstinspires.ftc.teamcode;
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name = "Alan Blue 1",group = "Autonomous")
-public class AlanBlue1 extends PlaceholderAutonomousHardware {
+public class AlanBlue1 extends AlanAutonomousHardwareMap {
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         private ElapsedTime runtime = new ElapsedTime();
         GoldAlignDetector align;
-        public final int LIFT_RUN_POSITION = 2720;
+        public final int LIFT_RUN_POSITION = -2310;
+        public final int LIFT_DOWN_POSITION = -57;
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         // private ElapsedTime runtime = new ElapsedTime();
         //GoldAlignDetector align;
@@ -26,16 +26,17 @@ public class AlanBlue1 extends PlaceholderAutonomousHardware {
             align = new GoldAlignDetector();
             align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
             align.alignSize = 120;
-            liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             int state = 10;
-
             //wait till start here in the this place
             waitForStart();
+            liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             if(state == 10) {
-                setLiftPosition(2680, 0.3);
+                telemetry.addData("State","10");
+                telemetry.update();
+                setLiftPosition(LIFT_RUN_POSITION, 0.3);
                 hookServo.setPosition(1);
                 sleep(100);
-                setLiftPosition(218, 0.3);
+                setLiftPosition(LIFT_DOWN_POSITION, 0.3);
                 hookServo.setPosition(0.15);
                 state = 20;
             }

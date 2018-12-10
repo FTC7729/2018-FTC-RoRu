@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
-public abstract class PlaceholderHardwareMap extends OpMode{
+public abstract class AlanHardwareMap extends OpMode{
     public DcMotor LFMotor;
     public DcMotor RFMotor;
     public DcMotor LBMotor;

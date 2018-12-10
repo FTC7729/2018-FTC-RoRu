@@ -4,10 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.PlaceholderAutonomousHardware;
+import org.firstinspires.ftc.teamcode.AlanAutonomousHardwareMap;
 
 @Autonomous(name="Alan NavX Drive",group="tests")
-public class AlanNavXTurn extends PlaceholderAutonomousHardware {
+public class AlanNavXTurn extends AlanAutonomousHardwareMap {
     ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() throws InterruptedException {
         init(hardwareMap);
