@@ -8,9 +8,17 @@ import com.qualcomm.robotcore.util.Range;
 public class Apollo13Drive extends Apollo13TeleOpHandler{
 
     //Declare OpMode members.
-        private ElapsedTime runtime = new ElapsedTime();
-        private boolean liftUp = false;
-        private boolean hookOpen = false;
+    private ElapsedTime runtime = new ElapsedTime();
+    private boolean liftUp = false;
+    private boolean hookOpen = false;
+    /**
+     * Value here from {@link AlanBlue1}
+     */
+    public final int LIFT_MAX_POS = -2310;
+    /**
+     * Value here from {@link AlanBlue1}
+     */
+    public final int LIFT_MIN_POS = -57;
         @Override
         public void handleGamePad1(Gamepad gamepad) {
             telemetry.addData("We Made It", "We Made it !");
@@ -35,10 +43,10 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
         public void handleGamePad2(Gamepad gamepad) {
             telemetry.addData("Lift Position",String.format("%7d", liftMotor.getCurrentPosition()));
             telemetry.update();
-            if(gamepad.left_bumper && liftMotor.getCurrentPosition() > 21) {
-                liftMotor.setPower(-1);
-            } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() < 2700) {
+            if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
                 liftMotor.setPower(1);
+            } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() > LIFT_MAX_POS) {
+                liftMotor.setPower(-1);
             } else {
                 liftMotor.setPower(0);
             }

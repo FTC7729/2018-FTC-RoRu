@@ -12,7 +12,7 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
         private ElapsedTime runtime = new ElapsedTime();
         GoldAlignDetector align;
         public final int LIFT_RUN_POSITION = -2310;
-        public final int LIFT_DOWN_POSITION = -57;
+        public final int LIFT_DOWN_POSITION = -100;
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         // private ElapsedTime runtime = new ElapsedTime();
         //GoldAlignDetector align;
@@ -25,9 +25,10 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
             init(hardwareMap);
             align = new GoldAlignDetector();
             align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
-            align.alignSize = 120;
+            align.alignSize = 180;
             int state = 10;
             //wait till start here in the this place
+            align.enable();
             waitForStart();
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             if(state == 10) {
@@ -43,23 +44,22 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
 
             //State 30
             if (state == 20) {
-                align.enable();
+                sleep(500);
                 //if the gold IS on screen
                 //if (align.isFound()) {
-                // if the gold is to the right of the window of "aligned";
-                // if the robot needs to turn right to be aligned with the gold
-                if (align.getXPosition() > align.xMax()) {
-                    state = 22;
-                    telemetry.addData("Loading State", "22");
+                if ((align.getXPosition() < align.xMax() && align.getXPosition() > align.xMin())||(align.getAligned())) {
+                    // if already aligned (in center), just go straight
+                    state = 23;
+                    telemetry.addData("Loading State", "23");
                 } else if (align.getXPosition() < align.xMin()) {
                     // if the gold is to the left of the window of "aligned";
                     // if the robot needs to turn left to be aligned with the gold
                     state = 21;
                     telemetry.addData("Loading State", "21");
                 } else {
-                    // if the gold is already aligned; in the center
-                    state = 23;
-                    telemetry.addData("Loading State", "23");
+                    // if the gold is on the right (blindspot), turn right
+                    state = 22;
+                    telemetry.addData("Loading State", "22");
                 }
                 telemetry.update();
                 sleep(200);

@@ -287,6 +287,8 @@ public abstract class AlanAutonomousHardwareMap extends LinearOpMode{
         liftMotor.setTargetPosition(pos);
         liftMotor.setPower(speed);
         while((liftMotor.getCurrentPosition() > liftMotor.getTargetPosition() + 1||liftMotor.getCurrentPosition() < liftMotor.getTargetPosition() - 1) && opModeIsActive()) {
+            telemetry.addData("Encoder Position",liftMotor.getCurrentPosition());
+            telemetry.update();
             idle();
         }
         liftMotor.setPower(0);
