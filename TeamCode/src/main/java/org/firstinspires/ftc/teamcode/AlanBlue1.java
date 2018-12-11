@@ -12,7 +12,7 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
         private ElapsedTime runtime = new ElapsedTime();
         GoldAlignDetector align;
         public final int LIFT_RUN_POSITION = -2310;
-        public final int LIFT_DOWN_POSITION = -100;
+        public final int LIFT_DOWN_POSITION = -1000;
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         // private ElapsedTime runtime = new ElapsedTime();
         //GoldAlignDetector align;
@@ -112,12 +112,16 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -22, -22, -22, -22, 3);
-                stopMotors();
-                telemetry.addData("Status","Backing Up");
+                encoderDrive(0.2, -5, -5, -5, -5, 3);
+                telemetry.addData("Status","Turning Left");
                 telemetry.update();
-                encoderDrive(0.2, 10, 10, 10, 10, 3);
-                navxTurnRel(-100);
+                navxTurnRel(30);
+                telemetry.addData("Status","Move Towards Wall");
+                telemetry.update();
+                encoderDrive(0.2, -5, -5, -5, -5, 3);
+                telemetry.addData("Status","Turning Towards Depot");
+                telemetry.update();
+                navxTurnRel(10);
                 stopMotors();
             }
 
