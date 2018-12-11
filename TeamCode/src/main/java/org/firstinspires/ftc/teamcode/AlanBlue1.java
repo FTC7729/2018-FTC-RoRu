@@ -114,6 +114,11 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 telemetry.update();
                 encoderDrive(0.2, -22, -22, -22, -22, 3);
                 stopMotors();
+                telemetry.addData("Status","Backing Up");
+                telemetry.update();
+                encoderDrive(0.2, 10, 10, 10, 10, 3);
+                navxTurnRel(-100);
+                stopMotors();
             }
 
             // STATE 33
