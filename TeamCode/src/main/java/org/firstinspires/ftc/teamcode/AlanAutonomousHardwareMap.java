@@ -52,8 +52,8 @@ public abstract class AlanAutonomousHardwareMap extends LinearOpMode{
     static final double     TURN_SPEED              = 0.5;
     static final double     FORWARD_SPEED           = 0.6;
     static final double     BACKWARDS_SPEED         = -0.6;
-    public static final double START_WEEBLE = 0;
-    public static final double END_WEEBLE = 0.45;
+    static final double START_WEEBLE = 0;
+    static final double END_WEEBLE = 0.45;
     /**
      * This value here from {@link AlanBlue1}
      */

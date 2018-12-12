@@ -145,7 +145,7 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 weebleServ.setPosition(END_WEEBLE);
                 sleep(750);
                 weebleServ.setPosition(START_WEEBLE);
-                
+
                 stopMotors();
             }
 
