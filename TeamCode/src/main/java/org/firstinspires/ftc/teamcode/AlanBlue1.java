@@ -122,6 +122,30 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 telemetry.addData("Status","Turning Towards Depot");
                 telemetry.update();
                 navxTurnRel(10);
+                telemetry.addData("Status","Move Towards Wall");
+                telemetry.update();
+                encoderDrive(0.2, -8, -8, -8, -8, 3);
+                telemetry.addData("Status","Turn camera towards Depot");
+                telemetry.update();
+                navxTurnRel(90);
+                telemetry.addData("Status","Move Towards Depot");
+                telemetry.update();
+                encoderDrive(0.2, -30, -30, -30, -30, 3);
+                telemetry.addData("Status","Realigning");
+                telemetry.update();
+                navxTurnRel(15);
+                telemetry.addData("Status","Move Towards Depot");
+                telemetry.update();
+                encoderDrive(0.2, -30, -30, -30, -30, 3);
+                telemetry.addData("Status","Aligning for Dropping");
+                telemetry.update();
+                navxTurnRel(-90);
+                weebleServ.setPosition(START_WEEBLE);
+                sleep(700);
+                weebleServ.setPosition(END_WEEBLE);
+                sleep(750);
+                weebleServ.setPosition(START_WEEBLE);
+                
                 stopMotors();
             }
 
