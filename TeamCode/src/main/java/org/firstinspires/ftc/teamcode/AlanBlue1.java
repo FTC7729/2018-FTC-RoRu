@@ -115,35 +115,38 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 encoderDrive(0.2, -5, -5, -5, -5, 3);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
-                navxTurnRel(30);
+                navxTurnRel(90);
                 telemetry.addData("Status","Move Towards Wall");
                 telemetry.update();
                 encoderDrive(0.2, -5, -5, -5, -5, 3);
                 telemetry.addData("Status","Turning Towards Depot");
                 telemetry.update();
-                navxTurnRel(10);
-                telemetry.addData("Status","Move Towards Wall");
-                telemetry.update();
-                encoderDrive(0.2, -8, -8, -8, -8, 3);
-                telemetry.addData("Status","Turn camera towards Depot");
-                telemetry.update();
-                navxTurnRel(90);
+                navxTurnRel(20);
                 telemetry.addData("Status","Move Towards Depot");
                 telemetry.update();
                 encoderDrive(0.2, -30, -30, -30, -30, 3);
-                telemetry.addData("Status","Realigning");
+                telemetry.addData("Status","Realign for Depot");
                 telemetry.update();
-                navxTurnRel(15);
+                navxTurnRel(20);
                 telemetry.addData("Status","Move Towards Depot");
                 telemetry.update();
-                encoderDrive(0.2, -30, -30, -30, -30, 3);
-                telemetry.addData("Status","Aligning for Dropping");
+                encoderDrive(0.2, -20, -20, -20, -20, 3);
+                telemetry.addData("Status","Align for Dropping");
                 telemetry.update();
                 navxTurnRel(-90);
                 weebleServ.setPosition(START_WEEBLE);
                 sleep(700);
                 weebleServ.setPosition(END_WEEBLE);
                 sleep(750);
+                weebleServ.setPosition(START_WEEBLE);
+                telemetry.addData("Status","Turning Towards Depot");
+                telemetry.update();
+                navxTurnRel(-70);
+                telemetry.addData("Status","Move Towards Depot");
+                telemetry.update();
+                encoderDrive(0.2, -50, -50, -50, -50, 3);
+
+
                 weebleServ.setPosition(START_WEEBLE);
 
                 stopMotors();
@@ -158,7 +161,5 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 stopMotors();
             }
             align.disable();
-
-
         }
     }

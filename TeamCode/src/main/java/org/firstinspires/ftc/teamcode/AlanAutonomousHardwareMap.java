@@ -103,6 +103,7 @@ public abstract class AlanAutonomousHardwareMap extends LinearOpMode{
         hookServo = hardwareMap.servo.get("hookServo");
         hookServo.setDirection(Servo.Direction.FORWARD);
         hookServo.setPosition(0);
+        weebleServ = hardwareMap.servo.get("weeble");
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
         gyro = (IntegratingGyroscope)navx;
