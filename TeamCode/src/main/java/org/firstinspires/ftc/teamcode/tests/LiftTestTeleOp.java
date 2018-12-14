@@ -19,7 +19,7 @@ public class LiftTestTeleOp extends LiftTest {
         final double INCREMENT = 0.01;
         boolean isButtonB= gamepad1.b;
         boolean isButtonA = gamepad1.a;
-        double speed = 1.0;
+        double speed = 0.3;
         float leftStickY = Range.clip(-gamepad1.left_stick_y, -1, 1);
 
         if (isButtonA) {
