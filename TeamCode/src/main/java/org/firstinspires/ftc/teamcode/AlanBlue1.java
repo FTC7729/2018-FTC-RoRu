@@ -25,7 +25,7 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
             init(hardwareMap);
             align = new GoldAlignDetector();
             align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
-            align.alignSize = 180;
+            align.alignSize = 240;
             int state = 10;
             //wait till start here in the this place
             align.enable();
@@ -124,7 +124,7 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -35, -35, -35, -35, 2);
+                encoderDrive(0.4, -50, -50, -50, -50, 2);
                 stopMotors();
             }
 
@@ -137,7 +137,7 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 navxTurnRel(20);
                 telemetry.addData("Status","Move Towards Depot");
                 telemetry.update();
-                encoderDrive(0.2, -30, -30, -30, -30, 3);
+                encoderDrive(0.2, -35, -35, -35, -35, 3);
                 telemetry.addData("Status","Realign for Depot");
                 telemetry.update();
                 navxTurnRel(20);
