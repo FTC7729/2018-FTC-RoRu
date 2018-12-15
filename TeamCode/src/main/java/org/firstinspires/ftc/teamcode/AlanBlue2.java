@@ -66,7 +66,7 @@ public class AlanBlue2 extends AlanAutonomousHardwareMap {
             align.disable();
         }
 
-        // STATE 31
+        // STATE 22, which is for right allignment
         if (state == 22) {
             telemetry.addData("State","31");
             telemetry.addData("Status","Turning Right");
@@ -88,14 +88,14 @@ public class AlanBlue2 extends AlanAutonomousHardwareMap {
             // CHANGE THESE VALUES
             telemetry.addData("Status","Moving");
             telemetry.update();
-            encoderDrive(0.2, -22, -22, -22, -22, 3);
+            encoderDrive(0.2, -7, -7, -7, -7, 3);
             stopMotors();
             telemetry.addLine("Done");
             telemetry.update();
         }
 
 
-        // STATE 32
+        // STATE 21, which is for the left gold allignment
         if (state == 21) {
             telemetry.addData("State","21");
             telemetry.addData("Status","Turning Left");
@@ -119,12 +119,12 @@ public class AlanBlue2 extends AlanAutonomousHardwareMap {
           //  state = 30;
         }
 
-        // STATE 33
+        // STATE 23, which is for center allignment
         if (state == 23) {
             // CHANGE THESE VALUES
             telemetry.addData("Status","Moving");
             telemetry.update();
-            encoderDrive(0.2, -35, -35, -35, -35, 2);
+            encoderDrive(0.2, -25, -25, -25, -25, 2);
             stopMotors();
         }
 
