@@ -112,10 +112,23 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -5, -5, -5, -5, 3);
+                encoderDrive(0.2, -7,  -7, -7, -7, 3);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
                 navxTurnRel(90);
+                state = 30;
+            }
+
+            // STATE 33
+            if (state == 23) {
+                // CHANGE THESE VALUES
+                telemetry.addData("Status","Moving");
+                telemetry.update();
+                encoderDrive(0.2, -35, -35, -35, -35, 2);
+                stopMotors();
+            }
+
+            if (state == 30) {
                 telemetry.addData("Status","Move Towards Wall");
                 telemetry.update();
                 encoderDrive(0.2, -5, -5, -5, -5, 3);
@@ -139,27 +152,21 @@ public class AlanBlue1 extends AlanAutonomousHardwareMap {
                 weebleServ.setPosition(END_WEEBLE);
                 sleep(750);
                 weebleServ.setPosition(START_WEEBLE);
-                telemetry.addData("Status","Turning Towards Depot");
+                telemetry.addData("Status","Turning Towards Crater");
                 telemetry.update();
                 navxTurnRel(-70);
-                telemetry.addData("Status","Move Towards Depot");
+                telemetry.addData("Status","Move Towards Crater");
                 telemetry.update();
                 encoderDrive(0.2, -50, -50, -50, -50, 3);
-
-
-                weebleServ.setPosition(START_WEEBLE);
-
-                stopMotors();
-            }
-
-            // STATE 33
-            if (state == 23) {
-                // CHANGE THESE VALUES
-                telemetry.addData("Status","Moving");
+                telemetry.addData("Status","Adjust For Crater");
                 telemetry.update();
-                encoderDrive(0.2, -35, -35, -35, -35, 2);
+                navxTurnRel(-20);
+                telemetry.addData("Status","Move Towards Crater");
+                telemetry.update();
+                encoderDrive(0.2, -50, -50, -50, -50, 3);
                 stopMotors();
             }
             align.disable();
+
         }
     }
