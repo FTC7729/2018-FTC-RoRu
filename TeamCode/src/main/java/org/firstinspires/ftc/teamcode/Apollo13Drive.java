@@ -18,7 +18,7 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
     /**
      * Value here from {@link AlanBlue1}
      */
-    public final int LIFT_MIN_POS = -57;
+    public final int LIFT_MIN_POS = -1000;
         @Override
         public void handleGamePad1(Gamepad gamepad) {
             telemetry.addData("We Made It", "We Made it !");
@@ -31,7 +31,6 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
             double SPEED_MULTIPIER = 0.75;
             float leftPower = leftStickY;
             float rightPower = rightStickY;
-            telemetry.addData("gamepad1","Left1 %.2f , Right1 %.2f", leftStickY, rightStickY);
 
             LBMotor.setPower(leftPower* SPEED_MULTIPIER);
             LFMotor.setPower(leftPower * SPEED_MULTIPIER);
@@ -41,12 +40,13 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
 
         @Override
         public void handleGamePad2(Gamepad gamepad) {
-            telemetry.addData("Lift Position",String.format("%7d", liftMotor.getCurrentPosition()));
             telemetry.update();
-            if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
+            if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_MAX_POS) {
                 liftMotor.setPower(0.4);
-            } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() > LIFT_MAX_POS) {
+                //liftMotor.setTargetPosition(LIFT_MAX_POS);
+            } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() > LIFT_MIN_POS) {
                 liftMotor.setPower(-0.4);
+                liftMotor.setTargetPosition(LIFT_MIN_POS);
             } else {
                 liftMotor.setPower(0);
             }

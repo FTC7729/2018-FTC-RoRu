@@ -25,7 +25,7 @@ public class AlanBlue2 extends AlanAutonomousHardwareMap {
         init(hardwareMap);
         align = new GoldAlignDetector();
         align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
-        align.alignSize = 180;
+        align.alignSize = 240;
         int state = 10;
         //wait till start here in the this place
         align.enable();
