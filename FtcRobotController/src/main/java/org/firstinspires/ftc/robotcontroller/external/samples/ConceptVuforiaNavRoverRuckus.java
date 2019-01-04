@@ -113,11 +113,14 @@ public class ConceptVuforiaNavRoverRuckus extends LinearOpMode {
     // We will define some constants and conversions here
     private static final float mmPerInch        = 25.4f;
     private static final float mmFTCFieldWidth  = (12*6) * mmPerInch;       // the width of the FTC field (from the center point to the outer panels)
-    private static final float mmTargetHeight   = (6) * mmPerInch;          // the height of the center of the target image above the floor
+    //1,828.8 mm
+    private static final float mmTargetHeight   = (5.75f) * mmPerInch;          // the height of the center of the target image above the floor
+    //146.05 mm
 
     // Select which camera you want use.  The FRONT camera is the one on the same side as the screen.
     // Valid choices are:  BACK or FRONT
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
+    //BACK is correct
 
     private OpenGLMatrix lastLocation = null;
     private boolean targetVisible = false;
@@ -183,8 +186,8 @@ public class ConceptVuforiaNavRoverRuckus extends LinearOpMode {
 
         /**
          * To place the BlueRover target in the middle of the blue perimeter wall:
-         * - First we rotate it 90 around the field's X axis to flip it upright.
-         * - Then, we translate it along the Y axis to the blue perimeter wall.
+         * - First, we translate it along the Y axis to the blue perimeter wall.
+         * - Then, we rotate it 90 around the field's X axis to flip it upright.
          */
         OpenGLMatrix blueRoverLocationOnField = OpenGLMatrix
                 .translation(0, mmFTCFieldWidth, mmTargetHeight)
