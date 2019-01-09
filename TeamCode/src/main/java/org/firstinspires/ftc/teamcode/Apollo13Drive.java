@@ -14,7 +14,8 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
     /**
      * Value here from {@link AlanBlue1}
      */
-    public final int LIFT_MAX_POS = -2310;
+    public final int LIFT_MAX_POS = -2810;
+    //this is slightly higher (or lower; it is technically a lower number) than what is in AlanBlue1
     /**
      * Value here from {@link AlanBlue1}
      */
@@ -41,13 +42,19 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
         @Override
         public void handleGamePad2(Gamepad gamepad) {
             telemetry.update();
-            if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_MAX_POS) {
+            if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
                 liftMotor.setPower(0.4);
                 //liftMotor.setTargetPosition(LIFT_MAX_POS);
-            } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() > LIFT_MIN_POS) {
+                //retracts
+            } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() > LIFT_MAX_POS) {
                 liftMotor.setPower(-0.4);
-                liftMotor.setTargetPosition(LIFT_MIN_POS);
-            } else {
+                //liftMotor.setTargetPosition(LIFT_MIN_POS);
+                //extends
+            } else if(gamepad.x && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
+                liftMotor.setPower(1);
+                //extends real fast
+            }
+            else {
                 liftMotor.setPower(0);
             }
             if(gamepad.a && hookServo.getPosition() < 1) {
