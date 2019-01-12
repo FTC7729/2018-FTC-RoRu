@@ -19,7 +19,7 @@ public class HawkeyeAdjustmentMode extends OpMode {
     }
     public void loop() {
         handleGamePad1(gamepad1);
-        hawk.colorFilter.updateSettings(new Scalar(Hue,Sat,Val), new Scalar(45,75,75));
+        hawk.colorFilter.updateSettings(new Scalar(Hue,Sat,Val), new Scalar(25,75,75));
         telemetry.addData("Hue",Hue);
         telemetry.addData("Saturation",Sat);
         telemetry.addData("Value",Val);
@@ -33,19 +33,19 @@ public class HawkeyeAdjustmentMode extends OpMode {
         boolean valDown = gamepad.dpad_left;
         boolean valUp = gamepad.dpad_right;
         if(hueUp) {
-            Hue += 0.2;
+            Hue += 0.1;
         } else if(hueDown) {
-            Hue -= 0.2;
+            Hue -= 0.1;
         }
         if(satUp) {
-            Sat += 0.2;
+            Sat += 0.1;
         } else if(satDown) {
-            Sat -= 0.2;
+            Sat -= 0.1;
         }
         if(valUp) {
-            Val += 0.2;
+            Val += 0.1;
         } else if(valDown) {
-            Val -= 0.2;
+            Val -= 0.1;
         }
     }
 }

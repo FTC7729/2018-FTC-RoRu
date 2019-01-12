@@ -26,14 +26,15 @@ import org.opencv.core.Scalar;
  */
 public class HawkeyeDetector extends GenericDetector {
     /**
-     * Simply sets the fields that are declared in the superclass. It allows us to detect the Hawkeye target with DogeCV loaded with our customized parameters.
+     * Simply sets new values for the fields that are declared in the superclass. It allows us to detect the Hawkeye target we are using for collision prevention
+     * using a DogeCV Detector (this class) loaded with our customized parameters.
      */
     public HawkeyeDetector() {
         super();
         detectorName = "Hawkeye Collision Detector";
-        colorFilter = new HSVColorFilter(new Scalar(52.4166,211.905,255), new Scalar(45,25,25));
-        //perfectAreaScorer = new PerfectAreaScorer(40000,4);
-        maxDifference = 6;
+        colorFilter = new HSVColorFilter(new Scalar(60,210,185), new Scalar(35,75,85));
+        perfectAreaScorer = new PerfectAreaScorer(20000,2);
+        maxDifference = 10;
         //areaScoringMethod = DogeCV.AreaScoringMethod.PERFECT_AREA;
     }
 }
