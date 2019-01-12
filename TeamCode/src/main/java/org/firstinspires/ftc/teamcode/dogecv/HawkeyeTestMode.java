@@ -9,7 +9,6 @@ public class HawkeyeTestMode extends LinearOpMode {
     private HawkeyeDetector collisionDetect;
     public void runOpMode() {
         collisionDetect = new HawkeyeDetector();
-        collisionDetect.useDefaults();
         collisionDetect.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         collisionDetect.enable();
         waitForStart();
