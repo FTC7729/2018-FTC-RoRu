@@ -113,6 +113,12 @@ public abstract class AlanAutonomousHardwareMap extends LinearOpMode{
             Thread.sleep(50);
         }
     }
+    public void goForward(double power) {
+        LFMotor.setPower(power);
+        RFMotor.setPower(power);
+        LBMotor.setPower(power);
+        RBMotor.setPower(power);
+    }
     public void turnLeft(double power) {
         LFMotor.setPower(-power);
         RFMotor.setPower(power);
