@@ -25,6 +25,7 @@ import org.opencv.core.Scalar;
  * @author Isaac Blum
  */
 public class HawkeyeDetector extends GenericDetector {
+    public boolean enabled = false;
     /**
      * Simply sets new values for the fields that are declared in the superclass. It allows us to detect the Hawkeye target we are using for collision prevention
      * using a DogeCV Detector (this class) loaded with our customized parameters.
@@ -36,5 +37,18 @@ public class HawkeyeDetector extends GenericDetector {
         perfectAreaScorer = new PerfectAreaScorer(20000,2);
         maxDifference = 10;
         //areaScoringMethod = DogeCV.AreaScoringMethod.PERFECT_AREA;
+    }
+    @Override
+    public void enable() {
+        super.enable();
+        enabled = true;
+    }
+    @Override
+    public void disable() {
+        super.disable();
+        enabled = false;
+    }
+    public boolean getEnabled() {
+        return enabled;
     }
 }
