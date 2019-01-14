@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
+import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
@@ -424,18 +425,6 @@ public abstract class AlanAutonomousHardwareMapStates extends LinearOpMode{
     }
 
 
-    public void goToX(int Xcoord,double speed) {
-        while(opModeIsActive()) {
-
-        }
-
-    }
-     public void goToY(int Ycoord,double speed) {
-
-         while(opModeIsActive()) {
-
-         }
-       }
 
 
 
@@ -446,7 +435,5 @@ public abstract class AlanAutonomousHardwareMapStates extends LinearOpMode{
 
 
 
-     public void thingone(int pos,double speed) {
 
-            }
 }
