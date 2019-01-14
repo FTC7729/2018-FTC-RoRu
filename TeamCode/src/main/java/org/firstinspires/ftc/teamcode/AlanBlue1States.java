@@ -19,6 +19,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.
 @Autonomous(name = "Alan Blue 1 States",group = "Autonomous")
 public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
     VectorF translation;
+    Orientation rotation;
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         private ElapsedTime runtime = new ElapsedTime();
         GoldAlignDetector align;
@@ -68,9 +69,8 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
                 translation = lastLocation.getTranslation();
                 telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
                         translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
-
+                rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
                 // Express the rotation of the robot in degrees.
-                Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
                 telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
             }
             else {
@@ -144,7 +144,7 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
             }
 
 
-            // STATE 32
+            // STATE 32 (the left one)
             if (state == 21) {
                 telemetry.addData("State","21");
                 telemetry.addData("Status","Turning Left");
@@ -168,12 +168,16 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
                 state = 30;
             }
 
-            // STATE 33
+            // STATE 33 (the center one)
             if (state == 23) {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.4, -50, -50, -50, -50, 2);
+                encoderDrive(0.2, -14,  -14, -14, -14, 3);
+                encoderDrive(0.2, 14,  14, 14, 14, 3);
+                navxTurnRel(30);
+
+                getVuforiaTargetAngle(125, rotation.thirdAngle);
                 stopMotors();
             }
 
@@ -239,7 +243,7 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
         }
         stopMotors();
     }
-    public void getVuforiaTargetAngle(double targetHeading, double currentHeading) {
+    public void getVuforiaTargetAngle(double targetHeading, float currentHeading) {
         double newnavxTarget = targetHeading - currentHeading;
         navxTurnRel(newnavxTarget);
     }
