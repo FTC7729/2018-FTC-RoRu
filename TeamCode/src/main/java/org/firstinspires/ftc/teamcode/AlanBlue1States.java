@@ -221,14 +221,26 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
 
 
         }
+    public void goForward(double power) {
+        LFMotor.setPower(power);
+        RFMotor.setPower(power);
+        LBMotor.setPower(power);
+        RBMotor.setPower(power);
+    }
     public void goToX(int Xcoord, double speed) {
         while(opModeIsActive() && (translation.get(0) != Xcoord)) {
-
+            goForward(speed);
         }
+        stopMotors();
     }
     public void goToY(int Ycoord,double speed) {
         while(opModeIsActive() && (translation.get(1) != Ycoord)) {
-
+            goForward(speed);
         }
+        stopMotors();
+    }
+    public void getVuforiaTargetAngle(double targetHeading, double currentHeading) {
+        double newnavxTarget = targetHeading - currentHeading;
+        navxTurnRel(newnavxTarget);
     }
     }

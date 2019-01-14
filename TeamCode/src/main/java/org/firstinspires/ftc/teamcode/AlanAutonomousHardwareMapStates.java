@@ -436,7 +436,4 @@ public abstract class AlanAutonomousHardwareMapStates extends LinearOpMode{
 
 
 
-     public void thingone(int pos,double speed) {
-
-            }
 }
