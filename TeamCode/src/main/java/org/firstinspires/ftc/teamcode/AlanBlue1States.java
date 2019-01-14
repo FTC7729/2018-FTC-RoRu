@@ -6,13 +6,27 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
+import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
+
+import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
+import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
+import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
+
 @Autonomous(name = "Alan Blue 1 States",group = "Autonomous")
-public class AlanBlue1States extends AlanAutonomousHardwareMap {
+public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
+    VectorF translation;
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         private ElapsedTime runtime = new ElapsedTime();
         GoldAlignDetector align;
         public final int LIFT_RUN_POSITION = -2310;
         public final int LIFT_DOWN_POSITION = -1000;
+    private static final float mmPerInch        = 25.4f;
+    private OpenGLMatrix lastLocation = null;
+    boolean targetVisible;
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         // private ElapsedTime runtime = new ElapsedTime();
         //GoldAlignDetector align;
@@ -30,6 +44,41 @@ public class AlanBlue1States extends AlanAutonomousHardwareMap {
             //wait till start here in the this place
             align.enable();
             waitForStart();
+            targetVisible = false;
+
+            //Loop through trackables - if we find one, get the location
+            for (VuforiaTrackable trackable : allTrackables) {
+                if (((VuforiaTrackableDefaultListener)trackable.getListener()).isVisible()) {
+                    //We found a target! Print data to telemetry
+                    telemetry.addData("Visible Target", trackable.getName());
+                    targetVisible = true;
+
+                    // getUpdatedRobotLocation() will return null if no new information is available since the last time that call was made, or if the trackable is not currently visible.
+                    OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener)trackable.getListener()).getUpdatedRobotLocation();
+                    if (robotLocationTransform != null) {
+                        lastLocation = robotLocationTransform;
+                    }
+                    break;
+                }
+            }
+
+            // Provide feedback as to where the robot is located (if we know).
+            if (targetVisible) {
+                // Express position (translation) of robot in inches.
+                translation = lastLocation.getTranslation();
+                telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
+                        translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
+
+                // Express the rotation of the robot in degrees.
+                Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
+                telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
+            }
+            else {
+                //No visible target
+                telemetry.addData("Visible Target", "none");
+            }
+            // Update telemetry
+            telemetry.update();
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             if(state == 10) {
                 telemetry.addData("State","10");
@@ -168,5 +217,18 @@ public class AlanBlue1States extends AlanAutonomousHardwareMap {
             }
             align.disable();
 
+            //translation.get(0) gets the x-coordinate
+
+
         }
+    public void goToX(int Xcoord, double speed) {
+        while(opModeIsActive() && (translation.get(0) != Xcoord)) {
+
+        }
+    }
+    public void goToY(int Ycoord,double speed) {
+        while(opModeIsActive() && (translation.get(1) != Ycoord)) {
+
+        }
+    }
     }
