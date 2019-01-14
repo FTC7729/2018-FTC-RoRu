@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name = "Gold Alignment Test Mode",group = "tests")
-@Disabled // Comment out to enable
+//@Disabled // Comment out to enable
 public class GoldAlignTest extends LinearOpMode {
     GoldAlignDetector align;
     public void runOpMode() {
