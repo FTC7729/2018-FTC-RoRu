@@ -17,8 +17,10 @@ public class HawkeyeForwardDemo extends AlanAutonomousHardwareMap {
         while(opModeIsActive()) {
             if (!hawkeye.isFound() && opModeIsActive()) {
                 goForward(-0.1);
+                telemetry.addData("Status","Running, all clear!");
             } else {
                 stopMotors();
+                telemetry.addData("Status","Target detected, bot stopped!");
             }
         }
     }
