@@ -177,7 +177,11 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
                 encoderDrive(0.2, 14,  14, 14, 14, 3);
                 navxTurnRel(30);
 
-                getVuforiaTargetAngle(125, rotation.thirdAngle);
+                double thirdAngleVuphoria = 0;
+
+                        thirdAngleVuphoria = rotation.thirdAngle;
+
+                getVuforiaTargetAngle(125, (double) thirdAngleVuphoria);
                 stopMotors();
             }
 
@@ -243,8 +247,9 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
         }
         stopMotors();
     }
-    public void getVuforiaTargetAngle(double targetHeading, float currentHeading) {
+    public void getVuforiaTargetAngle(double targetHeading, double currentHeading) {
         double newnavxTarget = targetHeading - currentHeading;
+        //125 - 90 =
         navxTurnRel(newnavxTarget);
     }
     }
