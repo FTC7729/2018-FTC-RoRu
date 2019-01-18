@@ -1,0 +1,226 @@
+package org.firstinspires.ftc.teamcode.Seymour;
+
+import com.disnodeteam.dogecv.CameraViewDisplay;
+import com.disnodeteam.dogecv.DogeCV;
+import com.disnodeteam.dogecv.Dogeforia;
+import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
+import com.disnodeteam.dogecv.filters.LeviColorFilter;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.teamcode.AlanBlue1;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
+import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
+import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.YZX;
+import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
+import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
+import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.FRONT;
+
+public abstract class SeymourHardwareMap extends LinearOpMode {
+        public DcMotor liftMotor;
+        private final int LIFT_HOLD_POSITION = -5;
+        /**
+         * I2C Pin order: Red, Black, Yellow, White
+         *
+         * On Board Pin order: White, Yellow, Black, Red
+         */
+
+        //Elapsed time and measurement constants
+        private ElapsedTime runtime = new ElapsedTime();
+        private static final float mmPerInch        = 25.4f;
+        private static final float mmFTCFieldWidth  = (12*6) * mmPerInch;       // the width of the FTC field (from the center point to the outer panels)
+        private static final float mmTargetHeight   = (5.75f) * mmPerInch;          // the height of the center of the target image above the floor
+
+        // Select which camera you want use.  The FRONT camera is the one on the same side as the screen.
+        // Valid choices are:  BACK or FRONT
+        private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
+
+        //Vuforia variables
+        private OpenGLMatrix lastLocation = null;
+        boolean targetVisible;
+        Dogeforia vuforia;
+        WebcamName webcamName;
+        List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
+
+
+        //Detector object
+        GoldAlignDetector detector;
+
+        IntegratingGyroscope gyro;
+        //private ElapsedTime     runtime = new ElapsedTime();
+        static final double     BOT_SPEED = 0.2;
+        static final double     COUNTS_PER_MOTOR_REV_NEVEREST40    = 1120 ;    // eg: NEVEREST 40 Motor Encoder https://www.servocity.com/neverest-40-gearmotor
+        static final double     COUNTS_PER_MOTOR_REV_NEVEREST20    = 560 ;
+        static final double     ROTATIONS_PER_MINUTE    = 160 ;
+        static final double     DRIVE_GEAR_REDUCTION    = 1 ;     // This is < 1.0 if geared UP
+        static final double     WHEEL_DIAMETER_INCHES   = 5 ;     // For figuring circumference
+        static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV_NEVEREST20
+                * DRIVE_GEAR_REDUCTION) /
+                (WHEEL_DIAMETER_INCHES * Math.PI);
+
+        static final double THRESHOLD = 2;
+        static final double     DRIVE_SPEED             = 0.6;
+        static final double     TURN_SPEED              = 0.5;
+        static final double     FORWARD_SPEED           = 0.6;
+        static final double     BACKWARDS_SPEED         = -0.6;
+        static final double START_WEEBLE = 0;
+        static final double END_WEEBLE = 0.45;
+        /**
+         * This value here from {@link AlanBlue1}
+         */
+        static final int        LIFT_EXTEND_MAX         = -2310;
+        /**
+         * This value here from {@link AlanBlue1}
+         */
+        static final int        LIFT_DOWN_END_POS       = -57;
+        static final double     HOOK_CLOSE              = 0;
+        static final double     HOOK_OPEN               = 0;
+
+        /**
+         * Initialize the hardware
+         *
+         * @param hardwareMap configuration from FTC application
+         */
+        public void  init(HardwareMap hardwareMap) throws InterruptedException {
+            // grab wheels
+            //front is 1 back is 2
+            liftMotor = hardwareMap.dcMotor.get("liftMotor");
+            liftMotor.setDirection(DcMotor.Direction.FORWARD);
+            liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            idle();
+            liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            liftMotor.setTargetPosition(LIFT_HOLD_POSITION);
+            liftMotor.setPower(0.25);
+            //liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            //liftMotor.setPower(0);
+            //front is 1 back is 2
+            // Setup camera and Vuforia parameters
+            int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+            VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+
+            // Set Vuforia parameters
+            parameters.vuforiaLicenseKey = "Aa0ODYT/////AAABmbrSV1REZUlljIiCpPNPvdlR2T8o80Rzjt2HYPF1L/yMqgYtiPiS2wISQ/Hl5yWPn8/BGo9Gxj4Ik583p3trh7q4Yaw/l4F0+MhN6ApKPq6vYImunRyDouiULcV+Bd/haLM+G754/3Srfw11SdWKJjFfjYHafrNOkTqEZhyCQAza2xSWKHKtAMZot93WU6YM4wXlCrosFHWc4/YQZJb0BPi6m7R/7dJSVm8PR7jUfT8mnlW0A+q0K151xQtfxbj0CMGqIilLihCP1x8rYaWiAAaCwJU3slDaR22x9DqpRQ6E8+IryNxrZW2kX14rzCEax2EdnsrNi3SXdswXS+LsH3UfjtxU/sxLtjmFA8ekk0sQ";
+            parameters.fillCameraMonitorViewParent = true;
+
+            // Init Dogeforia
+            vuforia = new Dogeforia(parameters);
+            vuforia.enableConvertFrameToBitmap();
+
+            // Set target names
+            VuforiaTrackables targetsRoverRuckus = this.vuforia.loadTrackablesFromAsset("RoverRuckus");
+            VuforiaTrackable blueRover = targetsRoverRuckus.get(0);
+            blueRover.setName("Blue-Rover");
+            VuforiaTrackable redFootprint = targetsRoverRuckus.get(1);
+            redFootprint.setName("Red-Footprint");
+            VuforiaTrackable frontCraters = targetsRoverRuckus.get(2);
+            frontCraters.setName("Front-Craters");
+            VuforiaTrackable backSpace = targetsRoverRuckus.get(3);
+            backSpace.setName("Back-Space");
+
+            // For convenience, gather together all the trackable objects in one easily-iterable collection */
+            allTrackables.addAll(targetsRoverRuckus);
+
+            // Set trackables' location on field
+            OpenGLMatrix blueRoverLocationOnField = OpenGLMatrix
+                    .translation(0, mmFTCFieldWidth, mmTargetHeight)
+                    .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, 0));
+            blueRover.setLocation(blueRoverLocationOnField);
+
+            OpenGLMatrix redFootprintLocationOnField = OpenGLMatrix
+                    .translation(0, -mmFTCFieldWidth, mmTargetHeight)
+                    .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, 180));
+            redFootprint.setLocation(redFootprintLocationOnField);
+
+            OpenGLMatrix frontCratersLocationOnField = OpenGLMatrix
+                    .translation(-mmFTCFieldWidth, 0, mmTargetHeight)
+                    .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0 , 90));
+            frontCraters.setLocation(frontCratersLocationOnField);
+
+            OpenGLMatrix backSpaceLocationOnField = OpenGLMatrix
+                    .translation(mmFTCFieldWidth, 0, mmTargetHeight)
+                    .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, -90));
+            backSpace.setLocation(backSpaceLocationOnField);
+
+
+            //Set camera displacement
+            final int CAMERA_FORWARD_DISPLACEMENT  = 140;   // eg: Camera is 110 mm in front of robot center
+            final int CAMERA_VERTICAL_DISPLACEMENT = 174;   // eg: Camera is 200 mm above ground
+            final int CAMERA_LEFT_DISPLACEMENT     = 20;     // eg: Camera is ON the robot's center line
+
+            // Set phone location on robot
+            OpenGLMatrix phoneLocationOnRobot = OpenGLMatrix
+                    .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
+                    .multiplied(Orientation.getRotationMatrix(EXTRINSIC, YZX, DEGREES,
+                            CAMERA_CHOICE == FRONT ? 90 : -90, 0, 0));
+
+            //Set info for the trackables
+            for (VuforiaTrackable trackable : allTrackables) {
+                ((VuforiaTrackableDefaultListener)trackable.getListener()).setPhoneInformation(phoneLocationOnRobot, parameters.cameraDirection);
+            }
+            for (VuforiaTrackable trackable : allTrackables) {
+                ((VuforiaTrackableDefaultListener)trackable.getListener()).setPhoneInformation(phoneLocationOnRobot, parameters.cameraDirection);
+            }
+
+            //Activate targets
+            targetsRoverRuckus.activate();
+
+            detector = new GoldAlignDetector(); // Create a gold aligndetector
+            detector.init(hardwareMap.appContext,CameraViewDisplay.getInstance(), 0, true);
+
+            detector.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100); // Create new filter
+            detector.useDefaults(); // Use default settings
+            detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+            //detector.perfectAreaScorer.perfectArea = 10000; // Uncomment if using PERFECT_AREA scoring
+
+            //Setup Vuforia
+            vuforia.setDogeCVDetector(detector); // Set the Vuforia detector
+            vuforia.enableDogeCV(); //Enable the DogeCV-Vuforia combo
+            vuforia.showDebug(); // Show debug info
+            vuforia.start(); // Start the detector
+        }
+
+        public void encoderDrive(double speed, double leftInches, double rightInches, double leftBackInches, double rightBackInches, double timeoutS) {
+            int newLeftTarget;
+            int newRightTarget;
+            int newLeftBackTarget;
+            int newRightBackTarget;
+
+            if (opModeIsActive()) {
+
+            }
+
+
+        }
+
+        public void setLiftPosition(int pos,double speed) {
+            liftMotor.setTargetPosition(pos);
+            liftMotor.setPower(speed);
+            while((liftMotor.getCurrentPosition() > liftMotor.getTargetPosition() + 1||liftMotor.getCurrentPosition() < liftMotor.getTargetPosition() - 1) && opModeIsActive()) {
+                telemetry.addData("Encoder Position",liftMotor.getCurrentPosition());
+                telemetry.update();
+                idle();
+            }
+            liftMotor.setPower(0);
+        }
+
+
+
+}
