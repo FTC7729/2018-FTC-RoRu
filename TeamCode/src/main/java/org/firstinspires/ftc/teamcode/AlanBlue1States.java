@@ -48,39 +48,15 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
             targetVisible = false;
 
             //Loop through trackables - if we find one, get the location
-            for (VuforiaTrackable trackable : allTrackables) {
-                if (((VuforiaTrackableDefaultListener)trackable.getListener()).isVisible()) {
-                    //We found a target! Print data to telemetry
-                    telemetry.addData("Visible Target", trackable.getName());
-                    targetVisible = true;
 
-                    // getUpdatedRobotLocation() will return null if no new information is available since the last time that call was made, or if the trackable is not currently visible.
-                    OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener)trackable.getListener()).getUpdatedRobotLocation();
-                    if (robotLocationTransform != null) {
-                        lastLocation = robotLocationTransform;
-                    }
-                    break;
-                }
-            }
 
             // Provide feedback as to where the robot is located (if we know).
-            if (targetVisible) {
-                // Express position (translation) of robot in inches.
-                translation = lastLocation.getTranslation();
-                telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
-                        translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
-                rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
-                // Express the rotation of the robot in degrees.
-                telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
-            }
-            else {
-                //No visible target
-                telemetry.addData("Visible Target", "none");
-            }
+
             // Update telemetry
             telemetry.update();
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             if(state == 10) {
+                /*
                 telemetry.addData("State","10");
                 telemetry.update();
                 setLiftPosition(LIFT_RUN_POSITION, 0.3);
@@ -88,6 +64,7 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
                 sleep(100);
                 setLiftPosition(LIFT_DOWN_POSITION, 0.3);
                 hookServo.setPosition(0.15);
+                */
                 state = 20;
             }
 
@@ -171,6 +148,7 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
             // STATE 33 (the center one)
             if (state == 23) {
                 // CHANGE THESE VALUES
+                updateVuforia();
                 telemetry.addData("Status","Moving");
                 telemetry.update();
                 encoderDrive(0.2, -14,  -14, -14, -14, 3);
@@ -181,7 +159,7 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
 
                         thirdAngleVuphoria = rotation.thirdAngle;
 
-                getVuforiaTargetAngle(125, (double) thirdAngleVuphoria);
+                getVuforiaTargetAngle(125, thirdAngleVuphoria);
                 stopMotors();
             }
 
@@ -251,5 +229,34 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
         double newnavxTarget = targetHeading - currentHeading;
         //125 - 90 =
         navxTurnRel(newnavxTarget);
+    }
+    public void updateVuforia() {
+        for (VuforiaTrackable trackable : allTrackables) {
+            if (((VuforiaTrackableDefaultListener)trackable.getListener()).isVisible()) {
+                //We found a target! Print data to telemetry
+                telemetry.addData("Visible Target", trackable.getName());
+                targetVisible = true;
+
+                // getUpdatedRobotLocation() will return null if no new information is available since the last time that call was made, or if the trackable is not currently visible.
+                OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener)trackable.getListener()).getUpdatedRobotLocation();
+                if (robotLocationTransform != null) {
+                    lastLocation = robotLocationTransform;
+                }
+                break;
+            }
+        }
+        if (targetVisible) {
+            // Express position (translation) of robot in inches.
+            translation = lastLocation.getTranslation();
+            telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
+                    translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
+            rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
+            // Express the rotation of the robot in degrees.
+            telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
+        }
+        else {
+            //No visible target
+            telemetry.addData("Visible Target", "none");
+        }
     }
     }
