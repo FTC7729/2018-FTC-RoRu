@@ -224,19 +224,22 @@ public abstract class AlanAutonomousHardwareMapStates extends LinearOpMode{
         //Activate targets
         targetsRoverRuckus.activate();
 
-        detector = new GoldAlignDetector(); // Create a gold aligndetector
-        detector.init(hardwareMap.appContext,CameraViewDisplay.getInstance(), 0, true);
+        //detector = new GoldAlignDetector(); // Create a gold aligndetector
+        //detector.init(hardwareMap.appContext,CameraViewDisplay.getInstance(), 0, true);
 
-        detector.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100); // Create new filter
-        detector.useDefaults(); // Use default settings
-        detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        //detector.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100); // Create new filter
+        //detector.useDefaults(); // Use default settings
+        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
         //detector.perfectAreaScorer.perfectArea = 10000; // Uncomment if using PERFECT_AREA scoring
 
         //Setup Vuforia
+        // We need to have access to the detector in the opmode so the initialization happens in-opmode
+        /*
         vuforia.setDogeCVDetector(detector); // Set the Vuforia detector
-        vuforia.enableDogeCV(); //Enable the DogeCV-Vuforia combo
+        vuforia.enableDogeCV(); //Enable the DogeCV part
         vuforia.showDebug(); // Show debug info
-        vuforia.start(); // Start the detector
+        vuforia.start(); // Start the whole thing
+        */
     }
     public void turnLeft(double power) {
         LFMotor.setPower(-power);

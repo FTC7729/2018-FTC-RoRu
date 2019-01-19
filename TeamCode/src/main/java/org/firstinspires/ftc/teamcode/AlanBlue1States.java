@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
+import com.disnodeteam.dogecv.filters.LeviColorFilter;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -39,11 +40,16 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
             // which end up causing encoderDrive to loop.
             init(hardwareMap);
             align = new GoldAlignDetector();
-            align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+            align.init(hardwareMap.appContext, CameraViewDisplay.getInstance(),0,true);
             align.alignSize = 240;
+            align.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100);
+            vuforia.setDogeCVDetector(align);
+            vuforia.enableDogeCV();
+            vuforia.showDebug();
+            vuforia.start();
+            sleep(60);
             int state = 10;
             //wait till start here in the this place
-            align.enable();
             waitForStart();
             targetVisible = false;
 
@@ -151,10 +157,13 @@ public class AlanBlue1States extends AlanAutonomousHardwareMapStates {
                 updateVuforia();
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -14,  -14, -14, -14, 3);
-                encoderDrive(0.2, 14,  14, 14, 14, 3);
-                navxTurnRel(30);
-
+                encoderDrive(0.15, -20,  -20, -20, -20, 3);
+                updateVuforia();
+                encoderDrive(0.15, 20,  20, 20, 20, 3);
+                updateVuforia();
+                navxTurnRel(50);
+                updateVuforia();
+                sleep(80);
                 double thirdAngleVuphoria = 0;
 
                         thirdAngleVuphoria = rotation.thirdAngle;
