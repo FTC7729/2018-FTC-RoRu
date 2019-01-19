@@ -52,15 +52,18 @@ public class Apollo13Drive extends Apollo13TeleOpHandler{
                 //extends
             } else if(gamepad.x && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
                 liftMotor.setPower(1);
-                //extends real fast
+                //retracts real fast
             }
             else {
                 liftMotor.setPower(0);
             }
             if(gamepad.a && hookServo.getPosition() < 1) {
                 hookServo.setPosition(hookServo.getPosition() + 0.01);
-            } else if (gamepad.b && hookServo.getPosition() > 0.1) {
+                //opens hook
+            }
+            else if (gamepad.b && hookServo.getPosition() > 0.1) {
                 hookServo.setPosition(hookServo.getPosition() - 0.01);
+                //closes hook
             }
         }
 
