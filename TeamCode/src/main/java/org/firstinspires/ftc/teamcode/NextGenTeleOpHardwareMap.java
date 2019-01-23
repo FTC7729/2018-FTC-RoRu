@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -11,7 +12,11 @@ public abstract class NextGenTeleOpHardwareMap {
     public DcMotor LBMotor;
     public DcMotor RBMotor;
     public DcMotor liftMotor;
+    public DcMotor collectorLift;
     public Servo hookServo;
+    public Servo collectorServo;
+    public Servo mineralBox;
+    public DigitalChannel LimitSwitchCollector;
     //public NavxMicroNavigationSensor navx;
 
 
@@ -76,6 +81,22 @@ public abstract class NextGenTeleOpHardwareMap {
         hookServo = hardwareMap.servo.get("hookServo");
         hookServo.setDirection(Servo.Direction.FORWARD);
         hookServo.setPosition(0);
+
+        collectorServo = hardwareMap.servo.get("collectorServo");
+        collectorServo.setDirection(Servo.Direction.FORWARD);
+        collectorServo.setPosition(0);
+
+        mineralBox = hardwareMap.servo.get("mineralBox");
+        mineralBox.setDirection(Servo.Direction.FORWARD);
+        mineralBox.setPosition(0);
+
+        collectorLift = hardwareMap.dcMotor.get("collectorLift");
+        collectorLift.setDirection(DcMotor.Direction.FORWARD);
+        collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        collectorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
 
     }
     public void stopMotors() {
