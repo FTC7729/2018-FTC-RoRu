@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public abstract class NextGenTeleOpHardwareMap {
+public abstract class NextGenTeleOpHardwareMap extends OpMode {
     public DcMotor LFMotor;
     public DcMotor RFMotor;
     public DcMotor LBMotor;
