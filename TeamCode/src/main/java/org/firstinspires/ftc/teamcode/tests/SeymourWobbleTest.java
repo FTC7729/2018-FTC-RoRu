@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name="WEEBLE test",group="tests")
+@Disabled
 public class SeymourWobbleTest  extends LinearOpMode {
     public static final double START_WEEBLE = 0;
     public static final double END_WEEBLE = 0.45;

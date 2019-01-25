@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.AlanAutonomousHardwareMap;
 
 @Autonomous(name="Alan NavX Drive",group="tests")
+@Disabled
 public class AlanNavXTurn extends AlanAutonomousHardwareMap {
     ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() throws InterruptedException {

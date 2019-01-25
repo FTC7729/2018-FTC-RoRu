@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.dogecv;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.opencv.core.Scalar;
 @TeleOp(name ="Hawkeye Adjustment Mode")
+@Disabled
 public class HawkeyeAdjustmentMode extends OpMode {
     public HawkeyeDetector hawk;
     public double Hue = 0;

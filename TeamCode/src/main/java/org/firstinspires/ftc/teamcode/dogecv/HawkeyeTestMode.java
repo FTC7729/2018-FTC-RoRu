@@ -2,9 +2,11 @@ package org.firstinspires.ftc.teamcode.dogecv;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name="Hawkeye Test Mode",group = "tests")
+@Disabled
 public class HawkeyeTestMode extends LinearOpMode {
     private HawkeyeDetector collisionDetect;
     public void runOpMode() {

@@ -2,10 +2,12 @@ package org.firstinspires.ftc.teamcode.dogecv;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.AlanAutonomousHardwareMap;
 
 @Autonomous(name = "Hawkeye Forwards Test",group = "tests")
+@Disabled
 public class HawkeyeForwardDemo extends AlanAutonomousHardwareMap {
     public HawkeyeDetector hawkeye;
     public void runOpMode() throws InterruptedException {

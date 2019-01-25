@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="NextGenDrive", group="TeleOp")
+@Disabled
 public class NextGenDrive extends NextGenTeleopHandler{
     //Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
