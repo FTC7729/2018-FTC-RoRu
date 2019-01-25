@@ -13,7 +13,7 @@ public class AlanBlue2 extends AlanAutonomousHardwareMap {
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     private ElapsedTime runtime = new ElapsedTime();
     GoldAlignDetector align;
-    public final int LIFT_RUN_POSITION = -2310;
+    public final int LIFT_RUN_POSITION = -5743;
     public final int LIFT_DOWN_POSITION = -1000;
     // BoxyHardwareMap robot = new BoxyHardwareMap();
     // private ElapsedTime runtime = new ElapsedTime();

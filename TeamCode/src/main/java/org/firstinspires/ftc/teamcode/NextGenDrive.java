@@ -14,7 +14,7 @@ public class NextGenDrive extends NextGenTeleopHandler{
     /**
      * Value here from {@link AlanBlue1}
      */
-    public final int LIFT_MAX_POS = -2810;
+    public final int LIFT_MAX_POS = -5743;
     //this is slightly higher (or lower; it is technically a lower number) than what is in AlanBlue1
     /**
      * Value here from {@link AlanBlue1}

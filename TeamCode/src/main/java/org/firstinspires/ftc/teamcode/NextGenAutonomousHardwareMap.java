@@ -1,13 +1,9 @@
 package org.firstinspires.ftc.teamcode;
-import android.app.Activity;
-
 import com.disnodeteam.dogecv.Dogeforia;
-import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -101,13 +97,15 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     /**
      * This value here from {@link AlanBlue1}
      */
-    static final int        LIFT_EXTEND_MAX         = -4032; //extend va;ue for autonomous from lander to ground
+    static final int        LIFT_EXTEND_MAX         = -5743; //extend va;ue for autonomous from lander to ground
+   // -6375 = max for mineral box ADD LATER
+
     /**
      * This value here from {@link AlanBlue1}
      */
     static final int        LIFT_DOWN_END_POS       = -157;
-    static final double     HOOK_CLOSE              = 1;
-    static final double     HOOK_OPEN               = 0.37;
+    static final double     HOOK_CLOSE              = 0.00;
+    static final double     HOOK_OPEN               = 1.00;
 
     /**
      * Initialize the hardware

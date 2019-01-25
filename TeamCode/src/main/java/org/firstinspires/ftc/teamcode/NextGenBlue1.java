@@ -27,7 +27,7 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         private ElapsedTime runtime = new ElapsedTime();
         GoldAlignDetector align;
-        public final int LIFT_RUN_POSITION = -4032;
+        public final int LIFT_RUN_POSITION = -5743;
         public final int LIFT_DOWN_POSITION = -1000;
         private static final float mmPerInch        = 25.4f;
         private OpenGLMatrix lastLocation = null;
