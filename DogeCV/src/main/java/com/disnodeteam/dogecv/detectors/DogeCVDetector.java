@@ -62,6 +62,9 @@ public abstract class DogeCVDetector extends OpenCVPipeline{
 
     @Override
     public Mat processFrame(Mat rgba, Mat gray) {
+        if(isNextGen) {
+            Core.flip(rgba,rgba,0);
+        }
         initSize = rgba.size();
 
         if(useFixedDownscale){
@@ -69,10 +72,6 @@ public abstract class DogeCVDetector extends OpenCVPipeline{
         }else{
             adjustedSize = new Size(initSize.width * downscale, initSize.height * downscale);
         }
-        if(isNextGen) {
-            Core.flip(rgba,rgba,0);
-        }
-
         rgba.copyTo(workingMat);
 
         if(workingMat.empty()){

@@ -12,6 +12,7 @@ import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
+import org.firstinspires.ftc.teamcode.dogecv.HawkeyeDetector;
 
 import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
@@ -42,14 +43,16 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
             // which end up causing encoderDrive to loop.
             init(hardwareMap);
             align = new GoldAlignDetector();
-            align.init(hardwareMap.appContext, CameraViewDisplay.getInstance(),0,true);
+            align.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
             align.alignSize = 240;
-            align.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100);
-            align.isNextGen = true;
-            vuforia.setDogeCVDetector(align);
+            hawkeye = new HawkeyeDetector();
+            hawkeye.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+            //align.isNextGen = true;
+            /*vuforia.setDogeCVDetector(align);
             vuforia.enableDogeCV();
             vuforia.showDebug();
-            vuforia.start();
+            vuforia.start();*/
+            align.enable();
             sleep(60);
             int state = 10;
             //wait till start here in the this place
@@ -99,6 +102,7 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
                 telemetry.update();
                 sleep(200);
                 align.disable();
+                hawkeye.enable();
             }
 
             // STATE 31
@@ -116,7 +120,7 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -26, -26, -26, -26, 3);
+                encoderDriveHawk(0.2, -26, -26, -26, -26, 3);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
                 navxTurnRel(53);
