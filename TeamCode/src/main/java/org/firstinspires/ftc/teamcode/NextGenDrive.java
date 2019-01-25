@@ -65,10 +65,11 @@ public class NextGenDrive extends NextGenTeleopHandler{
             hookServo.setPosition(hookServo.getPosition() - 0.01);
             //closes hook
         }
-        if(gamepad.y) {
+      /*  if(gamepad.y) {
             // Do *NOT* press this button in the last 5 seconds or so of the match or else it might still be turning at the buzzer!
             navxTurn(0);
         }
+        */
         //RTrigger spins the collector servo clockwise (in)
         //LTrigger spins the collector servo counterclockwise (out)
         //UpDPad moves the collector lift counterclockwise (in)
