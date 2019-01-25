@@ -1,12 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 public abstract class NextGenTeleOpHardwareMap extends OpMode {
     public DcMotor LFMotor;
@@ -30,6 +37,8 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
     //NavXMicro Navx = new NavXMicro();
 
     private ElapsedTime     runtime = new ElapsedTime();
+    public NavxMicroNavigationSensor navx;
+    IntegratingGyroscope gyro;
     static final double     BOT_SPEED = 0.3;
     static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: NEVEREST 40 Motor Encoder https://www.servocity.com/neverest-40-gearmotor
     static final double     ROTATIONS_PER_MINUTE    = 160 ;
@@ -99,12 +108,43 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
         collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
-
+        if (!navx.isCalibrating()) telemetry.addData("Gyro","Calibrated!");
+    }
+    public void turnLeft(double power) {
+        LFMotor.setPower(-power);
+        RFMotor.setPower(power);
+        LBMotor.setPower(-power);
+        RBMotor.setPower(power);
+    }
+    public void turnRight(double power) {
+        LFMotor.setPower(power);
+        RFMotor.setPower(-power);
+        LBMotor.setPower(power);
+        RBMotor.setPower(-power);
     }
     public void stopMotors() {
         LFMotor.setPower(0);
         RFMotor.setPower(0);
         LBMotor.setPower(0);
         RBMotor.setPower(0);
+    }
+    public void navxTurn(double target) {
+        Orientation angles;
+        while(true) {
+            angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            telemetry.addData("Heading",angles.firstAngle+" degrees");
+            if(angles.firstAngle < target - THRESHOLD) {
+                telemetry.addData("Status","Turning Left");
+                turnLeft(BOT_SPEED);
+            } else if(angles.firstAngle > target + THRESHOLD) {
+                telemetry.addData("Status","Turning Right");
+                turnRight(BOT_SPEED);
+            } else {
+                stopMotors();
+                break;
+            }
+            telemetry.update();
+            //idle();
+        }
     }
 }
