@@ -2,9 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
-import com.disnodeteam.dogecv.filters.LeviColorFilter;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -19,9 +17,9 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGR
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
 
-@Autonomous(name = "nextGenBlue1",group = "Autonomous")
-@Disabled
-public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
+@Autonomous(name = "NextGen Blue1 Crater",group = "Autonomous")
+//@Disabled
+public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
 
 
     VectorF translation;
@@ -109,7 +107,7 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
 
             // STATE 31
             if (state == 22) {
-                telemetry.addData("State","31");
+                telemetry.addData("State","22");
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
                 navxTurnRel(-46);
@@ -129,7 +127,7 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -22, -22, -22, -22, 3);
+                encoderDriveHawk(0.2, -22, -22, -22, -22, 3);
                 stopMotors();
                 telemetry.addLine("Done");
                 telemetry.update();
@@ -153,10 +151,10 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -50,  -50, -50, -50, 3);
+                encoderDriveHawk(0.2, -50,  -50, -50, -50, 3);
                 telemetry.addData("Status","Parking");
                 telemetry.update();
-                navxTurnRel(90);
+              //  navxTurnRel(90);
                 //state = 30;
             }
 /*
@@ -196,19 +194,19 @@ This will be used in states when completed, in the meantime we have a working st
             if (state == 30) {
                 telemetry.addData("Status","Move Towards Wall");
                 telemetry.update();
-                encoderDrive(0.2, -5, -5, -5, -5, 3);
+                encoderDriveHawk(0.2, -5, -5, -5, -5, 3);
                 telemetry.addData("Status","Turning Towards Depot");
                 telemetry.update();
                 navxTurnRel(20);
                 telemetry.addData("Status","Move Towards Depot");
                 telemetry.update();
-                encoderDrive(0.2, -35, -35, -35, -35, 3);
+                encoderDriveHawk(0.2, -35, -35, -35, -35, 3);
                 telemetry.addData("Status","Realign for Depot");
                 telemetry.update();
                 navxTurnRel(20);
                 telemetry.addData("Status","Move Towards Depot");
                 telemetry.update();
-                encoderDrive(0.2, -20, -20, -20, -20, 3);
+                encoderDriveHawk(0.2, -20, -20, -20, -20, 3);
                 telemetry.addData("Status","Align for Dropping");
                 telemetry.update();
                 navxTurnRel(-90);
@@ -219,13 +217,13 @@ This will be used in states when completed, in the meantime we have a working st
                 navxTurnRel(-70);
                 telemetry.addData("Status","Move Towards Crater");
                 telemetry.update();
-                encoderDrive(0.2, -50, -50, -50, -50, 3);
+                encoderDriveHawk(0.2, -50, -50, -50, -50, 3);
                 telemetry.addData("Status","Adjust For Crater");
                 telemetry.update();
                 navxTurnRel(-20);
                 telemetry.addData("Status","Move Towards Crater");
                 telemetry.update();
-                encoderDrive(0.2, -50, -50, -50, -50, 3);
+                encoderDriveHawk(0.2, -50, -50, -50, -50, 3);
                 stopMotors();
             }
             align.disable();
