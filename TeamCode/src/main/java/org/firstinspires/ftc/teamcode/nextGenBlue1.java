@@ -28,9 +28,9 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
         GoldAlignDetector align;
         public final int LIFT_RUN_POSITION = -4032;
         public final int LIFT_DOWN_POSITION = -1000;
-    private static final float mmPerInch        = 25.4f;
-    private OpenGLMatrix lastLocation = null;
-    boolean targetVisible;
+        private static final float mmPerInch        = 25.4f;
+        private OpenGLMatrix lastLocation = null;
+        boolean targetVisible;
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         // private ElapsedTime runtime = new ElapsedTime();
         //GoldAlignDetector align;
@@ -45,6 +45,7 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
             align.init(hardwareMap.appContext, CameraViewDisplay.getInstance(),0,true);
             align.alignSize = 240;
             align.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100);
+            align.isNextGen = true;
             vuforia.setDogeCVDetector(align);
             vuforia.enableDogeCV();
             vuforia.showDebug();

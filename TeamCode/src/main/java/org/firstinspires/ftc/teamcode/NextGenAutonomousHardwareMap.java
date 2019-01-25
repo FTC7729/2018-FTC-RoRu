@@ -1,4 +1,6 @@
 package org.firstinspires.ftc.teamcode;
+import android.app.Activity;
+
 import com.disnodeteam.dogecv.Dogeforia;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
@@ -72,8 +74,6 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
 
 
-    //Detector object
-    GoldAlignDetector detector;
 
     IntegratingGyroscope gyro;
     NavxMicroNavigationSensor navxMicro;
