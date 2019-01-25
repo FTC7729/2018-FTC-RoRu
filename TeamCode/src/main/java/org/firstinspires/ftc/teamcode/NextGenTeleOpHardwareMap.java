@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -15,9 +16,9 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
     public DcMotor liftMotor;
     public DcMotor collectorLift;
     public Servo hookServo;
-    public Servo collectorServo;
-    public Servo mineralBox;
-    public DigitalChannel LimitSwitchCollector;
+    public CRServo collectorServo;
+    //public Servo mineralBox;
+    //public DigitalChannel LimitSwitchCollector;
     //public NavxMicroNavigationSensor navx;
 
 
@@ -83,21 +84,21 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
         hookServo.setDirection(Servo.Direction.FORWARD);
         hookServo.setPosition(0);
 
-        collectorServo = hardwareMap.servo.get("collectorServo");
-        collectorServo.setDirection(Servo.Direction.FORWARD);
-        collectorServo.setPosition(0);
-
+        collectorServo = hardwareMap.crservo.get("collectorServo");
+        collectorServo.setDirection(CRServo.Direction.FORWARD);
+        collectorServo.setPower(0);
+/*
         mineralBox = hardwareMap.servo.get("mineralBox");
         mineralBox.setDirection(Servo.Direction.FORWARD);
         mineralBox.setPosition(0);
-
+*/
         collectorLift = hardwareMap.dcMotor.get("collectorLift");
         collectorLift.setDirection(DcMotor.Direction.FORWARD);
         collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         collectorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
+        //LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
 
     }
     public void stopMotors() {

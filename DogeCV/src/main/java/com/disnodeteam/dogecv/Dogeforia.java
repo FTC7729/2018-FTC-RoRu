@@ -100,7 +100,6 @@ public class Dogeforia extends VuforiaLocalizerImpl {
     public void enableTrack(){
         startTracker();
     }
-
     public void disableTrack() {
         stopTracker();
     }

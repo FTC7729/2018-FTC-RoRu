@@ -4,6 +4,7 @@ import com.disnodeteam.dogecv.DogeCV;
 import com.disnodeteam.dogecv.OpenCVPipeline;
 import com.disnodeteam.dogecv.scoring.DogeCVScorer;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 
 public abstract class DogeCVDetector extends OpenCVPipeline{
-
+    public boolean isNextGen = false;
     public abstract Mat process(Mat input);
     public abstract void useDefaults();
 
@@ -67,6 +68,9 @@ public abstract class DogeCVDetector extends OpenCVPipeline{
             adjustedSize = downscaleResolution;
         }else{
             adjustedSize = new Size(initSize.width * downscale, initSize.height * downscale);
+        }
+        if(isNextGen) {
+            Core.flip(rgba,rgba,0);
         }
 
         rgba.copyTo(workingMat);

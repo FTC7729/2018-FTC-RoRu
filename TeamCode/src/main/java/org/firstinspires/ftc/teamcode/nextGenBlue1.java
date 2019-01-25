@@ -30,9 +30,9 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
         GoldAlignDetector align;
         public final int LIFT_RUN_POSITION = -4032;
         public final int LIFT_DOWN_POSITION = -1000;
-    private static final float mmPerInch        = 25.4f;
-    private OpenGLMatrix lastLocation = null;
-    boolean targetVisible;
+        private static final float mmPerInch        = 25.4f;
+        private OpenGLMatrix lastLocation = null;
+        boolean targetVisible;
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         // private ElapsedTime runtime = new ElapsedTime();
         //GoldAlignDetector align;
@@ -47,6 +47,7 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
             align.init(hardwareMap.appContext, CameraViewDisplay.getInstance(),0,true);
             align.alignSize = 240;
             align.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100);
+            align.isNextGen = true;
             vuforia.setDogeCVDetector(align);
             vuforia.enableDogeCV();
             vuforia.showDebug();
@@ -148,12 +149,16 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -7,  -7, -7, -7, 3);
-                telemetry.addData("Status","Turning Left");
+                encoderDrive(0.2, -50,  -50, -50, -50, 3);
+                telemetry.addData("Status","Parking");
                 telemetry.update();
                 navxTurnRel(90);
-                state = 30;
+                //state = 30;
             }
+/*
+
+NOTE: This state is the complicated form where we implement Vuforia to turn the robot for point collection in ways other tban just sampling
+This will be used in states when completed, in the meantime we have a working state that samples and parks lower down.
 
             // STATE 33 (the center one)
             if (state == 23) {
@@ -173,6 +178,14 @@ public class nextGenBlue1 extends NextGenAutonomousHardwareMap {
                 //        thirdAngleVuphoria = rotation.thirdAngle;
 
                // getVuforiaTargetAngle(125, thirdAngleVuphoria);
+                stopMotors();
+            }
+*/
+            if (state == 23) {
+                // CHANGE THESE VALUES
+                telemetry.addData("Status","Moving");
+                telemetry.update();
+                encoderDrive(0.4, -50, -50, -50, -50, 2); // drive ito crator
                 stopMotors();
             }
 
