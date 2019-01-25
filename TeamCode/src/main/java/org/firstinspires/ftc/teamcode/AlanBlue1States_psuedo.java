@@ -1,22 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.disnodeteam.dogecv.CameraViewDisplay;
-import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
-import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
-
-import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
-import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
-import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
-
-@Autonomous(name = "Alan Blue 1 States",group = "Autonomous")
+@Autonomous(name = "Alan Blue 1 States Psue",group = "Autonomous")
+@Disabled
 public class AlanBlue1States_psuedo extends AlanAutonomousHardwareMapStates {
 
         public void runOpMode() throws InterruptedException {
