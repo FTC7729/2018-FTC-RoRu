@@ -80,7 +80,7 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 state = 20;
             }
 
-            //State 30
+            //State 20
             if (state == 20) {
                 sleep(500);
                 //if the gold IS on screen
@@ -120,14 +120,14 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDriveHawk(0.2, -26, -26, -26, -26, 3);
+                encoderDrive(0.2, -26, -26, -26, -26, 3);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
                 navxTurnRel(53);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDriveHawk(0.2, -7, -7, -7, -7, 3);
+                encoderDrive(0.2, -13, -13, -13, -13, 3);
                 stopMotors();
                 telemetry.addLine("Done");
                 telemetry.update();
@@ -144,14 +144,14 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.addData("Status","Moving");
                 telemetry.update();
                 // CHANGE THESE VALUES
-                encoderDriveHawk(0.2, -26, -26, -26, -26, 3);
+                encoderDrive(0.2, -26, -26, -26, -26, 3);
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
                 navxTurnRel(-53);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDriveHawk(0.2, -7,  -7, -7, -7, 3);
+                encoderDrive(0.2, -7,  -7, -7, -7, 3);
                // telemetry.addData("Status","Parking");
                 //telemetry.update();
                 //navxTurnRel(90);
@@ -188,7 +188,7 @@ This will be used in states when completed, in the meantime we have a working st
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDriveHawk(0.4, -25, -25, -25, -25, 2); // drive ito crator
+                encoderDrive(0.4, -30, -30, -30, -30, 2); // drive ito crator
                 stopMotors();
             }
 

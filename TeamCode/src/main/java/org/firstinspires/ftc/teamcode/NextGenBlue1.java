@@ -105,7 +105,7 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
                 hawkeye.enable();
             }
 
-            // STATE 31
+            // STATE 22
             if (state == 22) {
                 telemetry.addData("State","22");
                 telemetry.addData("Status","Turning Right");
@@ -134,7 +134,7 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
             }
 
 
-            // STATE 32 (the left one)
+            // STATE 21 (the left one)
             if (state == 21) {
                 telemetry.addData("State","21");
                 telemetry.addData("Status","Turning Left");
