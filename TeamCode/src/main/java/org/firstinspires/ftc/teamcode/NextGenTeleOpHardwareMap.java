@@ -87,7 +87,7 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
 
         collectorServo = hardwareMap.crservo.get("collectorServo");
         collectorServo.setDirection(CRServo.Direction.FORWARD);
-        collectorServo.setPower(0);
+        //collectorServo.setPower(0);
 /*
         mineralBox = hardwareMap.servo.get("mineralBox");
         mineralBox.setDirection(Servo.Direction.FORWARD);

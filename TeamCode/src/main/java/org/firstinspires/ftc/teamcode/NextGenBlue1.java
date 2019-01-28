@@ -120,14 +120,14 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDriveHawk(0.2, -26, -26, -26, -26, 3);
+                encoderDrive(0.2, -26, -26, -26, -26, 3);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
                 navxTurnRel(53);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDriveHawk(0.2, -22, -22, -22, -22, 3);
+                encoderDrive(0.2, -22, -22, -22, -22, 3);
                 stopMotors();
                 telemetry.addLine("Done");
                 telemetry.update();
@@ -149,9 +149,9 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
                 telemetry.update();
                 navxTurnRel(-53);
                 // CHANGE THESE VALUES
-                telemetry.addData("Status","Moving");
+                telemetry.addData("Status","Moving to knock off gold");
                 telemetry.update();
-                encoderDriveHawk(0.2, -50,  -50, -50, -50, 3);
+                encoderDrive(0.2, -50,  -50, -50, -50, 3);
                 telemetry.addData("Status","Parking");
                 telemetry.update();
               //  navxTurnRel(90);
