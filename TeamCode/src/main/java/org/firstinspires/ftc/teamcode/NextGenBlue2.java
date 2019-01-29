@@ -27,8 +27,7 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
         // BoxyHardwareMap robot = new BoxyHardwareMap();
         private ElapsedTime runtime = new ElapsedTime();
         GoldAlignDetector align;
-        public final int LIFT_RUN_POSITION = -4032;
-        public final int LIFT_DOWN_POSITION = -1000;
+
         private static final float mmPerInch        = 25.4f;
         private OpenGLMatrix lastLocation = null;
         boolean targetVisible;
@@ -137,6 +136,9 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.addData("Status","Moving");
                 telemetry.update();
                 encoderDrive(0.2, -13, -13, -13, -13, 3);
+                telemetry.addData("Status","Moving Back");
+                telemetry.update();
+                encoderDrive(0.2, 13, 13, 13,  13, 3);
                 stopMotors();
                 telemetry.addLine("Done");
                 telemetry.update();
@@ -158,10 +160,10 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.update();
                 navxTurnRel(-53);
                 // CHANGE THESE VALUES
-                telemetry.addData("Status","Moving");
+                telemetry.addData("Status","Moving ");
                 telemetry.update();
                 encoderDrive(0.2, -7,  -7, -7, -7, 3);
-                telemetry.addData("Status","Moving");
+                telemetry.addData("Status","Moving Back");
                 telemetry.update();
                 encoderDrive(0.2, 7,  7, 7, 7, 3);
                 // telemetry.addData("Status","Parking");
@@ -201,6 +203,9 @@ This will be used in states when completed, in the meantime we have a working st
                 telemetry.addData("Status","Moving");
                 telemetry.update();
                 encoderDrive(0.4, -30, -30, -30, -30, 2); // drive ito crator
+                telemetry.addData("Status","Moving");
+                telemetry.update();
+                encoderDrive(0.4, 30, 30, 30, 30 , 2);
                 stopMotors();
             }
 
