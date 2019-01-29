@@ -46,6 +46,8 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     //public NavxMicroNavigationSensor navx;
     HawkeyeDetector hawkeye;
     private final int LIFT_HOLD_POSITION = -100; // minimum start for automnomous
+    public final int LIFT_RUN_POSITION = -4032;
+    public final int LIFT_DOWN_POSITION = -1000;
     /**
      * I2C Pin order: Red, Black, Yellow, White
      *
@@ -103,7 +105,6 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     /**
      * This value here from {@link AlanBlue1}
      */
-    static final int        LIFT_DOWN_END_POS       = -157;
     static final double     HOOK_CLOSE              = 0.00;
     static final double     HOOK_OPEN               = 1.00;
 
