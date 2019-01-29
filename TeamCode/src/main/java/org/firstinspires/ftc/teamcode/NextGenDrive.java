@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -20,6 +21,7 @@ public class NextGenDrive extends NextGenTeleopHandler{
      * Value here from {@link AlanBlue1}
      */
     public final int LIFT_MIN_POS = -1000;
+    public final double COLLECTOR_LIFT_SPEED = 0.3;
     @Override
     public void handleGamePad1(Gamepad gamepad) {
         telemetry.addData("We Made It", "We Made it !");
@@ -41,6 +43,8 @@ public class NextGenDrive extends NextGenTeleopHandler{
 
     @Override
     public void handleGamePad2(Gamepad gamepad) {
+        float leftStickY = Range.clip(-gamepad.left_stick_y, -1, 1);
+        float rightStickY = Range.clip(-gamepad.right_stick_y, -1, 1);
         telemetry.update();
         if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
             liftMotor.setPower(0.4);
@@ -57,11 +61,11 @@ public class NextGenDrive extends NextGenTeleopHandler{
         else {
             liftMotor.setPower(0);
         }
-        if(gamepad.a && hookServo.getPosition() < 1) {
+        if(leftStickY < -0.1 && hookServo.getPosition() < 1) {
             hookServo.setPosition(hookServo.getPosition() + 0.01);
             //opens hook
         }
-        else if (gamepad.b && hookServo.getPosition() > 0.1) {
+        else if (leftStickY > 0.1 && hookServo.getPosition() > 0.1) {
             hookServo.setPosition(hookServo.getPosition() - 0.01);
             //closes hook
         }
@@ -70,15 +74,28 @@ public class NextGenDrive extends NextGenTeleopHandler{
             navxTurn(0);
         }
         */
+        if(gamepad.right_trigger > 0.1) {
+            //fix me!!!!
+        }
+        else if(gamepad.left_trigger > 0.1) {
+            //fix me!!!
+
+        }
         //RTrigger spins the collector servo clockwise (in)
         //LTrigger spins the collector servo counterclockwise (out)
+        if (gamepad.dpad_up){
+            collectorLift.setPower(COLLECTOR_LIFT_SPEED);
+        }
+        else if (gamepad.dpad_down){
+            collectorLift.setPower(-COLLECTOR_LIFT_SPEED);
+        }
         //UpDPad moves the collector lift counterclockwise (in)
         //DownDPad moves the collector lift clockwise (out)
+        if (gamepad.a){
+
+        }
         //A moves the Mineral Box servo counterclockwise (in/ dumps mineral(s) in lander)
         //B moves the Mineral Box servo clockwise (out/ brings servo back)
-
-        float leftStickY = Range.clip(-gamepad.left_stick_y, -1, 1);
-        float rightStickY = Range.clip(-gamepad.right_stick_y, -1, 1);
 
     }
 

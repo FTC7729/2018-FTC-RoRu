@@ -54,7 +54,7 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
             vuforia.start();*/
             align.enable();
             sleep(60);
-            int state = 10;
+            int state = 9;
             //wait till start here in the this place
             waitForStart();
             targetVisible = false;
@@ -65,6 +65,12 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
             // Provide feedback as to where the robot is located (if we know).
 
             // Update telemetry
+            if (state == 9) {
+                telemetry.addData("State","9");
+                telemetry.update();
+                setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
+                state = 10;
+            }
             telemetry.update();
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             if(state == 10) {

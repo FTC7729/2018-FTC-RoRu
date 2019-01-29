@@ -112,6 +112,10 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
      *
      * @param hardwareMap configuration from FTC application
      */
+    
+    static final int COLLECTOR_LIFT_START = 0;
+    static final int COLLECTOR_LIFT_UPRIGHT = -330;
+    static final int COLLECTOR_LIFT_CRATER = -889;
     public void  init(HardwareMap hardwareMap) throws InterruptedException {
         // grab wheels
         LFMotor = hardwareMap.dcMotor.get("LFMotor");
@@ -157,6 +161,7 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
         collectorLift.setDirection(DcMotor.Direction.FORWARD);
         collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         collectorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        collectorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
@@ -508,7 +513,16 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
         }
         liftMotor.setPower(0);
     }
-
+    public void setCollectorPosition(int pos,double speed) {
+        collectorLift.setTargetPosition(pos);
+        collectorLift.setPower(speed);
+        while((collectorLift.getCurrentPosition() > collectorLift.getTargetPosition() + 1||collectorLift.getCurrentPosition() < collectorLift.getTargetPosition() - 1) && opModeIsActive()) {
+            telemetry.addData("Encoder Collector Position",collectorLift.getCurrentPosition());
+            telemetry.update();
+            idle();
+        }
+        collectorLift.setPower(0);
+    }
 
 
 
