@@ -56,7 +56,7 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
             sleep(60);
             int state = 10;
             //wait till start here in the this place
-            waitForStart();
+            waitForStart(); 
             targetVisible = false;
 
             //Loop through trackables - if we find one, get the location
@@ -80,7 +80,7 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
                 state = 20;
             }
 
-            //State 30
+            //State 20
             if (state == 20) {
                 sleep(500);
                 //if the gold IS on screen
@@ -162,7 +162,7 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
 NOTE: This state is the complicated form where we implement Vuforia to turn the robot for point collection in ways other tban just sampling
 This will be used in states when completed, in the meantime we have a working state that samples and parks lower down.
 
-            // STATE 33 (the center one)
+            // STATE 23 (the center one)
             if (state == 23) {
                 // CHANGE THESE VALUES
                 updateVuforia();
@@ -182,12 +182,12 @@ This will be used in states when completed, in the meantime we have a working st
                // getVuforiaTargetAngle(125, thirdAngleVuphoria);
                 stopMotors();
             }
-*/
+*/          //center one
             if (state == 23) {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.4, -50, -50, -50, -50, 2); // drive ito crator
+                encoderDrive(0.3, -50, -50, -50, -50, 2); // drive ito crator
                 stopMotors();
             }
 
