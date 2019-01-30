@@ -4,6 +4,7 @@ import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -41,9 +42,8 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     public DcMotor collectorLift;
     public Servo hookServo;
     public CRServo collectorServo;
-    //public Servo mineralBox;
-    //public DigitalChannel LimitSwitchCollector;
-    //public NavxMicroNavigationSensor navx;
+    public Servo mineralBox;
+    public DigitalChannel LimitSwitchCollector;
     HawkeyeDetector hawkeye;
     private final int LIFT_HOLD_POSITION = -100; // minimum start for automnomous
     public final int LIFT_RUN_POSITION = -4032;
@@ -53,7 +53,7 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
      *
      * On Board Pin order: White, Yellow, Black, Red
      */
-    public NavxMicroNavigationSensor navx;
+    public NavxMicroNavigationSensor navx ;
 
     //Elapsed time and measurement constants
     private ElapsedTime runtime = new ElapsedTime();
@@ -165,7 +165,7 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
         collectorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
+        LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
         gyro = (IntegratingGyroscope)navx;
