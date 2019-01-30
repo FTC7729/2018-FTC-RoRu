@@ -89,9 +89,14 @@ public class NextGenDrive extends NextGenTeleopHandler{
         else if (gamepad.dpad_down){
             collectorLift.setPower(-COLLECTOR_LIFT_SPEED);
         }
+        else{
+            collectorLift.setPower(0);
+        }
         //UpDPad moves the collector lift counterclockwise (in)
         //DownDPad moves the collector lift clockwise (out)
         if (gamepad.a){
+
+        }else if (gamepad.b){
 
         }
         //A moves the Mineral Box servo counterclockwise (in/ dumps mineral(s) in lander)
