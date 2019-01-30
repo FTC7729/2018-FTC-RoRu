@@ -52,11 +52,10 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
     static final double     TURN_SPEED              = 0.5;
     static final double     FORWARD_SPEED           = 0.6;
     static final double     BACKWARDS_SPEED         = -0.6;
-    static final int        LIFT_EXTEND_MAX         = 2628;
-    static final int        LIFT_DOWN_START_POS     = 97;
-    static final int        LIFT_EXTEND_LATCH       = 1511;
-    static final int        LIFT_EXTEND_LAND        = 1511;
-    static final int        LIFT_DOWN_END_POS       = 97;
+    public final int LIFT_HOLD_POSITION = -100; // minimum start for automnomous
+    public final int LIFT_RUN_POSITION = -4032; //lift for endgame
+    public final int LIFT_DOWN_POSITION = -1000;
+    public final int LIFT_DUMP_MAX_POSITION = -6470;
     static final double     HOOK_CLOSE              = 0;
     static final double     HOOK_OPEN               = 0;
 
@@ -97,8 +96,8 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
 
         boxServo = hardwareMap.servo.get("boxServo");
         boxServo.setDirection(Servo.Direction.FORWARD);
-        boxServo.setPosition(0);
-
+        boxServo.setPosition(0); //max down
+        //1 = max up (dump)
         collectorServo = hardwareMap.crservo.get("collectorServo");
         collectorServo.setDirection(CRServo.Direction.FORWARD);
         //collectorServo.setPower(0);

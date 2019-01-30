@@ -15,12 +15,12 @@ public class NextGenDrive extends NextGenTeleopHandler{
     /**
      * Value here from {@link AlanBlue1}
      */
-    public final int LIFT_MAX_POS = -5743;
+ //   public final int LIFT_MAX_POS = -5743;
     //this is slightly higher (or lower; it is technically a lower number) than what is in AlanBlue1
     /**
      * Value here from {@link AlanBlue1}
      */
-    public final int LIFT_MIN_POS = -1000;
+//    public final int LIFT_MIN_POS = -1000;
     public final double COLLECTOR_LIFT_SPEED = 0.3;
     @Override
     public void handleGamePad1(Gamepad gamepad) {
@@ -45,17 +45,19 @@ public class NextGenDrive extends NextGenTeleopHandler{
     public void handleGamePad2(Gamepad gamepad) {
         float leftStickY = Range.clip(-gamepad.left_stick_y, -1, 1);
         telemetry.update();
-        if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
+        if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_HOLD_POSITION) {
             liftMotor.setPower(0.4);
             //liftMotor.setTargetPosition(LIFT_MAX_POS);
             //retracts
-        } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() > LIFT_MAX_POS) {
+        } else if(gamepad.right_bumper && liftMotor.getCurrentPosition() > LIFT_RUN_POSITION) {
             liftMotor.setPower(-0.4);
             //liftMotor.setTargetPosition(LIFT_MIN_POS);
             //extends
-        } else if(gamepad.x && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
+        } else if(gamepad.x && liftMotor.getCurrentPosition() < LIFT_HOLD_POSITION) {
             liftMotor.setPower(1);
             //retracts real fast
+        } else if(gamepad.y && liftMotor.getCurrentPosition() > LIFT_DUMP_MAX_POSITION) {
+            liftMotor.setPower(-0.4);
         }
         else {
             liftMotor.setPower(0);
