@@ -16,7 +16,7 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
     public DcMotor collectorLift;
     public Servo hookServo;
     public CRServo collectorServo;
-    public Servo boxServo;
+//    public Servo boxServo;
     //public Servo mineralBox;
     //public DigitalChannel LimitSwitchCollector;
     //public NavxMicroNavigationSensor navx;
@@ -88,9 +88,9 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
         hookServo.setDirection(Servo.Direction.FORWARD);
         hookServo.setPosition(0);
 
-        boxServo = hardwareMap.servo.get("boxServo");
-        boxServo.setDirection(Servo.Direction.FORWARD);
-        boxServo.setPosition(0);
+  //      boxServo = hardwareMap.servo.get("boxServo");
+//        boxServo.setDirection(Servo.Direction.FORWARD);
+    //    boxServo.setPosition(0);
 
         collectorServo = hardwareMap.crservo.get("collectorServo");
         collectorServo.setDirection(CRServo.Direction.FORWARD);
