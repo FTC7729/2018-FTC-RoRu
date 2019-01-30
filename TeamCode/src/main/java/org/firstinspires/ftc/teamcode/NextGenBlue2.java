@@ -139,6 +139,12 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.addData("Status","Moving Back");
                 telemetry.update();
                 encoderDrive(0.2, 13, 13, 13,  13, 3);
+                setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
+                navxTurnRel(90);
+                encoderDriveHawk(0.2, -16, -16, -16, -16, 3);
+                navxTurnRel(45);
+                encoderDriveHawk(0.2, -24, -24, -24, -24, 3);
+                setCollectorPosition(COLLECTOR_LIFT_CRATER, 0.3);
                 stopMotors();
                 telemetry.addLine("Done");
                 telemetry.update();
@@ -166,6 +172,12 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.addData("Status","Moving Back");
                 telemetry.update();
                 encoderDrive(0.2, 7,  7, 7, 7, 3);
+                setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
+                navxTurnRel(90);
+                encoderDriveHawk(0.2, -26, -26, -26, -26, 3);
+                navxTurnRel(45);
+                encoderDriveHawk(0.2, -24, -24, -24, -24, 3);
+                setCollectorPosition(COLLECTOR_LIFT_CRATER, 0.3);
                 // telemetry.addData("Status","Parking");
                 //telemetry.update();
                 //navxTurnRel(90);
@@ -206,6 +218,12 @@ This will be used in states when completed, in the meantime we have a working st
                 telemetry.addData("Status","Moving");
                 telemetry.update();
                 encoderDrive(0.4, 30, 30, 30, 30 , 2);
+                setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
+                navxTurnRel(90);
+                encoderDriveHawk(0.2, -36, -36, -36, -36, 3);
+                navxTurnRel(45);
+                encoderDriveHawk(0.2, -24, -24, -24, -24, 3);
+                setCollectorPosition(COLLECTOR_LIFT_CRATER, 0.3);
                 stopMotors();
             }
 
