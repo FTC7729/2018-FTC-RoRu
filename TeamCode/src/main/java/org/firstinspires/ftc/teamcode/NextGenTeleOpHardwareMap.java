@@ -1,11 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 public abstract class NextGenTeleOpHardwareMap extends OpMode {
     public DcMotor LFMotor;
@@ -16,15 +24,14 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
     public DcMotor collectorLift;
     public Servo hookServo;
     public CRServo collectorServo;
-//    public Servo boxServo;
-    //public Servo mineralBox;
-    //public DigitalChannel LimitSwitchCollector;
-    //public NavxMicroNavigationSensor navx;
+    public Servo boxServo;
+    public DigitalChannel LimitSwitchCollector;
+    public NavxMicroNavigationSensor navx;
 
 
-    //IntegratingGyroscope gyro;
-    //NavxMicroNavigationSensor navxMicro;
-    //public double degrees;
+    IntegratingGyroscope gyro;
+    NavxMicroNavigationSensor navxMicro;
+    public double degrees;
     ElapsedTime timer = new ElapsedTime();
     //Boxy         robot   = new Boxy();
     //NavXMicro Navx = new NavXMicro();
@@ -88,18 +95,15 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
         hookServo.setDirection(Servo.Direction.FORWARD);
         hookServo.setPosition(0);
 
-  //      boxServo = hardwareMap.servo.get("boxServo");
-//        boxServo.setDirection(Servo.Direction.FORWARD);
-    //    boxServo.setPosition(0);
+        boxServo = hardwareMap.servo.get("boxServo");
+        boxServo.setDirection(Servo.Direction.FORWARD);
+        boxServo.setPosition(0);
 
         collectorServo = hardwareMap.crservo.get("collectorServo");
         collectorServo.setDirection(CRServo.Direction.FORWARD);
         //collectorServo.setPower(0);
-/*
-        mineralBox = hardwareMap.servo.get("mineralBox");
-        mineralBox.setDirection(Servo.Direction.FORWARD);
-        mineralBox.setPosition(0);
-*/
+
+
         collectorLift = hardwareMap.dcMotor.get("collectorLift");
         collectorLift.setDirection(DcMotor.Direction.FORWARD);
         collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -127,7 +131,7 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
         LBMotor.setPower(0);
         RBMotor.setPower(0);
     }
-  /*  public void navxTurn(double target) {
+    public void navxTurn(double target) {
         Orientation angles;
         while(true) {
             angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -146,5 +150,5 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
             //idle();
         }
     }
-    */
+
 }
