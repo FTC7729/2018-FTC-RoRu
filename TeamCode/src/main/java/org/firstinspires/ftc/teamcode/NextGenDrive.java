@@ -44,7 +44,6 @@ public class NextGenDrive extends NextGenTeleopHandler{
     @Override
     public void handleGamePad2(Gamepad gamepad) {
         float leftStickY = Range.clip(-gamepad.left_stick_y, -1, 1);
-        float rightStickY = Range.clip(-gamepad.right_stick_y, -1, 1);
         telemetry.update();
         if(gamepad.left_bumper && liftMotor.getCurrentPosition() < LIFT_MIN_POS) {
             liftMotor.setPower(0.4);
@@ -61,13 +60,16 @@ public class NextGenDrive extends NextGenTeleopHandler{
         else {
             liftMotor.setPower(0);
         }
+        //move left stick up and down
         if(leftStickY < -0.1 && hookServo.getPosition() < 1) {
             hookServo.setPosition(hookServo.getPosition() + 0.01);
             //opens hook
+            //stick down
         }
         else if (leftStickY > 0.1 && hookServo.getPosition() > 0.1) {
             hookServo.setPosition(hookServo.getPosition() - 0.01);
             //closes hook
+            //stick up
         }
       /*  if(gamepad.y) {
             // Do *NOT* press this button in the last 5 seconds or so of the match or else it might still be turning at the buzzer!
@@ -85,10 +87,10 @@ public class NextGenDrive extends NextGenTeleopHandler{
         }
         //RTrigger spins the collector servo clockwise (in)
         //LTrigger spins the collector servo counterclockwise (out)
-        if (gamepad.dpad_up){
+        if (gamepad.dpad_up && collectorLift.getCurrentPosition() < COLLECTOR_LIFT_START){
             collectorLift.setPower(COLLECTOR_LIFT_SPEED);
         }
-        else if (gamepad.dpad_down){
+        else if (gamepad.dpad_down && collectorLift.getCurrentPosition() > COLLECTOR_LIFT_CRATER){
             collectorLift.setPower(-COLLECTOR_LIFT_SPEED);
         }
         else{
