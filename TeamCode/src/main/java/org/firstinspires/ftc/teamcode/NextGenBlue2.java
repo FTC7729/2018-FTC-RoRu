@@ -85,6 +85,12 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 setLiftPosition(LIFT_DOWN_POSITION, 0.3);
                 hookServo.setPosition(0.15);
 
+                state = 11;
+            }
+            if (state == 11)  {
+                telemetry.addData("State","11");
+                telemetry.update();
+                setCollectorPosition(COLLECTOR_LIFT_START, 0.3);
                 state = 20;
             }
 
@@ -139,7 +145,7 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.addData("Status","Moving Back");
                 telemetry.update();
                 encoderDrive(0.2, 13, 13, 13,  13, 3);
-                setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
+                //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
                 navxTurnRel(90);
                 encoderDriveHawk(0.2, -16, -16, -16, -16, 3);
                 navxTurnRel(45);
@@ -172,7 +178,7 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.addData("Status","Moving Back");
                 telemetry.update();
                 encoderDrive(0.2, 7,  7, 7, 7, 3);
-                setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
+                //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
                 navxTurnRel(90);
                 encoderDriveHawk(0.2, -26, -26, -26, -26, 3);
                 navxTurnRel(45);
@@ -183,32 +189,9 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 //navxTurnRel(90);
                 //state = 30;
             }
-/*
 
-NOTE: This state is the complicated form where we implement Vuforia to turn the robot for point collection in ways other tban just sampling
-This will be used in states when completed, in the meantime we have a working state that samples and parks lower down.
 
-            // STATE 33 (the center one)
-            if (state == 23) {
-                // CHANGE THESE VALUES
-                updateVuforia();
-                telemetry.addData("Status","Moving");
-                telemetry.update();
-                encoderDrive(0.15, -20,  -20, -20, -20, 3);
-                updateVuforia();
-                encoderDrive(0.15, 20,  20, 20, 20, 3);
-                updateVuforia();
-                navxTurnRel(50);
-                updateVuforia();
-                sleep(80);
-              //  double thirdAngleVuphoria = 0;
 
-                //        thirdAngleVuphoria = rotation.thirdAngle;
-
-               // getVuforiaTargetAngle(125, thirdAngleVuphoria);
-                stopMotors();
-            }
-*/
             // CENTER
             if (state == 23) {
                 // CHANGE THESE VALUES
@@ -218,7 +201,7 @@ This will be used in states when completed, in the meantime we have a working st
                 telemetry.addData("Status","Moving");
                 telemetry.update();
                 encoderDrive(0.4, 30, 30, 30, 30 , 2);
-                setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
+                //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
                 navxTurnRel(90);
                 encoderDriveHawk(0.2, -36, -36, -36, -36, 3);
                 navxTurnRel(45);
