@@ -43,7 +43,7 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     public Servo hookServo;
     public CRServo collectorServo;
     public Servo mineralBox;
-    public DigitalChannel LimitSwitchCollector;
+    //public DigitalChannel LimitSwitchCollector;
     HawkeyeDetector hawkeye;
     private final int LIFT_HOLD_POSITION = -100; // minimum start for automnomous
     public final int LIFT_RUN_POSITION = -4032;
@@ -165,7 +165,7 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
         collectorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
+       // LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
         // grab navx sensor
         navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
         gyro = (IntegratingGyroscope)navx;
