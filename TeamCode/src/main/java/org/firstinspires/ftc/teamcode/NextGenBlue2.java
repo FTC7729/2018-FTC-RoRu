@@ -125,11 +125,7 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.addData("Status","Turning Right");
                 telemetry.update();
                 navxTurnRel(-46);
-                //while(!align.getAligned() && opModeIsActive()) {
-                // navxTurnRel(-2,1);
-                //sleep(50);
-                //}
-                // Relative
+
                 sleep(500);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
@@ -141,13 +137,13 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -13, -13, -13, -13, 3);
+                encoderDrive(0.2, -16, -16, -16, -16, 3);
                 telemetry.addData("Status","Moving Back");
                 telemetry.update();
-                encoderDrive(0.2, 13, 13, 13,  13, 3);
-                //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
+                encoderDrive(0.2, 16, 16, 16,  16, 3);
+                //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3); //sampling ends
                 navxTurnRel(90);
-                encoderDriveHawk(0.2, -16, -16, -16, -16, 3);
+                encoderDriveHawk(0.2, -30, -30, -30, -30, 3);
                 navxTurnRel(45);
                 encoderDriveHawk(0.2, -24, -24, -24, -24, 3);
                 setCollectorPosition(COLLECTOR_LIFT_CRATER, 0.3);
