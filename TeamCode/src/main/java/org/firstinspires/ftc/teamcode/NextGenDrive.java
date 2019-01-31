@@ -40,7 +40,7 @@ public class NextGenDrive extends NextGenTeleopHandler{
         if (gamepad.left_bumper){
             turnLeft(SPEED_MULTIPIER);
         }
-        else if (gamepad.left_bumper){
+        else if (gamepad.right_bumper){
             turnRight(SPEED_MULTIPIER);
         }
         else {
