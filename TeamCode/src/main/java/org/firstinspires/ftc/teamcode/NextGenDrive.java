@@ -12,6 +12,7 @@ public class NextGenDrive extends NextGenTeleopHandler{
     private ElapsedTime runtime = new ElapsedTime();
     private boolean liftUp = false;
     private boolean hookOpen = false;
+
     /**
      * Value here from {@link AlanBlue1}
      */
@@ -35,10 +36,36 @@ public class NextGenDrive extends NextGenTeleopHandler{
         float leftPower = leftStickY;
         float rightPower = rightStickY;
 
-        LBMotor.setPower(leftPower* SPEED_MULTIPIER);
-        LFMotor.setPower(leftPower * SPEED_MULTIPIER);
-        RFMotor.setPower(rightPower * SPEED_MULTIPIER);
-        RBMotor.setPower(rightPower * SPEED_MULTIPIER);
+
+        if (gamepad.left_bumper){
+            turnLeft(SPEED_MULTIPIER);
+        }
+        else if (gamepad.left_bumper){
+            turnRight(SPEED_MULTIPIER);
+        }
+        else {
+            LBMotor.setPower(leftPower* SPEED_MULTIPIER);
+            LFMotor.setPower(leftPower * SPEED_MULTIPIER);
+            RFMotor.setPower(rightPower * SPEED_MULTIPIER);
+            RBMotor.setPower(rightPower * SPEED_MULTIPIER);
+        }
+
+        /*if (gamepad.dpad_left){
+            navxTurn(-90);
+            //dpad left turns to absolute -90
+        }
+        else if (gamepad.dpad_right){
+            navxTurn(90);
+            //dpad right turns to absolute 90
+        }
+        else if (gamepad.dpad_up) {
+            navxTurn(0);
+            //dpad up turns to absolute 0
+        }
+        else if (gamepad.dpad_down){
+            navxTurn(180);
+            //dpad down turns to absolute 180
+        }*/
     }
 
     @Override
@@ -89,10 +116,10 @@ public class NextGenDrive extends NextGenTeleopHandler{
         }
         //RTrigger spins the collector servo clockwise (in)
         //LTrigger spins the collector servo counterclockwise (out)
-        if (gamepad.dpad_up && collectorLift.getCurrentPosition() < COLLECTOR_LIFT_START){
+        if (gamepad.dpad_up){
             collectorLift.setPower(COLLECTOR_LIFT_SPEED);
         }
-        else if (gamepad.dpad_down && collectorLift.getCurrentPosition() > COLLECTOR_LIFT_CRATER){
+        else if (gamepad.dpad_down){
             collectorLift.setPower(-COLLECTOR_LIFT_SPEED);
         }
         else{

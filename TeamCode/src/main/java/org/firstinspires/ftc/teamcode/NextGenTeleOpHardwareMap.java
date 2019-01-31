@@ -74,6 +74,8 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
 
 
     public void init(HardwareMap hardwareMap) {
+        navx = hardwareMap.get(NavxMicroNavigationSensor.class,"navx");
+        gyro = (IntegratingGyroscope)navx;
         // grab wheels
         LFMotor = hardwareMap.dcMotor.get("LFMotor");
         RFMotor = hardwareMap.dcMotor.get("RFMotor");
@@ -110,7 +112,7 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
         collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
-       // if (!navx.isCalibrating()) telemetry.addData("Gyro","Calibrated!");
+        if (!navx.isCalibrating()) telemetry.addData("Gyro","Calibrated!");
     }
     public void turnLeft(double power) {
         LFMotor.setPower(-power);
