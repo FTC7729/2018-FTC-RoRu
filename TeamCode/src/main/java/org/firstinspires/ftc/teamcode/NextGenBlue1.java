@@ -83,6 +83,13 @@ public class NextGenBlue1 extends NextGenAutonomousHardwareMap {
                 setLiftPosition(LIFT_DOWN_POSITION, 0.3);
                 hookServo.setPosition(0.15);
 
+                state = 11;
+            }
+
+            if (state == 11)  {
+                telemetry.addData("State","11");
+                telemetry.update();
+                setCollectorPosition(COLLECTOR_LIFT_START, 0.3);
                 state = 20;
             }
 

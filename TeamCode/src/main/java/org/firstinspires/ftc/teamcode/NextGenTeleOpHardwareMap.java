@@ -53,7 +53,7 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
     static final double     FORWARD_SPEED           = 0.6;
     static final double     BACKWARDS_SPEED         = -0.6;
     public final int LIFT_HOLD_POSITION = -100; // minimum start for automnomous
-    public final int LIFT_RUN_POSITION = -4032; //lift for endgame
+    public final int LIFT_RUN_POSITION = -5743; //lift for endgame
     public final int LIFT_DOWN_POSITION = -1000;
     public final int LIFT_DUMP_MAX_POSITION = -6470;
     static final double     HOOK_CLOSE              = 0;

@@ -22,7 +22,7 @@ public class NextGenDrive extends NextGenTeleopHandler{
      * Value here from {@link AlanBlue1}
      */
 //    public final int LIFT_MIN_POS = -1000;
-    public final double COLLECTOR_LIFT_SPEED = 0.3;
+    public final double COLLECTOR_LIFT_SPEED = 0.7;
     @Override
     public void handleGamePad1(Gamepad gamepad) {
         telemetry.addData("We Made It", "We Made it !");

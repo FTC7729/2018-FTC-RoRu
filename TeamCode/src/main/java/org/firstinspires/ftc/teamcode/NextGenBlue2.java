@@ -143,7 +143,9 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 encoderDrive(0.2, 16, 16, 16,  16, 3);
                 //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3); //sampling ends
                 navxTurnRel(90);
-                encoderDriveHawk(0.2, -30, -30, -30, -30, 3);
+
+///////////// fix values
+                encoderDriveHawk(0.2, -40, -40, -40, -40, 3);
                 navxTurnRel(45);
                 encoderDriveHawk(0.2, -24, -24, -24, -24, 3);
                 setCollectorPosition(COLLECTOR_LIFT_CRATER, 0.3);

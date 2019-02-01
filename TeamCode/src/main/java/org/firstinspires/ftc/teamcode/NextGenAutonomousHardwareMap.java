@@ -46,7 +46,7 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     //public DigitalChannel LimitSwitchCollector;
     HawkeyeDetector hawkeye;
     private final int LIFT_HOLD_POSITION = -100; // minimum start for automnomous
-    public final int LIFT_RUN_POSITION = -4032;
+    public final int LIFT_RUN_POSITION = -5743;
     public final int LIFT_DOWN_POSITION = -1000;
     /**
      * I2C Pin order: Red, Black, Yellow, White
