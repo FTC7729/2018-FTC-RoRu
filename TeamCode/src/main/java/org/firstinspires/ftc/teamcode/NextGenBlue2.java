@@ -142,12 +142,12 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 telemetry.update();
                 encoderDrive(0.2, 20, 20, 20,  20, 3);
                 //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3); //sampling ends
-                navxTurnRel(70);
+                navxTurnRel(75);
 
 ///////////// fix values
-                encoderDriveHawk(0.2, -60, -60, -60, -60, 3);
+                encoderDriveHawk(0.2, -65, -65, -65, -65, 5);
                 navxTurnRel(45);
-                encoderDriveHawk(0.2, -24, -24, -24, -24, 3);
+                encoderDriveHawk(0.2, -17, -17, -17, -17, 3);
                 setCollectorPosition(COLLECTOR_LIFT_CRATER, 0.3);
                 stopMotors();
                 telemetry.addLine("Done");
@@ -195,15 +195,15 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.4, -30, -30, -30, -30, 2); // drive ito crator
+                encoderDrive(0.3, -30, -30, -30, -30, 2); // drive ito crator
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.4, 30, 30, 30, 30 , 2);
+                encoderDrive(0.3, 30, 30, 30, 30 , 2);
                 //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3);
-                navxTurnRel(90);
+                navxTurnRel(60);
                 encoderDriveHawk(0.2, -36, -36, -36, -36, 3);
-                navxTurnRel(45);
-                encoderDriveHawk(0.2, -24, -24, -24, -24, 3);
+                navxTurnRel(60);
+                encoderDriveHawk(0.2, -17, -17, -17, -17, 3);
                 setCollectorPosition(COLLECTOR_LIFT_CRATER, 0.3);
                 stopMotors();
             }
