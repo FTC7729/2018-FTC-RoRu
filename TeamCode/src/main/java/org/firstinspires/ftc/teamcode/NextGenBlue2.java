@@ -130,22 +130,22 @@ public class NextGenBlue2 extends NextGenAutonomousHardwareMap {
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -26, -26, -26, -26, 3);
+                encoderDrive(0.2, -25, -25, -25, -25, 3);
                 telemetry.addData("Status","Turning Left");
                 telemetry.update();
                 navxTurnRel(53);
                 // CHANGE THESE VALUES
                 telemetry.addData("Status","Moving");
                 telemetry.update();
-                encoderDrive(0.2, -16, -16, -16, -16, 3);
+                encoderDrive(0.2, -17, -17, -17, -17, 3);
                 telemetry.addData("Status","Moving Back");
                 telemetry.update();
-                encoderDrive(0.2, 16, 16, 16,  16, 3);
+                encoderDrive(0.2, 20, 20, 20,  20, 3);
                 //setCollectorPosition(COLLECTOR_LIFT_UPRIGHT, 0.3); //sampling ends
-                navxTurnRel(90);
+                navxTurnRel(70);
 
 ///////////// fix values
-                encoderDriveHawk(0.2, -40, -40, -40, -40, 3);
+                encoderDriveHawk(0.2, -60, -60, -60, -60, 3);
                 navxTurnRel(45);
                 encoderDriveHawk(0.2, -24, -24, -24, -24, 3);
                 setCollectorPosition(COLLECTOR_LIFT_CRATER, 0.3);
