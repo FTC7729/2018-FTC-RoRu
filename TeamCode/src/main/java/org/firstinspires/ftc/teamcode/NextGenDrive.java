@@ -106,10 +106,10 @@ public class NextGenDrive extends NextGenTeleopHandler{
         }
         */
         if(gamepad.right_trigger > 0.1) {
-            collectorServo.setPower(0.3);
+            collectorServo.setPower(0.8);
         }
         else if(gamepad.left_trigger > 0.1) {
-            collectorServo.setPower(-0.3);
+            collectorServo.setPower(-0.8);
         }
         else{
             collectorServo.setPower(0);
@@ -128,9 +128,9 @@ public class NextGenDrive extends NextGenTeleopHandler{
         //UpDPad moves the collector lift counterclockwise (in)
         //DownDPad moves the collector lift clockwise (out)
         if (gamepad.a){
-            boxServo.setPosition(boxServo.getPosition() + 0.01);
+            boxServo.setPosition(boxServo.getPosition() + 0.03 );
         }else if (gamepad.b){
-            boxServo.setPosition(boxServo.getPosition() - 0.01);
+            boxServo.setPosition(boxServo.getPosition() - 0.03);
         }
         //A moves the Mineral Box servo counterclockwise (in/ dumps mineral(s) in lander)
         //B moves the Mineral Box servo clockwise (out/ brings servo back)
