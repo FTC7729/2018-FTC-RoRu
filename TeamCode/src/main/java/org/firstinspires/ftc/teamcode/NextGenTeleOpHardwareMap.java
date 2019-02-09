@@ -109,6 +109,7 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
         collectorLift.setDirection(DcMotor.Direction.FORWARD);
         collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         collectorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        collectorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");

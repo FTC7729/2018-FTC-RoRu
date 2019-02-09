@@ -119,11 +119,11 @@ public class NextGenDrive extends NextGenTeleopHandler{
         if (gamepad.dpad_up){
             collectorLift.setTargetPosition(collectorLift.getCurrentPosition() + 1);
         }
-        else if (gamepad.dpad_down){
-            collectorLift.setTargetPosition(-collectorLift.getCurrentPosition() - 1);
-        }
-        else{
-            collectorLift.setPower(0);
+        else if (gamepad.dpad_down) {
+            collectorLift.setTargetPosition(collectorLift.getCurrentPosition() - 1);
+        } else {
+            collectorLift.setTargetPosition(collectorLift.getCurrentPosition());
+            collectorLift.setPower(0.6);
         }
         //UpDPad moves the collector lift counterclockwise (in)
         //DownDPad moves the collector lift clockwise (out)
