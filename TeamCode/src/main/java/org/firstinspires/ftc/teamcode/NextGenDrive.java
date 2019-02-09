@@ -117,10 +117,10 @@ public class NextGenDrive extends NextGenTeleopHandler{
         //RTrigger spins the collector servo clockwise (in)
         //LTrigger spins the collector servo counterclockwise (out)
         if (gamepad.dpad_up){
-            collectorLift.setPower(COLLECTOR_LIFT_SPEED);
+            collectorLift.setTargetPosition(collectorLift.getCurrentPosition() + 1);
         }
         else if (gamepad.dpad_down){
-            collectorLift.setPower(-COLLECTOR_LIFT_SPEED);
+            collectorLift.setTargetPosition(-collectorLift.getCurrentPosition() - 1);
         }
         else{
             collectorLift.setPower(0);
