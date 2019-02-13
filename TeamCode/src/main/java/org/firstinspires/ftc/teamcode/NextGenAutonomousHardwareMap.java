@@ -105,8 +105,8 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     /**
      * This value here from {@link AlanBlue1}
      */
-    static final double     HOOK_CLOSE              = 0.00;
-    static final double     HOOK_OPEN               = 1.00;
+    static final double     HOOK_CLOSE              = 1.00;
+    static final double     HOOK_OPEN               = 0.00;
 
     /**
      * Initialize the hardware
