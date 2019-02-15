@@ -5,10 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.AlanAutonomousHardwareMap;
+import org.firstinspires.ftc.teamcode.NextGenAutonomousHardwareMap;
 
-@Autonomous(name = "Hawkeye Forwards Test",group = "tests")
-@Disabled
-public class HawkeyeForwardDemo extends AlanAutonomousHardwareMap {
+@Autonomous(name = "Hawkeye EncoderDriveHawk Test",group = "tests")
+//@Disabled
+public class HawkeyeForwardDemo extends NextGenAutonomousHardwareMap {
     public HawkeyeDetector hawkeye;
     public void runOpMode() throws InterruptedException {
         init(hardwareMap);
@@ -17,13 +18,7 @@ public class HawkeyeForwardDemo extends AlanAutonomousHardwareMap {
         hawkeye.enable();
         waitForStart();
         while(opModeIsActive()) {
-            if (!hawkeye.isFound() && opModeIsActive()) {
-                goForward(-0.1);
-                telemetry.addData("Status","Running, all clear!");
-            } else {
-                stopMotors();
-                telemetry.addData("Status","Target detected, bot stopped!");
-            }
+            encoderDriveHawk(0.2,50,50,50,50,5);
         }
     }
 }
