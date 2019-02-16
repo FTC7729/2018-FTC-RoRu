@@ -18,7 +18,7 @@ public class HawkeyeForwardDemo extends NextGenAutonomousHardwareMap {
         hawkeye.enable();
         waitForStart();
         while(opModeIsActive()) {
-            encoderDriveHawk(0.2,50,50,50,50,5);
+            encoderDriveHawk(0.2,100,100,100,100,5);
         }
     }
 }
