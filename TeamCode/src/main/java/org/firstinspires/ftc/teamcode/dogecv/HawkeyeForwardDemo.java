@@ -10,10 +10,8 @@ import org.firstinspires.ftc.teamcode.NextGenAutonomousHardwareMap;
 @Autonomous(name = "Hawkeye EncoderDriveHawk Test",group = "tests")
 //@Disabled
 public class HawkeyeForwardDemo extends NextGenAutonomousHardwareMap {
-    public HawkeyeDetector hawkeye;
     public void runOpMode() throws InterruptedException {
         init(hardwareMap);
-        hawkeye = new HawkeyeDetector();
         hawkeye.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         hawkeye.enable();
         waitForStart();

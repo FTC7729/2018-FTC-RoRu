@@ -13,6 +13,6 @@ public class HawkeyeCenterDetector extends GoldAlignDetector {
         yellowFilter = new HSVColorFilter(new Scalar(60,210,185), new Scalar(35,75,85));
         perfectAreaScorer = new PerfectAreaScorer(20000,2);
         maxDifference = 10;
-        alignSize = 125;
+        alignSize = 150;
     }
 }

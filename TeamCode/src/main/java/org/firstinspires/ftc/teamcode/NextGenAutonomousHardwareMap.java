@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.Dogeforia;
+import com.disnodeteam.dogecv.detectors.DogeCVDetector;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -21,6 +22,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.teamcode.dogecv.HawkeyeCenterDetector;
 import org.firstinspires.ftc.teamcode.dogecv.HawkeyeDetector;
 
 import java.util.ArrayList;
@@ -45,7 +47,8 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     public CRServo collectorServo;
     public Servo mineralBox;
     //public DigitalChannel LimitSwitchCollector;
-    HawkeyeDetector hawkeye;
+    public HawkeyeDetector hawkeye;
+    public HawkeyeCenterDetector center;
     private final int LIFT_HOLD_POSITION = -100; // minimum start for automnomous
     public final int LIFT_RUN_POSITION = -5743;
     public final int LIFT_DOWN_POSITION = -1000;
@@ -262,7 +265,8 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
         vuforia.start(); // Start the whole thing
         */
         hawkeye = new HawkeyeDetector();
-        hawkeye.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+        // temporary
+        //hawkeye.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
     }
     public void turnLeft(double power) {
         LFMotor.setPower(-power);
@@ -377,6 +381,74 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
                     (runtime.seconds() < timeoutS + pausedSeconds) &&
                     (LFMotor.isBusy() && RFMotor.isBusy() && LBMotor.isBusy() && RBMotor.isBusy())) {
                 if(hawkeye.isFound()) {
+                    stopMotors();
+                    pausedSeconds += 0.1;
+                    telemetry.addData("Status","Paused.");
+                    sleep(100);
+                } else {
+                    telemetry.addData("Status","Running...");
+                    LFMotor.setPower(Math.abs(speed));
+                    RFMotor.setPower(Math.abs(speed));
+                    LBMotor.setPower(Math.abs(speed));
+                    RBMotor.setPower(Math.abs(speed));
+                }
+                // Display it for the driver.
+                telemetry.addData("Path1",  "Going to %7d :%7d", newLeftTarget,  newRightTarget);
+                telemetry.addData("Path2",  "Currently at %7d :%7d",
+                        LFMotor.getCurrentPosition(),
+                        RFMotor.getCurrentPosition(),
+                        LBMotor.getCurrentPosition(),
+                        RBMotor.getCurrentPosition()
+                );
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            stopMotors();
+
+            // Turn off RUN_TO_POSITION
+            LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+    }
+
+    public void encoderDriveCenter(double speed, double leftInches, double rightInches, double leftBackInches, double rightBackInches, double timeoutS) {
+        int newLeftTarget;
+        int newRightTarget;
+        int newLeftBackTarget;
+        int newRightBackTarget;
+        double pausedSeconds = 0;
+
+        if (opModeIsActive()) {
+            if(!hawkeye.getEnabled()) hawkeye.enable();
+            newLeftTarget = LFMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightTarget = RFMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newLeftBackTarget = LBMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightBackTarget = RBMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            LFMotor.setTargetPosition(newLeftTarget);
+            RFMotor.setTargetPosition(newRightTarget);
+            LBMotor.setTargetPosition(newLeftBackTarget);
+            RBMotor.setTargetPosition(newRightBackTarget);
+
+            LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            RFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            RBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            LFMotor.setPower(Math.abs(speed));
+            RFMotor.setPower(Math.abs(speed));
+            LBMotor.setPower(Math.abs(speed));
+            RBMotor.setPower(Math.abs(speed));
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS + pausedSeconds) &&
+                    (LFMotor.isBusy() && RFMotor.isBusy() && LBMotor.isBusy() && RBMotor.isBusy())) {
+                if(center.getAligned()) {
                     stopMotors();
                     pausedSeconds += 0.1;
                     telemetry.addData("Status","Paused.");
