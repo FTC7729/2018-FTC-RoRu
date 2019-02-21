@@ -4,10 +4,11 @@ import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.AlanAutonomousHardwareMap;
 import org.firstinspires.ftc.teamcode.NextGenAutonomousHardwareMap;
 
 @Autonomous(name="Centered Drive Test",group="tests")
-public class CenteredDetectorDriveTest extends NextGenAutonomousHardwareMap{
+public class CenteredDetectorDriveTest extends AlanAutonomousHardwareMap {
     public void runOpMode() throws InterruptedException {
         init(hardwareMap);
         center = new HawkeyeCenterDetector();

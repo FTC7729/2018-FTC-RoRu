@@ -12,6 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.teamcode.dogecv.HawkeyeCenterDetector;
 import org.firstinspires.ftc.teamcode.dogecv.HawkeyeDetector;
 
 
@@ -24,6 +25,7 @@ public abstract class AlanAutonomousHardwareMap extends LinearOpMode{
     public DcMotor liftMotor;
     public Servo hookServo;
     public HawkeyeDetector hawkeye;
+    public HawkeyeCenterDetector center;
     private final int LIFT_HOLD_POSITION = -5;
     /**
      * I2C Pin order: Red, Black, Yellow, White
@@ -116,7 +118,7 @@ public abstract class AlanAutonomousHardwareMap extends LinearOpMode{
             Thread.sleep(50);
         }
         hawkeye = new HawkeyeDetector();
-        hawkeye.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+        //hawkeye.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
     }
     public void goForward(double power) {
         LFMotor.setPower(power);
@@ -175,6 +177,73 @@ public abstract class AlanAutonomousHardwareMap extends LinearOpMode{
                     (runtime.seconds() < timeoutS) &&
                     (LFMotor.isBusy() && RFMotor.isBusy() && LBMotor.isBusy() && RBMotor.isBusy())) {
 
+                // Display it for the driver.
+                telemetry.addData("Path1",  "Going to %7d :%7d", newLeftTarget,  newRightTarget);
+                telemetry.addData("Path2",  "Currently at %7d :%7d",
+                        LFMotor.getCurrentPosition(),
+                        RFMotor.getCurrentPosition(),
+                        LBMotor.getCurrentPosition(),
+                        RBMotor.getCurrentPosition()
+                );
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            stopMotors();
+
+            // Turn off RUN_TO_POSITION
+            LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+    }
+
+    public void encoderDriveCenter(double speed, double leftInches, double rightInches, double leftBackInches, double rightBackInches, double timeoutS) {
+        int newLeftTarget;
+        int newRightTarget;
+        int newLeftBackTarget;
+        int newRightBackTarget;
+        double pausedSeconds = 0;
+
+        if (opModeIsActive()) {
+            newLeftTarget = LFMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightTarget = RFMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newLeftBackTarget = LBMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightBackTarget = RBMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            LFMotor.setTargetPosition(newLeftTarget);
+            RFMotor.setTargetPosition(newRightTarget);
+            LBMotor.setTargetPosition(newLeftBackTarget);
+            RBMotor.setTargetPosition(newRightBackTarget);
+
+            LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            RFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            RBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            LFMotor.setPower(Math.abs(speed));
+            RFMotor.setPower(Math.abs(speed));
+            LBMotor.setPower(Math.abs(speed));
+            RBMotor.setPower(Math.abs(speed));
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS + pausedSeconds) &&
+                    (LFMotor.isBusy() && RFMotor.isBusy() && LBMotor.isBusy() && RBMotor.isBusy())) {
+                if(center.getAligned()) {
+                    stopMotors();
+                    pausedSeconds += 0.1;
+                    telemetry.addData("Status","Paused.");
+                    sleep(100);
+                } else {
+                    telemetry.addData("Status","Running...");
+                    LFMotor.setPower(Math.abs(speed));
+                    RFMotor.setPower(Math.abs(speed));
+                    LBMotor.setPower(Math.abs(speed));
+                    RBMotor.setPower(Math.abs(speed));
+                }
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Going to %7d :%7d", newLeftTarget,  newRightTarget);
                 telemetry.addData("Path2",  "Currently at %7d :%7d",
