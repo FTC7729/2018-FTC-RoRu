@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode;
+import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.Dogeforia;
 import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -260,6 +261,8 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
         vuforia.showDebug(); // Show debug info
         vuforia.start(); // Start the whole thing
         */
+        hawkeye = new HawkeyeDetector();
+        hawkeye.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
     }
     public void turnLeft(double power) {
         LFMotor.setPower(-power);
@@ -375,9 +378,9 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
                     (LFMotor.isBusy() && RFMotor.isBusy() && LBMotor.isBusy() && RBMotor.isBusy())) {
                 if(hawkeye.isFound()) {
                     stopMotors();
-                    pausedSeconds += 0.5;
+                    pausedSeconds += 0.1;
                     telemetry.addData("Status","Paused.");
-                    sleep(500);
+                    sleep(100);
                 } else {
                     telemetry.addData("Status","Running...");
                     LFMotor.setPower(Math.abs(speed));
