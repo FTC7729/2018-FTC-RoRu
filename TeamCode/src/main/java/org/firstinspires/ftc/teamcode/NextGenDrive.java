@@ -105,33 +105,33 @@ public class NextGenDrive extends NextGenTeleopHandler{
             navxTurn(0);
         }
         */
-        if(gamepad.right_trigger > 0.1) {
-            collectorServo.setPower(0.8);
-        }
-        else if(gamepad.left_trigger > 0.1) {
-            collectorServo.setPower(-0.8);
-        }
-        else{
-            collectorServo.setPower(0);
-        }
-        //RTrigger spins the collector servo clockwise (in)
-        //LTrigger spins the collector servo counterclockwise (out)
-        if (gamepad.dpad_up){
-            collectorLift.setTargetPosition(collectorLift.getCurrentPosition() + 1);
-        }
-        else if (gamepad.dpad_down) {
-            collectorLift.setTargetPosition(collectorLift.getCurrentPosition() - 1);
-        } else {
-            collectorLift.setTargetPosition(collectorLift.getCurrentPosition());
-            collectorLift.setPower(0.6);
-        }
+//        if(gamepad.right_trigger > 0.1) {
+//            collectorServo.setPower(0.8);
+//        }
+//        else if(gamepad.left_trigger > 0.1) {
+//            collectorServo.setPower(-0.8);
+//        }
+//        else{
+//            collectorServo.setPower(0);
+//        }
+//        //RTrigger spins the collector servo clockwise (in)
+//        //LTrigger spins the collector servo counterclockwise (out)
+//        if (gamepad.dpad_up){
+//            collectorLift.setTargetPosition(collectorLift.getCurrentPosition() + 1);
+//        }
+//        else if (gamepad.dpad_down) {
+//            collectorLift.setTargetPosition(collectorLift.getCurrentPosition() - 1);
+//        } else {
+//            collectorLift.setTargetPosition(collectorLift.getCurrentPosition());
+//            collectorLift.setPower(0.6);
+//        }
         //UpDPad moves the collector lift counterclockwise (in)
         //DownDPad moves the collector lift clockwise (out)
-        if (gamepad.a){
-            boxServo.setPosition(boxServo.getPosition() + 0.03 );
-        }else if (gamepad.b){
-            boxServo.setPosition(boxServo.getPosition() - 0.03);
-        }
+//        if (gamepad.a){
+//            boxServo.setPosition(boxServo.getPosition() + 0.03 );
+//        }else if (gamepad.b){
+//            boxServo.setPosition(boxServo.getPosition() - 0.03);
+//        }
         //A moves the Mineral Box servo counterclockwise (in/ dumps mineral(s) in lander)
         //B moves the Mineral Box servo clockwise (out/ brings servo back)
 

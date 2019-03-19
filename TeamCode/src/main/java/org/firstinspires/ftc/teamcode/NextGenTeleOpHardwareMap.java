@@ -21,9 +21,9 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
     public DcMotor LBMotor;
     public DcMotor RBMotor;
     public DcMotor liftMotor;
-    public DcMotor collectorLift;
+    //public DcMotor collectorLift;
     public Servo hookServo;
-    public CRServo collectorServo;
+    //public CRServo collectorServo;
     public Servo boxServo;
     public DigitalChannel LimitSwitchCollector;
     public NavxMicroNavigationSensor navx;
@@ -100,17 +100,17 @@ public abstract class NextGenTeleOpHardwareMap extends OpMode {
         boxServo.setDirection(Servo.Direction.FORWARD);
         boxServo.setPosition(0); //max down
         //1 = max up (dump)
-        collectorServo = hardwareMap.crservo.get("collectorServo");
-        collectorServo.setDirection(CRServo.Direction.FORWARD);
+//        collectorServo = hardwareMap.crservo.get("collectorServo");
+//        collectorServo.setDirection(CRServo.Direction.FORWARD);
         //collectorServo.setPower(0);
 
 
-        collectorLift = hardwareMap.dcMotor.get("collectorLift");
-        collectorLift.setDirection(DcMotor.Direction.FORWARD);
-        collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        collectorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        collectorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        collectorLift = hardwareMap.dcMotor.get("collectorLift");
+//        collectorLift.setDirection(DcMotor.Direction.FORWARD);
+//        collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        collectorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        collectorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
         if (!navx.isCalibrating()) telemetry.addData("Gyro","Calibrated!");

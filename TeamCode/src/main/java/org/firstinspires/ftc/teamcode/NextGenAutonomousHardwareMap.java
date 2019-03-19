@@ -40,9 +40,9 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
     public DcMotor LBMotor;
     public DcMotor RBMotor;
     public DcMotor liftMotor;
-    public DcMotor collectorLift;
+    //public DcMotor collectorLift;
     public Servo hookServo;
-    public CRServo collectorServo;
+    //public CRServo collectorServo;
     public Servo mineralBox;
     //public DigitalChannel LimitSwitchCollector;
     HawkeyeDetector hawkeye;
@@ -151,20 +151,20 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
         hookServo = hardwareMap.servo.get("hookServo");
         hookServo.setDirection(Servo.Direction.FORWARD);
         hookServo.setPosition(0);
-        collectorServo = hardwareMap.crservo.get("collectorServo");
-        collectorServo.setDirection(CRServo.Direction.FORWARD);
-        collectorServo.setPower(0);
+//        collectorServo = hardwareMap.crservo.get("collectorServo");
+//        collectorServo.setDirection(CRServo.Direction.FORWARD);
+//        collectorServo.setPower(0);
 /*
         mineralBox = hardwareMap.servo.get("mineralBox");
         mineralBox.setDirection(Servo.Direction.FORWARD);
         mineralBox.setPosition(0);
 */
-        collectorLift = hardwareMap.dcMotor.get("collectorLift");
-        collectorLift.setDirection(DcMotor.Direction.FORWARD);
-        collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        collectorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        collectorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        collectorLift = hardwareMap.dcMotor.get("collectorLift");
+//        collectorLift.setDirection(DcMotor.Direction.FORWARD);
+//        collectorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        collectorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        collectorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        collectorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
        // LimitSwitchCollector = hardwareMap.digitalChannel.get("LimitSwitch");
         // grab navx sensor
@@ -517,16 +517,16 @@ public abstract class NextGenAutonomousHardwareMap extends LinearOpMode{
         }
         liftMotor.setPower(0);
     }
-    public void setCollectorPosition(int pos,double speed) {
-        collectorLift.setTargetPosition(pos);
-        collectorLift.setPower(speed);
-        while((collectorLift.getCurrentPosition() > collectorLift.getTargetPosition() + 1||collectorLift.getCurrentPosition() < collectorLift.getTargetPosition() - 1) && opModeIsActive()) {
-            telemetry.addData("Encoder Collector Position",collectorLift.getCurrentPosition());
-            telemetry.update();
-            idle();
-        }
-        collectorLift.setPower(0);
-    }
+//    public void setCollectorPosition(int pos,double speed) {
+//        collectorLift.setTargetPosition(pos);
+//        collectorLift.setPower(speed);
+//        while((collectorLift.getCurrentPosition() > collectorLift.getTargetPosition() + 1||collectorLift.getCurrentPosition() < collectorLift.getTargetPosition() - 1) && opModeIsActive()) {
+//            telemetry.addData("Encoder Collector Position",collectorLift.getCurrentPosition());
+//            telemetry.update();
+//            idle();
+//        }
+//        collectorLift.setPower(0);
+//    }
 
 
 
