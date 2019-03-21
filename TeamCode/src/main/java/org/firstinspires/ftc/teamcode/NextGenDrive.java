@@ -32,7 +32,7 @@ public class NextGenDrive extends NextGenTeleopHandler{
         float rightStickY = Range.clip(-gamepad.right_stick_y, -1, 1);
 
         //Cannot go over 1
-        double SPEED_MULTIPIER = 0.75;
+        double SPEED_MULTIPIER = 0.375;
         float leftPower = leftStickY;
         float rightPower = rightStickY;
 
@@ -44,10 +44,19 @@ public class NextGenDrive extends NextGenTeleopHandler{
             turnRight(SPEED_MULTIPIER);
         }
         else {
-            LBMotor.setPower(leftPower* SPEED_MULTIPIER);
+            /*LBMotor.setPower(leftPower * SPEED_MULTIPIER);
             LFMotor.setPower(leftPower * SPEED_MULTIPIER);
             RFMotor.setPower(rightPower * SPEED_MULTIPIER);
             RBMotor.setPower(rightPower * SPEED_MULTIPIER);
+            */
+
+            LBMotor.setPower(leftPower * -SPEED_MULTIPIER);
+            LFMotor.setPower(leftPower * SPEED_MULTIPIER);
+            RFMotor.setPower(rightPower * SPEED_MULTIPIER);
+            RBMotor.setPower(rightPower * SPEED_MULTIPIER);
+
+            telemetry.addData("We Made It", rightPower);
+            telemetry.addData("We Made It", leftPower);
         }
 
         /*if (gamepad.dpad_left){
@@ -105,7 +114,8 @@ public class NextGenDrive extends NextGenTeleopHandler{
             navxTurn(0);
         }
         */
-        if(gamepad.right_trigger > 0.1) {
+      /*
+      if(gamepad.right_trigger > 0.1) {
             collectorServo.setPower(0.8);
         }
         else if(gamepad.left_trigger > 0.1) {
@@ -127,6 +137,7 @@ public class NextGenDrive extends NextGenTeleopHandler{
         }
         //UpDPad moves the collector lift counterclockwise (in)
         //DownDPad moves the collector lift clockwise (out)
+        */
         if (gamepad.a){
             boxServo.setPosition(boxServo.getPosition() + 0.03 );
         }else if (gamepad.b){
