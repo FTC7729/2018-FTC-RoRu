@@ -50,7 +50,7 @@ public class NextGenDrive extends NextGenTeleopHandler{
             RBMotor.setPower(rightPower * SPEED_MULTIPIER);
             */
 
-            LBMotor.setPower(leftPower * -SPEED_MULTIPIER);
+            LBMotor.setPower(leftPower * SPEED_MULTIPIER);
             LFMotor.setPower(leftPower * SPEED_MULTIPIER);
             RFMotor.setPower(rightPower * SPEED_MULTIPIER);
             RBMotor.setPower(rightPower * SPEED_MULTIPIER);
